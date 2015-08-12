@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+              
+<configuration>
+
+  <settings>
+    <setting name="callSettersOnNulls" value="false"/>
+  </settings> 
+  
+  <typeAliases>
+    <!-- <typeAlias alias="search" type="com.model2.mvc.common.Search" /> -->
+  </typeAliases>
+  
+  <mappers>
+    <mapper resource="sql/CuratorMapper.xml"/>
+  </mappers>
+
+</configuration>
