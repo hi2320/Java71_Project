@@ -15,7 +15,7 @@
   <!-- PropertyPlaceholderConfigurer 로 로드된 resource 는 ${  } 로 접근 가능 -->
   <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location" value="classpath:config/jdbc.properties" />
+    <property name="location" value="/WEB-INF/config/jdbc.properties" />
   </bean>
 
   <!-- DBCP (Apache Commons Database Connection) 사용 -->
