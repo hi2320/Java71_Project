@@ -18,8 +18,10 @@ public class CuratorController {
 		this.curatorService = curatorService;
 	}
 	
-	public CuratorController() {
-		System.out.println(this.getClass());
+	@RequestMapping
+	public void curating() throws Exception {
+		System.out.println(curatorService.getCurator(1));
+		
 	}
 	
 }
