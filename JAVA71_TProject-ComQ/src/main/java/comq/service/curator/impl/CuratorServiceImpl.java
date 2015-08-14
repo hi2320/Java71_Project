@@ -1,4 +1,4 @@
-package comq.service.impl;
+package comq.service.curator.impl;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import comq.domain.Answer;
 import comq.domain.Curator;
 import comq.domain.Question;
-import comq.service.CuratorDao;
-import comq.service.CuratorService;
+import comq.service.curator.CuratorDao;
+import comq.service.curator.CuratorService;
 
 @Service("curatorServiceImpl")
 public class CuratorServiceImpl implements CuratorService {
