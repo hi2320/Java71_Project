@@ -26,7 +26,7 @@ public class CuratorDaoImpl implements CuratorDao {
 		System.out.println(this.getClass());
 	}
 
-	// SELECT
+	// SELECT - domain
 	@Override
 	public Curator getCurator(int curId) throws Exception {
 		return sqlSession.selectOne("CuratingMapper.getCurator", curId);
@@ -42,43 +42,51 @@ public class CuratorDaoImpl implements CuratorDao {
 		return sqlSession.selectList("CuratingMapper.getAnswerList", queId);
   }
 	
+	// SELECT - DB_table count
+	@Override
+  public int getQuestionCount(int curId) throws Exception {
+	  return sqlSession.selectOne("CuratingMapper.getQuestionCount", curId);
+  }
+
+	@Override
+  public int getAnswerCount(int queId) throws Exception {
+	  return sqlSession.selectOne("CuratingMapper.getAnswerCount", queId);
+  }
+	
+	
 	// INSERT
 	@Override
-  public int addCurator(int curId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int addCurator(Curator curator) throws Exception {
+		return sqlSession.insert("CuratingMapper.addCurator", curator);
   }
 
 	@Override
-  public int addQuestion(int curId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int addQuestion(Question question) throws Exception {
+		return sqlSession.insert("CuratingMapper.addQuestion", question);
   }
 
 	@Override
-  public int addAnswer(int queId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int addAnswer(Answer answer) throws Exception {
+		return sqlSession.insert("CuratingMapper.addAnswer", answer);
   }
 
 	
 	// UPDATE
 	@Override
-  public int upDateCurator(int curId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int updateCurator(Curator curator) throws Exception {
+	  return sqlSession.update("CuratingMapper.updateCurator", curator);  
   }
 
 	@Override
-  public int upDateQuestion(int curId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int updateQuestion(Question question) throws Exception {
+	  return sqlSession.update("CuratingMapper.updateQuestion", question);
   }
 	
 	@Override
-  public int upDateAnswer(int queId) throws Exception {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public int updateAnswer(Answer answer) throws Exception {
+	  return sqlSession.update("CuratingMapper.updateAnswer", answer);
   }
+
+
 	
 }
