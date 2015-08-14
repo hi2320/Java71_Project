@@ -8,6 +8,10 @@ public class Question {
 	private String qProd;
 	private String qType;
 	
+	public Question() {
+		System.out.println(this.getClass());
+	}
+	
 	public int getQueId() {
 		return queId;
 	}
