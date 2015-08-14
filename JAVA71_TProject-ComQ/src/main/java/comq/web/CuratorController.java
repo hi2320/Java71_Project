@@ -24,4 +24,7 @@ public class CuratorController {
 		
 	}
 	
+	public void curatorAdmin() throws Exception {
+		
+	}
 }
