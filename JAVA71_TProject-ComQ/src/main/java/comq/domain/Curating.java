@@ -14,6 +14,10 @@ public class Curating {
 	private String aSente;
 	private String aSpec;
 	
+	public Curating() {
+		System.out.println(this.getClass());
+	}
+	
 	public int getCurId() {
 		return curId;
 	}

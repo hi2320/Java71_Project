@@ -8,7 +8,7 @@
 
  	<resultMap id="CuratorSelectMap" type="curator">
  		<result property="curId" 	column="cur_id" 	jdbcType="INTEGER"/>
- 		<result property="purpose" 	column="purpose" 	jdbcType="VARHCAR"/>
+ 		<result property="purpose" 	column="purpose" 	jdbcType="VARCHAR"/>
  	</resultMap>
  	
 	<resultMap id="QuestionSelectMap" type="question">
@@ -47,6 +47,7 @@
 
 
 	
+	<!-- 
 	<insert 	id="updateQuestion"		parameterType="question" >
 	 	INSERT
 		INTO questions(que_id, cur_id, qsente, qprod, qtype) 
@@ -56,5 +57,6 @@
      	INSERT
 		INTO answers(ans_id, que_id, asente, aspec) 
 		VALUES (#{answerCode}, #{questionCode}, #{answerText}, #{answerKeyword})
-	 </insert>
+	 </insert> 
+	 -->
 </mapper>

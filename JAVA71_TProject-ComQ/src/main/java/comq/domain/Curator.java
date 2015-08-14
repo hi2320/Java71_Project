@@ -5,6 +5,9 @@ public class Curator {
 	private int curId;
 	private String purpose;
 	
+	public Curator() {
+		System.out.println(this.getClass());
+	}
 	
 	public int getCurId() {
 		return curId;
