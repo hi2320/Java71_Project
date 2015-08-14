@@ -1,4 +1,4 @@
-package comq.service;
+package comq.service.curator;
 
 import comq.domain.Curator;
 

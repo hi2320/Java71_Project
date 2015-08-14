@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import comq.service.CuratorService;
+import comq.domain.Curator;
+import comq.service.curator.CuratorService;
 
 @Controller
 @RequestMapping("/curator/*")
@@ -25,6 +26,7 @@ public class CuratorController {
 	}
 	
 	public void curatorAdmin() throws Exception {
+		Curator curator = new Curator();
 		
 	}
 }
