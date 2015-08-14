@@ -12,7 +12,7 @@
  	</resultMap>
  	
 	<resultMap id="QuestionSelectMap" type="question">
-		<result property="queId	"	column="que_id" 	jdbcType="INTEGER"/>
+		<result property="queId"	column="que_id" 	jdbcType="INTEGER"/>
 		<result property="curId"	column="cur_id" 	jdbcType="INTEGER"/>
 		<result property="qSente" 	column="qsente" 	jdbcType="VARCHAR"/>
 		<result property="qProd" 	column="qprod" 		jdbcType="VARCHAR"/>
@@ -28,9 +28,10 @@
 	
 	
 	<!-- SQL : SELECT -->
-	<select id="getCuratorList" parameterType="integer" resultMap="CuratorSelectMap">
+	<select id="getCurator" parameterType="integer" resultMap="CuratorSelectMap">
 		SELECT cur_id, purpose
 		FROM CURATORS
+		WHERE cur_id = #{value}
 	</select>
 	
 	<select id="getQuestionList" parameterType="integer" resultMap="QuestionSelectMap">

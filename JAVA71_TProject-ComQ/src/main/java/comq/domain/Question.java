@@ -1,5 +1,7 @@
 package comq.domain;
 
+import java.util.List;
+
 public class Question {
 	
 	private int queId;
@@ -8,9 +10,12 @@ public class Question {
 	private String qProd;
 	private String qType;
 	
+	private List<Answer> answerList;
+	
 	public Question() {
 		System.out.println(this.getClass());
 	}
+
 	
 	public int getQueId() {
 		return queId;
@@ -42,11 +47,23 @@ public class Question {
 	public void setqType(String qType) {
 		this.qType = qType;
 	}
-	
+
+	public List<Answer> getAnswerList() {
+		return answerList;
+	}
+
+	public void setAnswerList(List<Answer> answerList) {
+		this.answerList = answerList;
+	}
+
+
 	@Override
   public String toString() {
 	  return "Question [queId=" + queId + ", curId=" + curId + ", qSente="
-	      + qSente + ", qProd=" + qProd + ", qType=" + qType + "]";
+	      + qSente + ", qProd=" + qProd + ", qType=" + qType + ", answerList="
+	      + answerList + "]";
   }
+
+	
 	
 }
