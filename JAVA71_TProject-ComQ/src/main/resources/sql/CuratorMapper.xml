@@ -27,7 +27,7 @@
 	</resultMap>
 	
 	
-	<!-- SQL : SELECT -->
+	<!-- SQL : get Domain -->
 	<select id="getCurator" parameterType="integer" resultMap="CuratorSelectMap">
 		SELECT cur_id, purpose
 		FROM CURATORS
@@ -36,28 +36,91 @@
 	
 	<select id="getQuestionList" parameterType="integer" resultMap="QuestionSelectMap">
 	    SELECT cur_id, que_id, qsente, qprod, qtype
-		FROM questions
+		FROM QUESTIONS
 		WHERE cur_id = #{value}
 	</select>
 	
 	<select id="getAnswerList" parameterType="integer" resultMap="AnswerSelectMap">
 	    SELECT ans_id, que_id, asente, aspec
-		FROM answers
+		FROM ANSWERS
 		WHERE que_id = #{value}
 	</select>
 
 
+	<!--  SQL : get DB_Table Count -->
+	<select id="getQuestionCount" parameterType="integer" resultType="integer">
+		SELECT COUNT(*)
+		FROM QUESTIONS
+		WHERE cur_id = #{value}
+	</select>
 	
-	<!-- 
-	<insert 	id="updateQuestion"		parameterType="question" >
+	<select id="getAnswerCount" parameterType="integer" resultType="integer">
+		SELECT CONUT(*)
+		FROM ANSWERS
+		WHERE que_id = #{value}
+	</select>
+
+
+	<!-- SQL : INSERT -->
+	<insert id="insertCurator" parameterType="curator">
 	 	INSERT
-		INTO questions(que_id, cur_id, qsente, qprod, qtype) 
-		VALUES (#{questionCode}, #{curatingCode}, #{questionText}, #{prodKind}, #{answerFormat})			
+		INTO CURATORS(cur_id, purpose) 
+		VALUES (#{curId}, #{purpose})			
 	 </insert>
-	 <insert id="updateAnswer" parameterType="answer">
+	 
+	<insert id="insertQuestion" parameterType="question">
+	 	INSERT
+		INTO QUESTIONS(que_id, cur_id, qsente, qprod, qtype) 
+		VALUES (#{queId}, #{curId}, #{qSente}, #{qProd}, #{qType})			
+	 </insert>
+	 
+	 <insert id="insertAnswer" parameterType="answer">
      	INSERT
-		INTO answers(ans_id, que_id, asente, aspec) 
-		VALUES (#{answerCode}, #{questionCode}, #{answerText}, #{answerKeyword})
-	 </insert> 
-	 -->
+		INTO ANSWERS(ans_id, que_id, asente, aspec) 
+		VALUES (#{ansId}, #{queId}, #{aSente}, #{aSpec})
+	 </insert>
+	 
+	 <!-- SQL : UPDATE -->
+	<update id="updateCurator" parameterType="curator">
+		UPDATE CURATORS
+		SET cur_id = #{curId},
+		SET purpose = #{purpose}
+		WHERE cur_id = #{curId}
+	</update>
+
+	<update id="updateQuestion" parameterType="question">
+		UPDATE QUESTIONS
+		SET que_id = #{queId}
+		SET	cur_id = #{curId}
+		SET qsente = #{qSente}
+		SET qprod = #{qProd}
+		SET qtype = #{qType}
+		WHERE que_Id = #{queId}
+	</update>
+	
+	<update id="updateAnswer" parameterType="answer">
+		UPDATE ANSWERS
+		SET ans_id = #{ansId}
+		SET que_id = #{queId}
+		SET asente = #{aSente}
+		SET aspec = #{aSpec}
+		WHERE ans_id = #{ansId}		
+	</update>
+		
+	<!-- SQL : DELETE -->
+	<delete id="deleteCurator" parameterType="integer">
+		DELETE ANSWERS
+		WHERE cur_id = #{value}
+	</delete>
+	
+	<delete id="deleteQuestion" parameterType="integer">
+		DELETE QUESTIONS
+		WHERE que_id > #{value}
+	</delete>
+	
+	<delete id="deleteAnswer" parameterType="integer">
+		DELETE ANSWERS
+		WHERE ans_id > #{value}
+	</delete>
+	
 </mapper>
