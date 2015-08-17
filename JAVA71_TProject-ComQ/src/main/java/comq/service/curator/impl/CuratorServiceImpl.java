@@ -60,7 +60,7 @@ public class CuratorServiceImpl implements CuratorService {
 	  	} else if(questionCount < questionDBCount) {
 	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
 	  		for (int j = questionDBCount; j > questionCount; j-- ) {
-	  			curatorDao.deleteQuestion(queId)
+
 	  		}
 	  		
 	  	}
