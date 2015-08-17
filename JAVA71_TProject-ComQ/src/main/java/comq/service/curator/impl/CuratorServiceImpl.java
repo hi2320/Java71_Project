@@ -40,10 +40,34 @@ public class CuratorServiceImpl implements CuratorService {
 
 	@Override
   public void updateCurator(Curator curator) throws Exception {
-	  int questionDBConut = curatorDao.getQuestionCount(curator.getCurId());
+	  int questionDBCount = curatorDao.getQuestionCount(curator.getCurId());
 	  int questionCount = curator.getQuestionList().size();
 	  
-	  int answerDBCount = 0;
+	  int cs = Math.abs(questionCount - questionDBCount); 
+	  curatorDao.updateCurator(curator);
+	  
+	  for (int i = 0; i < questionCount; i--) {
+	  	
+	  	if(questionCount == questionDBCount) { 
+	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
+	  		
+	  	} else if(questionCount > questionDBCount) {
+	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
+	  		for (int j = questionCount; j < (questionCount+cs); j++) {
+	  			curatorDao.addQuestion(curator.getQuestionList().get(j));
+	  		}
+	  		
+	  	} else if(questionCount < questionDBCount) {
+	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
+	  		for (int j = questionDBCount; j > questionCount; j-- ) {
+	  			curatorDao.deleteQuestion(queId)
+	  		}
+	  		
+	  	}
+	  	
+	  }
+	  
+	  int answerDBCount = curatorDao.getAnswerCount(curator.getQuestionList().get(1).getQueId());
 	  int answerCount = 0;
 	  
 	  

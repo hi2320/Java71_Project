@@ -106,5 +106,21 @@
 		SET aspec = #{aSpec}
 		WHERE ans_id = #{ansId}		
 	</update>
+		
+	<!-- SQL : DELETE -->
+	<delete id="deleteCurator" parameterType="integer">
+		DELETE ANSWERS
+		WHERE cur_id = #{value}
+	</delete>
+	
+	<delete id="deleteQuestion" parameterType="integer">
+		DELETE QUESTIONS
+		WHERE que_id > #{value}
+	</delete>
+	
+	<delete id="deleteAnswer" parameterType="integer">
+		DELETE ANSWERS
+		WHERE ans_id > #{value}
+	</delete>
 	
 </mapper>

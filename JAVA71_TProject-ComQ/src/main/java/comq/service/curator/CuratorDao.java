@@ -26,5 +26,9 @@ public interface CuratorDao {
 	public int updateQuestion(Question question) throws Exception;
 	public int updateAnswer(Answer answer) throws Exception;
 	
+	// DELETE
+	public int deleteCurator(int curId) throws Exception;
+	public int deleteQuestion(int queId) throws Exception;
+	public int deleteAnswer(int ansId) throws Exception;
 	
 }

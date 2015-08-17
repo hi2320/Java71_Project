@@ -87,6 +87,21 @@ public class CuratorDaoImpl implements CuratorDao {
 	  return sqlSession.update("CuratingMapper.updateAnswer", answer);
   }
 
+	@Override
+  public int deleteCurator(int curId) throws Exception {
+	  return sqlSession.delete("CuratingMapper.deleteCurator", curId) ;
+  }
 
+	@Override
+  public int deleteQuestion(int queId) throws Exception {
+	  return sqlSession.delete("CuratingMapper.deleteCurator", queId);
+  }
+
+	@Override
+  public int deleteAnswer(int ansId) throws Exception {
+	  return 0;
+  }
+
+	// DELETE
 	
 }
