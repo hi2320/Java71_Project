@@ -7,6 +7,10 @@ public class Answer {
 	private String aSente;
 	private String aSpec;
 	
+	public Answer() {
+		System.out.println(this.getClass());
+	}
+	
 	public int getAnsId() {
 		return ansId;
 	}
@@ -34,7 +38,7 @@ public class Answer {
 	
 	@Override
   public String toString() {
-	  return "Answer [ansId=" + ansId + ", queId=" + queId + ", aSente=" + aSente
+	  return "\nAnswer [ansId=" + ansId + ", queId=" + queId + ", aSente=" + aSente
 	      + ", aSpec=" + aSpec + "]";
   }
 	

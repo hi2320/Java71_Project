@@ -1,97 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CuratorMapper">
-  
-  
-<!--   <resultMap id="userSelectMap" type="user">
-    <result property="userId"       column="user_id"      jdbcType="VARCHAR"/>
-    <result property="userName" column="user_name"    jdbcType="VARCHAR" />
-    <result property="password"   column="password"     jdbcType="VARCHAR" />
-    <result property="role"         column="role"           jdbcType="VARCHAR" />
-    <result property="ssn"        column="ssn"          jdbcType="VARCHAR" />
-    <result property="phone"      column="cell_phone"     jdbcType="VARCHAR" />
-    <result property="addr"         column="addr"           jdbcType="VARCHAR" />
-    <result property="email"      column="email"        jdbcType="NUMERIC"  />
-    <result property="regDate"    column="reg_date"       jdbcType="DATE" />
-  </resultMap>
-  
-  SQL : INSERT
-  <insert   id="addUser"    parameterType="user" >
-    INSERT
-    INTO users( user_id , user_name , password , role , ssn, cell_phone, addr, email , reg_date) 
-    VALUES   (  #{userId} , #{userName} , #{password} , 'user' , #{ssn:VARCHAR} , 
-              #{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE )
-   </insert>
-   
-   SQL : SELECT ONE
-   <select  id="getUser"  parameterType="string"  resultMap="userSelectMap">
-    SELECT
-    user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date    
-    FROM users 
-    WHERE user_id = #{value}
-   </select>
-   
-   SQL : UPDATE
-   <update  id="updateUser" parameterType="user" >
-      UPDATE users
-      <set>
-        user_name   = #{userName} ,
-      cell_phone  = #{phone},
-      addr        = #{addr} ,
-      email       = #{email}
-      </set>
-      WHERE user_id = #{userId}
-   </update>
-     
-  SQL : SELECT LIST
-  <select  id="getUserList"  parameterType="search" resultMap="userSelectMap">
-      SELECT *
-      FROM (  SELECT inner_table.* , ROWNUM AS row_seq
-              FROM    ( SELECT user_id , user_name , email
-                      FROM users
-                      <if test="searchCondition != null">
-                        <where>
-                          <if test="searchCondition == 0 and searchKeyword !='' ">
-                            user_id LIKE #{searchKeyword}
-                          </if>
-                          <if test="searchCondition == 1 and searchKeyword !='' ">
-                            user_name LIKE #{searchKeyword}
-                          </if>
-                        </where>
-                      </if>
-                      ORDER BY user_id ) inner_table
-            WHERE ROWNUM &lt;= #{endRowNum} )
-    WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-   </select>
-     위 두번째 subQuery 의  
-        WHERE ROWNUM &lt;= #{endRowNum} ) 는
-        WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-        < 는 keyword 로 &lt; 를  사용.
-        
-        <![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-        CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
-        WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-   
-  
-  SQL : SELECT ROW Count  
-   <select  id="getTotalCount"  parameterType="search"   resultType="int">
-      SELECT COUNT(*)
-      FROM( SELECT user_id , user_name , email
-            FROM users
-            <if test="searchCondition != null">
-              <where>
-                <if test="searchCondition == 0 and searchKeyword !='' ">
-                  user_id LIKE #{searchKeyword}
-                </if>
-                <if test="searchCondition == 1 and searchKeyword !='' ">
-                user_name LIKE #{searchKeyword}
-                </if>
-              </where>
-            </if> ) countTable            
-   </select> -->
-   
+<mapper namespace="CuratingMapper">
+
+ 	<resultMap id="CuratorSelectMap" type="curator">
+ 		<result property="curId" 	column="cur_id" 	jdbcType="INTEGER"/>
+ 		<result property="purpose" 	column="purpose" 	jdbcType="VARCHAR"/>
+ 	</resultMap>
+ 	
+	<resultMap id="QuestionSelectMap" type="question">
+		<result property="queId"	column="que_id" 	jdbcType="INTEGER"/>
+		<result property="curId"	column="cur_id" 	jdbcType="INTEGER"/>
+		<result property="qSente" 	column="qsente" 	jdbcType="VARCHAR"/>
+		<result property="qProd" 	column="qprod" 		jdbcType="VARCHAR"/>
+		<result property="qType"	column="qtype" 		jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap id="AnswerSelectMap" type="answer">
+		<result property="ansId" 	column="ans_id" 	jdbcType="NUMERIC"/>
+		<result property="aSente" 	column="asente" 	jdbcType="VARCHAR"/>
+		<result property="aSpec" 	column="aspec" 		jdbcType="VARCHAR"/>
+		<result property="queId" 	column="que_id" 	jdbcType="NUMERIC"/>
+	</resultMap>
+	
+	
+	<!-- SQL : get Domain -->
+	<select id="getCurator" parameterType="integer" resultMap="CuratorSelectMap">
+		SELECT cur_id, purpose
+		FROM CURATORS
+		WHERE cur_id = #{value}
+	</select>
+	
+	<select id="getQuestionList" parameterType="integer" resultMap="QuestionSelectMap">
+	    SELECT cur_id, que_id, qsente, qprod, qtype
+		FROM QUESTIONS
+		WHERE cur_id = #{value}
+	</select>
+	
+	<select id="getAnswerList" parameterType="integer" resultMap="AnswerSelectMap">
+	    SELECT ans_id, que_id, asente, aspec
+		FROM ANSWERS
+		WHERE que_id = #{value}
+	</select>
+
+
+	<!--  SQL : get DB_Table Count -->
+	<select id="getQuestionCount" parameterType="integer" resultType="integer">
+		SELECT COUNT(*)
+		FROM QUESTIONS
+		WHERE cur_id = #{value}
+	</select>
+	
+	<select id="getAnswerCount" parameterType="integer" resultType="integer">
+		SELECT CONUT(*)
+		FROM ANSWERS
+		WHERE que_id = #{value}
+	</select>
+
+
+	<!-- SQL : INSERT -->
+	<insert id="insertCurator" parameterType="curator">
+	 	INSERT
+		INTO CURATORS(cur_id, purpose) 
+		VALUES (#{curId}, #{purpose})			
+	 </insert>
+	 
+	<insert id="insertQuestion" parameterType="question">
+	 	INSERT
+		INTO QUESTIONS(que_id, cur_id, qsente, qprod, qtype) 
+		VALUES (#{queId}, #{curId}, #{qSente}, #{qProd}, #{qType})			
+	 </insert>
+	 
+	 <insert id="insertAnswer" parameterType="answer">
+     	INSERT
+		INTO ANSWERS(ans_id, que_id, asente, aspec) 
+		VALUES (#{ansId}, #{queId}, #{aSente}, #{aSpec})
+	 </insert>
+	 
+	 <!-- SQL : UPDATE -->
+	<update id="updateCurator" parameterType="curator">
+		UPDATE CURATORS
+		SET cur_id = #{curId},
+		SET purpose = #{purpose}
+		WHERE cur_id = #{curId}
+	</update>
+
+	<update id="updateQuestion" parameterType="question">
+		UPDATE QUESTIONS
+		SET que_id = #{queId}
+		SET	cur_id = #{curId}
+		SET qsente = #{qSente}
+		SET qprod = #{qProd}
+		SET qtype = #{qType}
+		WHERE que_Id = #{queId}
+	</update>
+	
+	<update id="updateAnswer" parameterType="answer">
+		UPDATE ANSWERS
+		SET ans_id = #{ansId}
+		SET que_id = #{queId}
+		SET asente = #{aSente}
+		SET aspec = #{aSpec}
+		WHERE ans_id = #{ansId}		
+	</update>
+		
+	<!-- SQL : DELETE -->
+	<delete id="deleteCurator" parameterType="integer">
+		DELETE ANSWERS
+		WHERE cur_id = #{value}
+	</delete>
+	
+	<delete id="deleteQuestion" parameterType="integer">
+		DELETE QUESTIONS
+		WHERE que_id > #{value}
+	</delete>
+	
+	<delete id="deleteAnswer" parameterType="integer">
+		DELETE ANSWERS
+		WHERE ans_id > #{value}
+	</delete>
+	
 </mapper>
