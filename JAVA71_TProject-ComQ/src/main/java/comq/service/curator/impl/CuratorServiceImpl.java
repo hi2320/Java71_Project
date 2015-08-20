@@ -40,40 +40,49 @@ public class CuratorServiceImpl implements CuratorService {
 
 	@Override
   public void updateCurator(Curator curator) throws Exception {
-	  int questionDBCount = curatorDao.getQuestionCount(curator.getCurId());
-	  int questionCount = curator.getQuestionList().size();
-	  
-	  int cs = Math.abs(questionCount - questionDBCount); 
-	  curatorDao.updateCurator(curator);
-	  
-	  for (int i = 0; i < questionCount; i--) {
-	  	
-	  	if(questionCount == questionDBCount) { 
-	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
-	  		
-	  	} else if(questionCount > questionDBCount) {
-	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
-	  		for (int j = questionCount; j < (questionCount+cs); j++) {
-	  			curatorDao.addQuestion(curator.getQuestionList().get(j));
-	  		}
-	  		
-	  	} else if(questionCount < questionDBCount) {
-	  		curatorDao.updateQuestion(curator.getQuestionList().get(i));
-	  		for (int j = questionDBCount; j > questionCount; j-- ) {
 
-	  		}
-	  		
-	  	}
-	  	
-	  }
-	  
-	  int answerDBCount = curatorDao.getAnswerCount(curator.getQuestionList().get(1).getQueId());
-	  int answerCount = 0;
-	  
-	  
-	  	
-	  
-	  
+		// 인덱스 넘버링 초기값 설정
+		int cIndex = curator.getCurId();
+		int qIndex = Integer.parseInt(String.valueOf(cIndex)+"00");
+		int aIndex = Integer.parseInt(String.valueOf(cIndex)+"000");
+		
+		
+		// 넘버링된 인덱스 DB delete
+		curatorDao.deleteAnswer(aIndex);
+		curatorDao.deleteQuestion(qIndex);
+			
+		System.out.println("딜리트 완료?");
+		Curator curatorTest = this.getCurator(cIndex);
+		System.out.println(curatorTest);
+		
+		System.out.println(cIndex);
+		System.out.println(qIndex);
+		System.out.println(aIndex);
+		
+		// 인덱스 넘버링 세팅
+		for (int i = 0; i < curator.getQuestionList().size(); i++) {
+			curator.getQuestionList().get(i).setCurId(cIndex);
+			curator.getQuestionList().get(i).setQueId(qIndex);
+			System.out.println(qIndex);
+			System.out.println(curator.getQuestionList());
+			for (int j = 0; j < curator.getQuestionList().get(i).getAnswerList().size(); j++) {
+				curator.getQuestionList().get(i).getAnswerList().get(j).setQueId(qIndex);
+				curator.getQuestionList().get(i).getAnswerList().get(j).setAnsId(aIndex++);
+				System.out.println(curator.getQuestionList().get(i).getAnswerList().get(j));
+				System.out.println(aIndex);
+			}
+			qIndex++;
+			System.out.println(curator);
+		}
+		
+	  // 넘버링된 인덱스 DB insert
+		for (int i = 0; i < curator.getQuestionList().size(); i++) {
+			curatorDao.addQuestion(curator.getQuestionList().get(i));
+			for (int j = 0; j < curator.getQuestionList().get(i).getAnswerList().size(); j++) {
+				curatorDao.addAnswer(curator.getQuestionList().get(i).getAnswerList().get(j));
+			}
+		}
+		
   }
 	
 }
