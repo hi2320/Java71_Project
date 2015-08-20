@@ -64,4 +64,18 @@ public class CuratorController {
 		mv.addObject("list", curator);
 		return mv;
 	}
+	
+	@RequestMapping
+	public ModelAndView questionPageView() throws Exception {
+		System.out.println("/app/curator/questionPageView");
+		ModelAndView mv = new ModelAndView();
+		Curator curator = new Curator();
+		curator = curatorService.getCurator(1);
+		System.out.println(curatorService.getCurator(1));
+		
+		mv.setViewName("/manager/question_page.jsp");
+		mv.addObject("list", curator);
+		
+		return mv;
+	}
 }
