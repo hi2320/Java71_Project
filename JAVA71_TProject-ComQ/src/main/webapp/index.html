@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Main Page</title>
+
+<style>
+	
+body {
+	font-size: small;
+	margin: 0;
+}
+div {
+	border: 1px solid black;
+}
+
+section {
+	margin :0 auto;
+	position: relative;   
+}
+    
+
+#container {
+    position: relative;
+	border: 1px solid red;
+	margin: 0 auto;
+	width: 1024px;
+}
+#header {
+	position: relative;
+	background-color: #36383A;
+	height: 60px;
+	width: 1024px;
+}
+#logo {
+	float: left;
+	margin-left: 50px;
+	margin-top: 5px;
+	height: 100px;
+	width: 120px;	
+	text-align: center;	
+	background: #526261;
+}
+#logo a {
+	background-color: #F6EEA9;
+	padding: 50px;
+	text-decoration: none;
+	color: #F6EEA9;
+}
+#top_nav ul {
+	margin-left: 350px;
+	list-style: none;
+	float: left;
+}
+
+#top_nav ul li {
+	float: left;
+	line-height: 30px;
+	margin-left: 100px;
+	font-size: 120%;
+}
+.top_menu {
+	text-decoration: none;
+	color: #F6EEA9;
+}
+.top_menu:hover {
+	color: white;
+}
+
+.id{
+  margin:0 auto;
+  width:1024px;
+  height:300px;
+  overflow:hidden;
+  position:relative;
+  
+		
+}
+.slider{
+  margin:0 auto;
+  width:1024px;
+  height:300px;
+  overflow:hidden;
+  position:relative;
+  opacity:.80;
+
+}
+.photo{
+  width:1024px;
+  height:300px;
+  position:absolute;
+  animation:round 16s infinite;
+  opacity:0;
+  
+}
+@keyframes round{   
+  25%{opacity:1;}
+  40%{opacity:0;}
+} 
+
+img:nth-child(4){animation-delay:0s;}
+img:nth-child(3){animation-delay:4s;}
+img:nth-child(2){animation-delay:8s;}
+img:nth-child(1){animation-delay:12s;}
+
+
+</style>
+
+</head>
+<body>
+
+<div id='container'>
+	<div id='header'>
+		<nav id='top_nav'>
+			<ul>
+				<li><a class="top_menu" href="#">SERVICE</a></li>
+				<li><a class="top_menu" href="#">SUPPORT</a></li>
+				<li><a class="top_menu" href="#">LOGIN</a></li>
+				<li><a class="top_menu" href="#">JOIN</a></li>
+			</ul>
+		</nav>	
+	</div>
+	
+	<div class = "slider">
+		<img class ="photo" src="../images/c1.jpg" alt=""/>
+		<img class ="photo" src="../images/c2.jpg" alt=""/>
+		<img class ="photo" src="../images/c3.jpg" alt=""/>
+		<img class ="photo" src="../images/c4.jpg" alt=""/>
+	</div>
+<section class="sec">
+<figure id="abc">
+  <center>
+ 	  	<a href="/app/curator/curatorAdminView"><img src="../images/a3.jpg" alt=""width="399" height="228"></a>
+	   	<a href="/questManage/questionPage.do"><img src="../images/b3.jpg" alt=""width="399" height="228"></a>
+  </center>
+</figure>
+<figure>
+<center>
+ 	 <a href="#"><img src="../images/b2.jpg" alt=""width="266" height="228"></a>
+ 	 <a href="#"><img src="../images/logo3.jpg" alt=""width="266" height="228"></a>
+ 	 <a href="#"><img src="../images/a5.jpg" alt=""width="266" height="228"></a>
+</center>
+</figure>
+	<figure>
+<center>
+	<a href="#"><img src="../images/b1.jpg" alt=""width="399" height="228"></a>
+ 	<a href="#"><img src="../images/q1.jpg" alt=""width="399" height="228"></a>
+</center>
+</figure>
+</section>
+
+
+<!--	
+	<div id='footer'>
+		<h1> footer layer </h1>
+	</div>-->
+
+</div>
+
+<script src='http://codepen.io/assets/editor/live/css_live_reload_init.js'></script>
+
+</body>
+</html>
