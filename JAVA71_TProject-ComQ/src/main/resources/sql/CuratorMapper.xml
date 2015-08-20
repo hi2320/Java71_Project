@@ -109,18 +109,18 @@
 		
 	<!-- SQL : DELETE -->
 	<delete id="deleteCurator" parameterType="integer">
-		DELETE ANSWERS
+		DELETE CURATORS
 		WHERE cur_id = #{value}
 	</delete>
 	
 	<delete id="deleteQuestion" parameterType="integer">
 		DELETE QUESTIONS
-		WHERE que_id > #{value}
+		WHERE que_id BETWEEN #{value} AND #{value}+99
 	</delete>
 	
 	<delete id="deleteAnswer" parameterType="integer">
 		DELETE ANSWERS
-		WHERE ans_id > #{value}
+		WHERE ans_id BETWEEN #{value} AND #{value}+999
 	</delete>
 	
 </mapper>

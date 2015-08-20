@@ -57,17 +57,17 @@ public class CuratorDaoImpl implements CuratorDao {
 	// INSERT
 	@Override
   public int addCurator(Curator curator) throws Exception {
-		return sqlSession.insert("CuratingMapper.addCurator", curator);
+		return sqlSession.insert("CuratingMapper.insertCurator", curator);
   }
 
 	@Override
   public int addQuestion(Question question) throws Exception {
-		return sqlSession.insert("CuratingMapper.addQuestion", question);
+		return sqlSession.insert("CuratingMapper.insertQuestion", question);
   }
 
 	@Override
   public int addAnswer(Answer answer) throws Exception {
-		return sqlSession.insert("CuratingMapper.addAnswer", answer);
+		return sqlSession.insert("CuratingMapper.insertAnswer", answer);
   }
 
 	
@@ -87,21 +87,21 @@ public class CuratorDaoImpl implements CuratorDao {
 	  return sqlSession.update("CuratingMapper.updateAnswer", answer);
   }
 
+	// DELETE
 	@Override
   public int deleteCurator(int curId) throws Exception {
 	  return sqlSession.delete("CuratingMapper.deleteCurator", curId) ;
   }
 
 	@Override
-  public int deleteQuestion(int queId) throws Exception {
-	  return sqlSession.delete("CuratingMapper.deleteCurator", queId);
+  public int deleteQuestion(int qIndex) throws Exception {
+	  return sqlSession.delete("CuratingMapper.deleteQuestion", qIndex);
   }
 
 	@Override
-  public int deleteAnswer(int ansId) throws Exception {
-	  return 0;
+  public int deleteAnswer(int aIndex) throws Exception {
+	  return sqlSession.delete("CuratingMapper.deleteAnswer", aIndex);
   }
 
-	// DELETE
 	
 }
