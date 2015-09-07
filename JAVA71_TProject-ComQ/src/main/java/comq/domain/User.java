@@ -8,7 +8,7 @@ public class User {
 	private String nName;
 	private String proPic;
 	private int phone;
-	private int userKind;
+	private String userKind;
 		
 	public int getUserId() {
 		return userId;
@@ -47,16 +47,16 @@ public class User {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-	public int getUserKind() {
+	public String getUserKind() {
 		return userKind;
 	}
-	public void setUserKind(int userKind) {
-		this.userKind = userKind;
+	public void setUserKind(String string) {
+		this.userKind = string;
 	}
 	
 	@Override
   public String toString() {
-	  return "User [userId=" + userId + ", eMail=" + eMail + ", pwd=" + pwd
+	  return "User [userId=" + userId + ", eMail=" + email + ", pwd=" + pwd
 	      + ", nName=" + nName + ", proPic=" + proPic + ", phone=" + phone
 	      + ", userKind=" + userKind + "]";
   }

@@ -11,12 +11,15 @@ import comq.service.user.UserDao;
 @Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao {
 
-	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	public void setSqlsession(SqlSession sqlsession) {
 		this.sqlSession = sqlsession;
+	}
+	
+	public UserDaoImpl() {
+		System.out.println(this.getClass());
 	}
 	
 	@Override
