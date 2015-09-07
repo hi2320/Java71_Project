@@ -16,11 +16,13 @@
 		<typeAlias type="comq.domain.Curator" 	alias="curator"/>
 	    <typeAlias type="comq.domain.Question" 	alias="question"/>
 	    <typeAlias type="comq.domain.Answer" 	alias="answer"/>
+	    <typeAlias type="comq.domain.User"		alias="user"/>
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
 	    <mapper resource="sql/CuratorMapper.xml"/>
+	    <mapper resource="sql/UserMapper.xml"/>
 	</mappers>
 
 </configuration>

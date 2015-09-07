@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+ 	<resultMap id="UserSelectMap" type="user">
+ 		<result property="userId" 	column="user_id" 	jdbcType="INTEGER"/>
+ 		<result property="email" 	column="email" 		jdbcType="VARCHAR"/>
+ 		<result property="pwd" 		column="password" 	jdbcType="VARCHAR"/>
+ 		<result property="nName" 	column="nname" 		jdbcType="VARCHAR"/>
+ 		<result property="proPic" 	column="propic" 	jdbcType="VARCHAR"/>
+ 		<result property="phone" 	column="phone" 		jdbcType="INTEGER"/>
+ 		<result property="userKind" column="user_kind" 	jdbcType="VARCHAR"/>
+ 	</resultMap>
+ 	
+	<!-- SQL : get Domain -->
+	<select id="getUser" parameterType="integer" resultMap="UserSelectMap">
+		SELECT user_id, email, password, nname, propic, phone, user_kind
+		FROM USERS
+		WHERE user_id = #{value}
+	</select>
+	
+	<select id="getUserJoinCheck" parameterType="varchar" resultType="integer">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE email = #{value}
+	</select>
+
+	<!-- SQL : INSERT -->
+	<insert id="insertUser" parameterType="user">
+	 	INSERT
+		INTO USERS(user_id, email, password, nname, propic, phone, user_kind) 
+		VALUES (#{userId}, #{email}, #{pwd}, #{nName}, #{proPic}, #{phone}, #{userKind})			
+	 </insert>
+	 
+	 <!-- SQL : UPDATE -->
+	<update id="updateCurator" parameterType="curator">
+		UPDATE CURATORS
+		SET cur_id = #{curId},
+		SET purpose = #{purpose}
+		WHERE cur_id = #{curId}
+	</update>
+		
+	<!-- SQL : DELETE -->
+	<delete id="deleteAnswer" parameterType="integer">
+		DELETE ANSWERS
+		WHERE ans_id BETWEEN #{value} AND #{value}+999
+	</delete>
+	
+</mapper>
