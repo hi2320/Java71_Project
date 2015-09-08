@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import comq.domain.User;
 import comq.service.user.UserService;
@@ -24,17 +25,44 @@ public class UserController {
 	}
 	
 	@RequestMapping
-	public void joinUser() throws Exception {
+	public ModelAndView joinUserView() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/user/joinUser.html");
+		
+		return mv;
+	}
+	
+	@RequestMapping
+	public ModelAndView joinUserResult() throws Exception {
+		return new ModelAndView("/user/joinConfirm.html");
+	}
+	
+	@RequestMapping
+	public ModelAndView joinUser() throws Exception {
+		
 		User user = new User();
 		
-		user.setUserId(2222);
+		user.setUserId(2223);
 		user.setEmail("testEmail@google.com");
-		user.setnName("Å×½ºÆ® À¯Àú");
+		user.setnName("ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
 		user.setPwd("1111");
 		user.setUserKind("COMQ");
-		user.setPhone(010-9999-9999);
+		user.setPhone("010-9999-9999");
+		user.setProPic(null);
 		
-		userService.insertUser(user);
+		if (0 != userService.insertUser(user)) {
+			System.out.println("insert Success .. ");
+		} else {
+			System.out.println("insert Failed ..");
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/joinUser.html");
+		
+		
+		
+		
+		return mv;
 		
 	}
 	
