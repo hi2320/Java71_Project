@@ -10,6 +10,8 @@ public class User {
 	private String phone;
 	private String userKind;
 		
+	private boolean isActive;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -53,13 +55,18 @@ public class User {
 	public void setUserKind(String string) {
 		this.userKind = string;
 	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	
 	@Override
   public String toString() {
-	  return "User [userId=" + userId + ", eMail=" + email + ", pwd=" + pwd
+	  return "User [userId=" + userId + ", email=" + email + ", pwd=" + pwd
 	      + ", nName=" + nName + ", proPic=" + proPic + ", phone=" + phone
-	      + ", userKind=" + userKind + "]";
+	      + ", userKind=" + userKind + ", isActive=" + isActive + "]";
   }
-	
 	
 }
