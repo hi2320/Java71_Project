@@ -18,7 +18,7 @@ eclipse {
 }
 
 compileJava {
-  options.encoding = "UTF-8"
+  options.encoding = 'UTF-8'
   sourceCompatibility = 1.8
 }
 
