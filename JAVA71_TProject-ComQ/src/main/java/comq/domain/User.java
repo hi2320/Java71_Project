@@ -7,7 +7,7 @@ public class User {
 	private String pwd;
 	private String nName;
 	private String proPic;
-	private int phone;
+	private String phone;
 	private String userKind;
 		
 	public int getUserId() {
@@ -41,10 +41,10 @@ public class User {
 	public void setProPic(String proPic) {
 		this.proPic = proPic;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getUserKind() {

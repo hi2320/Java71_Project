@@ -27,14 +27,20 @@ public class UserController {
 	public void joinUser() throws Exception {
 		User user = new User();
 		
-		user.setUserId(2222);
+		user.setUserId(2223);
 		user.setEmail("testEmail@google.com");
 		user.setnName("테스트 유저");
 		user.setPwd("1111");
 		user.setUserKind("COMQ");
-		user.setPhone(010-9999-9999);
+		user.setPhone("010-9999-9999");
+		user.setProPic(null);
 		
-		userService.insertUser(user);
+		if (0 != userService.insertUser(user)) {
+			System.out.println("insert Success .. ");
+		} else {
+			System.out.println("insert Failed ..");
+		}
+		
 		
 	}
 	

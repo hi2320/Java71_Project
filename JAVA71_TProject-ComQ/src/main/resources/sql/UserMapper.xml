@@ -12,7 +12,7 @@
  		<result property="pwd" 		column="password" 	jdbcType="VARCHAR"/>
  		<result property="nName" 	column="nname" 		jdbcType="VARCHAR"/>
  		<result property="proPic" 	column="propic" 	jdbcType="VARCHAR"/>
- 		<result property="phone" 	column="phone" 		jdbcType="INTEGER"/>
+ 		<result property="phone" 	column="phone" 		jdbcType="VARCHAR"/>
  		<result property="userKind" column="user_kind" 	jdbcType="VARCHAR"/>
  	</resultMap>
  	
@@ -23,7 +23,7 @@
 		WHERE user_id = #{value}
 	</select>
 	
-	<select id="getUserJoinCheck" parameterType="varchar" resultType="integer">
+	<select id="getUserJoinCheck" parameterType="string" resultType="integer">
 		SELECT COUNT(*)
 		FROM USERS
 		WHERE email = #{value}
@@ -31,9 +31,16 @@
 
 	<!-- SQL : INSERT -->
 	<insert id="insertUser" parameterType="user">
-	 	INSERT
+	 	INSERT 
 		INTO USERS(user_id, email, password, nname, propic, phone, user_kind) 
-		VALUES (#{userId}, #{email}, #{pwd}, #{nName}, #{proPic}, #{phone}, #{userKind})			
+		VALUES (#{userId}, 
+				#{email}, 
+				#{pwd}, 
+				#{nName}, 
+				<if test="proPic != null">#{proPic},</if>
+				<if test="proPic == null">null,</if>
+				#{phone}, 
+				#{userKind})			
 	 </insert>
 	 
 	 <!-- SQL : UPDATE -->
