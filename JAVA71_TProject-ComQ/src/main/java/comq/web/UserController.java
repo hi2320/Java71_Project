@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import comq.domain.User;
@@ -32,19 +35,17 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping
 	public ModelAndView joinUserResult() throws Exception {
 		return new ModelAndView("/user/joinConfirm.html");
 	}
 	
-	@RequestMapping
 	public ModelAndView joinUser() throws Exception {
 		
 		User user = new User();
 		
 		user.setUserId(2223);
 		user.setEmail("testEmail@google.com");
-		user.setnName("�׽�Ʈ ����");
+		user.setnName("ensis");
 		user.setPwd("1111");
 		user.setUserKind("COMQ");
 		user.setPhone("010-9999-9999");
@@ -59,11 +60,23 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/joinUser.html");
 		
-		
-		
-		
 		return mv;
 		
+	}
+	
+	@RequestMapping(value="/checkId", method=RequestMethod.POST)
+	public @ResponseBody String duplicationCheck(@RequestParam("id") String id) throws Exception {
+		
+		System.out.println(id);
+		
+		String result = "";
+		if(userService.getUserCheck(id)) {
+			result = "ture";				
+		} else {
+			result = "flase";
+		}
+				
+		return result;
 	}
 	
 }
