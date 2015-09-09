@@ -33,16 +33,15 @@ public class CuratorController {
 	
 	@RequestMapping
 	public void curatorAdmin(@ModelAttribute Curator curators) throws Exception {
-		//admin 페이지에서 값 넘겨받기
 		Curator curator = new Curator();
 		for(int i = 0; i < curators.getQuestionList().size(); i++) {
-			System.out.println("질문문장::"+curators.getQuestionList().get(i).getqSente());
-			System.out.println("제품종류::"+curators.getQuestionList().get(i).getqProd());
-			System.out.println("답변유형::"+curators.getQuestionList().get(i).getqType());
+			System.out.println("::"+curators.getQuestionList().get(i).getqSente());
+			System.out.println("::"+curators.getQuestionList().get(i).getqProd());
+			System.out.println("::"+curators.getQuestionList().get(i).getqType());
 			
 			for(int j = 0; j < curators.getQuestionList().get(i).getAnswerList().size(); j++) {
-				System.out.println("답변문장::"+curators.getQuestionList().get(i).getAnswerList().get(j).getaSente());
-				System.out.println("답변스펙::"+curators.getQuestionList().get(i).getAnswerList().get(j).getaSpec());
+				System.out.println("::"+curators.getQuestionList().get(i).getAnswerList().get(j).getaSente());
+				System.out.println("::"+curators.getQuestionList().get(i).getAnswerList().get(j).getaSpec());
 			}
 			System.out.println("==============================================\n");
 		}

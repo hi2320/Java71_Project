@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 		boolean result = false; 
 		int resultDao = userDao.getUserCheck(email);
 		
-		if(resultDao == 0) {
+		if(resultDao != 0) {
 			result = true;
 		}
 		
