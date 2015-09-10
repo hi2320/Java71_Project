@@ -35,10 +35,7 @@ public class UserController {
 		return mv;
 	}
 	
-	public ModelAndView joinUserResult() throws Exception {
-		return new ModelAndView("/user/joinConfirm.html");
-	}
-	
+	@RequestMapping
 	public ModelAndView joinUser() throws Exception {
 		
 		User user = new User();
@@ -65,7 +62,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
-	public @ResponseBody String duplicationCheck(@RequestParam("id") String id) throws Exception {
+	public @ResponseBody String emailCheck(@RequestParam("id") String id) throws Exception {
 		
 		System.out.println(id);
 		
@@ -75,7 +72,7 @@ public class UserController {
 		} else {
 			result = "flase";
 		}
-				
+		
 		return result;
 	}
 	
