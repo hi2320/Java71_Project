@@ -1,5 +1,8 @@
 package comq.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import comq.common.FileUpload;
 import comq.domain.User;
 import comq.service.user.UserService;
 
@@ -35,10 +39,7 @@ public class UserController {
 		return mv;
 	}
 	
-	public ModelAndView joinUserResult() throws Exception {
-		return new ModelAndView("/user/joinConfirm.html");
-	}
-	
+	@RequestMapping
 	public ModelAndView joinUser() throws Exception {
 		
 		User user = new User();
@@ -64,9 +65,15 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/checkId", method=RequestMethod.POST)
-	public @ResponseBody String duplicationCheck(@RequestParam("id") String id) throws Exception {
+	@RequestMapping
+	public void test(HttpServletRequest request) throws Exception {
+		new FileUpload().userProfilePicture(request);
 		
+	}
+	
+	@RequestMapping(value="/checkId", method=RequestMethod.POST)
+	public @ResponseBody String emailCheck(@RequestParam("id") String id) throws Exception {
+	
 		System.out.println(id);
 		
 		String result = "";
@@ -75,7 +82,7 @@ public class UserController {
 		} else {
 			result = "flase";
 		}
-				
+		
 		return result;
 	}
 	

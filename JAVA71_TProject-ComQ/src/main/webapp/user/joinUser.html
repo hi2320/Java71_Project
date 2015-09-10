@@ -53,10 +53,9 @@ $('#check-password').keyup(function() {
 	var check_pwd = $(this).val();
 	
 	if (input_pwd == check_pwd) {
-		$('#pwd-checking').text('비밀번호가 일치합니다.');
+		$('#pwd-check-output').text('비밀번호가 일치합니다.');
 	} else {
-		$('this').css('border', '1px solid red');
-		$('#pwd-checking').text('비밀번호가 일치하지 않습니다.');
+		$('#pwd-check-output').text('비밀번호가 일치하지 않습니다.');
 	}	
 });
  
