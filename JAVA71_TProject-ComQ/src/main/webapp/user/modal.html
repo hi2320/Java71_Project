@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <style>
    
@@ -88,9 +88,9 @@
             </div>
           </form>
           <div id="footer">
-          <img class="img1" src="facebook.png" data-dismiss="modal" onClick="face()">
-          <img src="twitter.png" data-dismiss="modal" onClick="twit()">
-          <img class="comimg" src="../img/user/comq.png" data-dismiss="modal" onClick="comq()">
+          <img class="img1" src="../img/icon/facebook.png" data-dismiss="modal" onClick="face()">
+          <img src="../img/icon/twitter.png" data-dismiss="modal" onClick="twit()">
+          <img class="comimg" src="../img/icon/comq.png" data-dismiss="modal" onClick="comq()">
           </div>
         </div>
         </div>
@@ -113,7 +113,7 @@
 
           <form role="form">
                       <div class="pro">
-                         <img class="proimg" src="1.jpg" data-dismiss="modal"><br><br>
+                         <img class="proimg" src="../img/icon/default-propic.png" data-dismiss="modal"><br><br>
                         <input type="file" type="button" class="btn btn-default">파일 업로드</label>
                          
             </div>
@@ -137,15 +137,15 @@
         </div>
       </div>
             <div id="side">
-          <img class="img1" src="facebook.png" data-dismiss="modal" onClick="face()">
+          <img class="img1" src="../img/icon/facebook.png" data-dismiss="modal" onClick="face()">
           </a>
         </div>
             <div id="side">
-          <img src="twitter.png" data-dismiss="modal" onClick="twit()">
+          <img src="../img/icon/twitter.png" data-dismiss="modal" onClick="twit()">
           </a>
         </div>
                <div id="side">
-           <img class="comimg" src="comq.png" data-dismiss="modal" onClick="comq()">
+           <img class="comimg" src="../img/icon/comq.png" data-dismiss="modal" onClick="comq()">
           </a>
         </div>
   </div> 
@@ -179,15 +179,15 @@
         </div>
       </div>
             <div id="side">
-          <img class="img1" src="facebook.png" data-dismiss="modal" onClick="face()">
+          <img class="img1" src="../img/icon/facebook.png" data-dismiss="modal" onClick="face()">
           </a>
         </div>
             <div id="side">
-          <img src="twitter.png" data-dismiss="modal" onClick="twit()">
+          <img src="../img/icon/twitter.png" data-dismiss="modal" onClick="twit()">
           </a>
         </div>
            <div id="side">
-           <img class="comimg" src="comq.png" data-dismiss="modal" onClick="comq()">
+           <img class="comimg" src="../img/icon/comq.png" data-dismiss="modal" onClick="comq()">
           </a>
         </div>
     </div>
@@ -222,15 +222,15 @@
         </div>
       </div>
             <div id="side">
-          <img class="img1" src="facebook.png" data-dismiss="modal" onClick="face()">
+          <img class="img1" src="../img/icon/facebook.png" data-dismiss="modal" onClick="face()">
           </a>
         </div>
             <div id="side">
-          <img src="twitter.png" data-dismiss="modal" onClick="twit()">
+          <img src="../img/icon/twitter.png" data-dismiss="modal" onClick="twit()">
           </a>
         </div>
            <div id="side">
-           <img class="comimg" src="comq.png" data-dismiss="modal" onClick="comq()">
+           <img class="comimg" src="../img/icon/comq.png" data-dismiss="modal" onClick="comq()">
           </a>
         </div>
     </div>
@@ -241,6 +241,11 @@
 $(document).ready(function(){
     $("#myBtn").click(function(){
         $("#myModal").modal();
+    });
+    
+    $("#btn-join").click(function() {
+    	$("#myModa2").modal();
+    	$("#myModal").attr('style', "display:none;");
     });
 });
 
@@ -257,11 +262,6 @@ $(document).ready(function(){
    $("#myModal").attr('style',"display:none;")
  }
    
-   
-function btn-join() {
-	$("#myModa2").modal();
-	$("#myModal").attr('style', "display:none;");
-}
    
 </script>
 </html>
