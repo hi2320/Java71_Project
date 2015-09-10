@@ -15,7 +15,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class FileUpload extends HttpServlet {
 	
 	public List<FileItem> userProfilePicture(HttpServletRequest request) throws Exception{
-					
+					System.out.println("file uploadfile checking...");
 	DiskFileItemFactory factory = new DiskFileItemFactory();
 	ServletFileUpload upload = new ServletFileUpload(factory);
 	
@@ -26,7 +26,7 @@ public class FileUpload extends HttpServlet {
 	}
 	
 	System.out.println(items);
-	
+	System.out.println("================");
 	String name = null;
 	String photo = null;
 	
