@@ -42,19 +42,38 @@ public class UserController {
 		return mv;
 	}
 	
+	@Autowired ServletContext sc;
 	@RequestMapping
-	public ModelAndView joinUser() throws Exception {
+	public ModelAndView joinUser(HttpServletRequest request, @RequestParam MultipartFile propic) throws Exception {
 		
 		User user = new User();
 		
-		user.setUserId(2223);
-		user.setEmail("testEmail@google.com");
-		user.setnName("ensis");
-		user.setPwd("1111");
-		user.setUserKind("COMQ");
-		user.setPhone("010-9999-9999");
-		user.setProPic(null);
+		user.setEmail(request.getParameter("email"));
+		user.setPwd(request.getParameter("pwd"));
+		user.setUserKind("comq");
 		
+		if (propic.getSize() != 0) {
+			String originFilename = propic.getOriginalFilename();
+			System.out.println("originName ==>> " + originFilename);
+		
+  	  int lastDotPosition = originFilename.lastIndexOf(".");
+  	  String extname = originFilename.substring(lastDotPosition);
+  	  
+  	  String newFilename = System.currentTimeMillis() + extname;
+  	  System.out.println("newFileName :: " + newFilename);
+  	  
+  	  String realUploadPath = sc.getRealPath("/img");
+  	  System.out.println("realUploadPath:: " + realUploadPath);
+  	  
+      File newPath = new File(realUploadPath + "/" + newFilename);
+      System.out.println("newPath:: " + newPath);
+  	  propic.transferTo(newPath);
+  	  
+  	  user.setProPic(realUploadPath + "/" + newFilename);
+		} else {
+			user.setProPic(null);
+		}
+				
 		if (0 != userService.insertUser(user)) {
 			System.out.println("insert Success .. ");
 		} else {
@@ -68,7 +87,6 @@ public class UserController {
 		
 	}
 	
-	@Autowired ServletContext sc;
 	@RequestMapping
 	public void test(HttpServletRequest request, @RequestParam MultipartFile photo) throws Exception {
 		System.out.println("file testing...");
@@ -76,28 +94,20 @@ public class UserController {
 			String originFilename = photo.getOriginalFilename();
 			System.out.println("originName ==>> " + originFilename);
 		
-			// 원래 파일 이름에서 확장명을 추출: 예) .pdf, .jpg
   	  int lastDotPosition = originFilename.lastIndexOf(".");
   	  String extname = originFilename.substring(lastDotPosition);
   	  
-  	  // 새 파일명 준비
-  	  // 다른 사람이 올린 파일 이름과 중돌을 방지하지 위해 밀리초를 기반으로 새 파일명을 만든다.
   	  String newFilename = System.currentTimeMillis() + extname;
-  	  System.out.println("새파일명 :: " + newFilename);
+  	  System.out.println("newFileName :: " + newFilename);
   	  
-  	  // 파일을 저장할 위치 알아내기
   	  String realUploadPath = sc.getRealPath("/img");
-  	  System.out.println("파일저장위치:: " + realUploadPath);
+  	  System.out.println("realUploadPath:: " + realUploadPath);
   	  
-  	  // 파일을 저장할 위치 + 새 파일명
       File newPath = new File(realUploadPath + "/" + newFilename);
-      System.out.println("파일저장위치와 새파일명 :: " + newPath);
-      // 임시 폴더에 있는 파일을 새 위치와 새 파일명으로 옮긴다.
+      
+      System.out.println("newPath:: " + newPath);
   	  photo.transferTo(newPath);
-  	  
-		
 		}
-//		new FileUpload().userProfilePicture(request);
 		
 	}
 	
@@ -108,9 +118,9 @@ public class UserController {
 		
 		String result = "";
 		if(userService.getUserCheck(id)) {
-			result = "ture";				
+			result = "false";				
 		} else {
-			result = "flase";
+			result = "true";
 		}
 		
 		return result;

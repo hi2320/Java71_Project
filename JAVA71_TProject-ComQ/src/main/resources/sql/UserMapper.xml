@@ -10,15 +10,13 @@
  		<result property="userId" 	column="user_id" 	jdbcType="INTEGER"/>
  		<result property="email" 	column="email" 		jdbcType="VARCHAR"/>
  		<result property="pwd" 		column="password" 	jdbcType="VARCHAR"/>
- 		<result property="nName" 	column="nname" 		jdbcType="VARCHAR"/>
  		<result property="proPic" 	column="propic" 	jdbcType="VARCHAR"/>
- 		<result property="phone" 	column="phone" 		jdbcType="VARCHAR"/>
  		<result property="userKind" column="user_kind" 	jdbcType="VARCHAR"/>
  	</resultMap>
  	
 	<!-- SQL : get Domain -->
 	<select id="getUser" parameterType="integer" resultMap="UserSelectMap">
-		SELECT user_id, email, password, nname, propic, phone, user_kind
+		SELECT user_id, email, password, phone, user_kind
 		FROM USERS
 		WHERE user_id = #{value}
 	</select>
@@ -32,14 +30,12 @@
 	<!-- SQL : INSERT -->
 	<insert id="insertUser" parameterType="user">
 	 	INSERT 
-		INTO USERS(user_id, email, password, nname, propic, phone, user_kind) 
-		VALUES (#{userId}, 
+		INTO USERS(user_id, email, password, propic, user_kind) 
+		VALUES (USERID_SEQ.NEXTVAL, 
 				#{email}, 
 				#{pwd}, 
-				#{nName}, 
 				<if test="proPic != null">#{proPic},</if>
 				<if test="proPic == null">null,</if>
-				#{phone}, 
 				#{userKind})			
 	 </insert>
 	 

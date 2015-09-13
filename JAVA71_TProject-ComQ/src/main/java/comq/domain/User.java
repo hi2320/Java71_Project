@@ -5,9 +5,7 @@ public class User {
 	private int userId;
 	private String email;
 	private String pwd;
-	private String nName;
 	private String proPic;
-	private String phone;
 	private String userKind;
 		
 	private boolean isActive;
@@ -31,23 +29,11 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getnName() {
-		return nName;
-	}
-	public void setnName(String nName) {
-		this.nName = nName;
-	}
 	public String getProPic() {
 		return proPic;
 	}
 	public void setProPic(String proPic) {
 		this.proPic = proPic;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	public String getUserKind() {
 		return userKind;
@@ -65,8 +51,8 @@ public class User {
 	@Override
   public String toString() {
 	  return "User [userId=" + userId + ", email=" + email + ", pwd=" + pwd
-	      + ", nName=" + nName + ", proPic=" + proPic + ", phone=" + phone
-	      + ", userKind=" + userKind + ", isActive=" + isActive + "]";
+	      + ", proPic=" + proPic + ", userKind=" + userKind + ", isActive="
+	      + isActive + "]";
   }
 	
 }
