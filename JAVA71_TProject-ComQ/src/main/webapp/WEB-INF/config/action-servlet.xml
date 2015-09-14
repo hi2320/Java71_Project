@@ -24,7 +24,16 @@
  	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
   		<property name="maxUploadSize" value="5000000"/>
 	</bean>
+
   		
+   <!-- HandlerMapping 생성 -->
+  <!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    <property name="order" value="0"/>
+    <property name="interceptors" ref="logonCheckInterceptor"/>
+  </bean> -->
+  
+  <!-- Interceptor 생성 -->
+  <!-- <bean id="logonCheckInterceptor" class="spring.common.web.LogonCheckInterceptor"/> -->
 
 	<!-- :: exception resolver 선언 :: 서술적 / 선언적 예외처리 :: Servlet 에서의 선언적 예외처리를 
 		다시 생각하며.... -->

@@ -1,17 +1,9 @@
 package comq.web;
 
 import java.io.File;
-import java.util.Properties;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import comq.common.SMTPAuthenticator;
 import comq.domain.User;
 import comq.service.user.UserService;
 
@@ -51,25 +42,42 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping
-	public ModelAndView login(@RequestParam("email") String email, @RequestParam("pwd") String pwd, HttpSession session) throws Exception {
+	// User login
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public @ResponseBody String login(@RequestParam("email") String email, @RequestParam("pwd") String pwd, HttpSession session) throws Exception {
 		
 		User user = userService.getUser(email);
-		ModelAndView mv = new ModelAndView();
-		
-		if( user.getEmail() != null) {
-			if( !user.isActive() ) {
-				session.setAttribute("user", user);
-				mv.addObject("loginStatus", true);
-			}
-		} else {
-			mv.addObject("loginStatus", false);
-		}
-		
+		String result = "false";
 		
 		System.out.println(user);
+		if( user != null) {
+			if( user.getPwd().equals(pwd) ) {
+  			user.setActive(true);
+  		}
+  		if( user.isActive() ) {
+  			session.setAttribute("loginUser", user);
+  			result = "true";
+  		}
+		}
+		System.out.println(user);
+		System.out.println(result);
+		System.out.println(session.getAttribute("loginUser"));
 		
-		return new ModelAndView();
+		return result;
+	}
+	
+	// User logout
+	@RequestMapping(value="/logout", method=RequestMethod.POST)
+	public @ResponseBody String logout(HttpSession session) throws Exception {
+		
+		String result = "false";
+		
+		if(session.getAttribute("loginUser") != null) {
+			session.removeAttribute("loginUser");
+			result ="true";
+		} 
+
+		return result;
 	}
 	
 	// user join
@@ -120,12 +128,12 @@ public class UserController {
 	}
 	
 	// e-mail duplication checking
-	@RequestMapping(value="/checkId", method=RequestMethod.POST)
-	public @ResponseBody String emailCheck(@RequestParam("id") String id) throws Exception {
-		System.out.println(id);
+	@RequestMapping(value="/emailDuplicationcheck", method=RequestMethod.POST)
+	public @ResponseBody String emailCheck(@RequestParam("email") String email) throws Exception {
+		System.out.println(email);
 		
 		String result = "";
-		if(userService.getUserCheck(id)) {
+		if(userService.getUserCheck(email)) {
 			result = "false";				
 		} else {
 			result = "true";
@@ -134,8 +142,7 @@ public class UserController {
 	}
 	
 	// e-mail authorization 
-	@RequestMapping
-	public void sendAuthMail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+/*	public void sendAuthMail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		System.out.println("이메일 인증 테스트");
     request.setCharacterEncoding("UTF-8");
@@ -180,5 +187,5 @@ public class UserController {
       response.sendRedirect("request_failed.jsp");
     } 
     System.out.println("이메일 인증 테스트 end");
-	}
+	}*/
 }

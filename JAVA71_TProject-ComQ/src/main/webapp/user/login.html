@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='utf-8'>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>COMQ: login</title>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>COMQ: login</title>
 
 <!-- font -->
-
 <link rel="stylesheet" media="screen" href="http://openfontlibrary.org/face/alex-brush" rel="stylesheet" type="text/css"/> <!-- 'AlexBrushRegular' -->
 	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -18,13 +17,16 @@
 </head>
 <body>
 
-<button id="login-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-Modal">
+<div id="login">
+<button id="login-btn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-Modal">
   LOGIN
 </button>
-<button id="join-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#join-Modal">
-  가입
+<button id="logout-btn" type="button" class="btn btn-primary btn-lg">Log Out</button>
+<button id="join-btn" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#join-Modal">
+  SIGN IN
 </button>
 
+</div>
 
 <!-- login-Modal -->
 <div class="modal fade" id="login-Modal" tabindex="-1" role="dialog" aria-labelledby="login-ModalLabel" aria-hidden="true">
@@ -36,22 +38,22 @@
       </div>
       <div class="modal-body">
         
-        <form class="form-horizontal" action="/app/user/login" method="POST">
+        <form class="form-horizontal" action="/app/user/loginCheck" method="POST" id="login-form">
           <div class="form-group">
             <label for="user-mail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="user-mail" name="email" placeholder="Email@example.com">
+              <input type="email" class="form-control" id="user-email" name="email" placeholder="이메일을 입력하세요.">
             </div>
           </div>
           <div class="form-group">
             <label for="user-pwd" class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="user-pwd" name="pwd" placeholder="Password">
+              <input type="password" class="form-control" id="user-pwd" name="pwd" placeholder="비밀번호 입력하세요.">
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default">LOGIN</button>
+              <button type="submit" class="btn btn-default" id="btn-login">LOGIN</button>
             </div>
           </div>
         </form>
@@ -102,7 +104,8 @@
   </div>
 </div>
 
-<script src="../../js/user/user.js"></script>
+<script src="../../js/user/join.js"></script>
+<script src="../../js/user/login.js"></script>
 </body>
 </html>
 		

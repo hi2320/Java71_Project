@@ -5,17 +5,19 @@ $(document).ready(function(){
 	$('#duplication-check').on('click', function() {
 	 if ( isEmail( $('#input-email').val() )) {
 		 $.ajax({
-			url: "/app/user/checkId",
+			url: "/app/user/emailDuplicationcheck",
 			type: "POST",
-			data: { "id" : $("#input-email").val() },
+			data: { "email" : $("#input-email").val() },
 			success: function(data) {
 				if(data == "false") {
-				  alert("이미 존재하는  e-mail 입니다.");	
+				  $('#input-email-output').text("이미 존재하는  e-mail 입니다.");	
+				  $('#input-email-output').css("color", "red");
 				  joinCheck_email = false;
 				} else { 
-				  alert("사용 가능 합니다.");			
-					  joinCheck_email = true;
-					}
+				  $('#input-email-output').text("사용 가능 합니다.");
+				  $('#input-email-output').css("color", "green");
+				  joinCheck_email = true;
+				  }
 				}
 		});
 	 } else {
@@ -29,12 +31,16 @@ $(document).ready(function(){
 	  
 	  if (input_pwd.length == 0) {
 		  $('#pwd-check-output').text('비밀번호를 입력하세요.');
+		  $('#pwd-check-output').css("color", "red");
+		  joinCheck_pwd = false;
 	  } else {
 		  if (input_pwd == check_pwd) {
 		    $('#pwd-check-output').text('비밀번호가 일치합니다.');
+		    $('#pwd-check-output').css("color", "green");
 		    joinCheck_pwd = true;
 		  } else {
 		    $('#pwd-check-output').text('비밀번호가 일치하지 않습니다.');
+		    $('#pwd-check-output').css("color", "red");
 		    joinCheck_pwd = false;
 		  }
 	  }
@@ -50,7 +56,6 @@ $(document).ready(function(){
 	   e.preventDefault();
 	 }
 	});
-	
 });
 
 function readURL(input) {
