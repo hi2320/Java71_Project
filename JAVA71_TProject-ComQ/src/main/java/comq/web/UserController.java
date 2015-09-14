@@ -101,7 +101,7 @@ public class UserController {
   	  String newFilename = System.currentTimeMillis() + extname;
   	  System.out.println("newFileName :: " + newFilename);
   	  
-  	  String realUploadPath = sc.getRealPath("/img");
+  	  String realUploadPath = sc.getRealPath("/propic");
   	  System.out.println("realUploadPath:: " + realUploadPath);
   	  
       File newPath = new File(realUploadPath + "/" + newFilename);
