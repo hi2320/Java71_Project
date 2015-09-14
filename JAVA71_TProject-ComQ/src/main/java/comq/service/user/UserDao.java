@@ -7,6 +7,6 @@ public interface UserDao {
 	public int insertUser(User user) throws Exception;
 	
 	public int getUserCheck(String email) throws Exception;
-	public User getUser(int userId) throws Exception;
+	public User getUser(String email) throws Exception;
 	
 }

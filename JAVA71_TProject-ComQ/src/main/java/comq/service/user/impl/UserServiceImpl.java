@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
   }
 
 	@Override
-  public User getUser(int userId) throws Exception {
-	  return userDao.getUser(userId);
+  public User getUser(String email) throws Exception {
+	  return userDao.getUser(email);
   }
 
 }

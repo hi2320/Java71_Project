@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,9 +52,22 @@ public class UserController {
 	}
 	
 	@RequestMapping
-	public ModelAndView login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) throws Exception {
-		User user = userService.getUser(email);
+	public ModelAndView login(@RequestParam("email") String email, @RequestParam("pwd") String pwd, HttpSession session) throws Exception {
 		
+		User user = userService.getUser(email);
+		ModelAndView mv = new ModelAndView();
+		
+		if( user.getEmail() != null) {
+			if( !user.isActive() ) {
+				session.setAttribute("user", user);
+				mv.addObject("loginStatus", true);
+			}
+		} else {
+			mv.addObject("loginStatus", false);
+		}
+		
+		
+		System.out.println(user);
 		
 		return new ModelAndView();
 	}
@@ -167,5 +181,4 @@ public class UserController {
     } 
     System.out.println("이메일 인증 테스트 end");
 	}
-	
 }

@@ -15,10 +15,10 @@
  	</resultMap>
  	
 	<!-- SQL : get Domain -->
-	<select id="getUser" parameterType="integer" resultMap="UserSelectMap">
-		SELECT user_id, email, password, phone, user_kind
+	<select id="getUser" parameterType="string" resultMap="UserSelectMap">
+		SELECT user_id, email, password, propic, user_kind
 		FROM USERS
-		WHERE user_id = #{value}
+		WHERE email = #{email}
 	</select>
 	
 	<select id="getUserJoinCheck" parameterType="string" resultType="integer">
