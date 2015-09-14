@@ -100,9 +100,7 @@ public class UserController {
 	// e-mail duplication checking
 	@RequestMapping(value="/checkId", method=RequestMethod.POST)
 	public @ResponseBody String emailCheck(@RequestParam("id") String id) throws Exception {
-	
 		System.out.println(id);
-		
 		
 		String result = "";
 		if(userService.getUserCheck(id)) {
@@ -110,21 +108,19 @@ public class UserController {
 		} else {
 			result = "true";
 		}
-		
 		return result;
 	}
 	
-
 	// e-mail authorization 
 	@RequestMapping
-	public void test(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void sendAuthMail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		System.out.println("이메일 인증 테스트");
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
 
-    String m_name = "COMQ Administrator";
+    String m_name = "COMQ-관리자";
     String m_email = "narujb@gmail.com";
     String m_title = "제목이요";
     String m_text = "내용이요";
@@ -147,7 +143,6 @@ public class UserController {
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.auth", "true");
 
-
         Authenticator auth = new SMTPAuthenticator();
         Session sess = Session.getDefaultInstance(props, auth);
         MimeMessage msg = new MimeMessage(sess);
@@ -157,15 +152,12 @@ public class UserController {
         msg.setContent(contents, "text/html; charset=UTF-8");
         msg.setHeader("Content-type", "text/html; charset=UTF-8");
         Transport.send(msg);
-//        response.sendRedirect("request_complete.jsp");
         response.sendRedirect("index.html");
     } catch (Exception e) {
       e.printStackTrace();
       response.sendRedirect("request_failed.jsp");
     } 
     System.out.println("이메일 인증 테스트 end");
-}
-	
-	
+	}
 	
 }
