@@ -45,9 +45,17 @@ public class UserController {
 	@RequestMapping
 	public ModelAndView joinUserView() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/user/joinUser.html");
+		mv.setViewName("/user/login.html");
 		
 		return mv;
+	}
+	
+	@RequestMapping
+	public ModelAndView login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) throws Exception {
+		User user = userService.getUser(email);
+		
+		
+		return new ModelAndView();
 	}
 	
 	// user join
@@ -115,21 +123,21 @@ public class UserController {
 	@RequestMapping
 	public void sendAuthMail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("ÀÌ¸ŞÀÏ ÀÎÁõ Å×½ºÆ®");
+		System.out.println("ì´ë©”ì¼ ì¸ì¦ í…ŒìŠ¤íŠ¸");
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
 
-    String m_name = "COMQ-°ü¸®ÀÚ";
+    String m_name = "COMQ-ê´€ë¦¬ì";
     String m_email = "narujb@gmail.com";
-    String m_title = "Á¦¸ñÀÌ¿ä";
-    String m_text = "³»¿ëÀÌ¿ä";
+    String m_title = "ì œëª©ì´ìš”";
+    String m_text = "ë‚´ìš©ì´ìš”";
     
     try {
         String mail_from =  m_name + "<" + m_email + ">";
         String mail_to =    "crunky89@naver.com";
-        String title =      "hosting.83rpm.com ¿äÃ»»çÇ× :: " + m_title;
-        String contents =   "º¸³½ »ç¶÷ :: " + m_name + "&lt;" + m_email + "&gt;<br><br>" + m_title + "<br><br>" + m_text;
+        String title =      "hosting.83rpm.com ìš”ì²­ì‚¬í•­ :: " + m_title;
+        String contents =   "ë³´ë‚¸ ì‚¬ëŒ :: " + m_name + "&lt;" + m_email + "&gt;<br><br>" + m_title + "<br><br>" + m_text;
         mail_from = new String(mail_from.getBytes("UTF-8"), "8859_1");
         mail_to = new String(mail_to.getBytes("UTF-8"), "8859_1");
 
@@ -157,7 +165,7 @@ public class UserController {
       e.printStackTrace();
       response.sendRedirect("request_failed.jsp");
     } 
-    System.out.println("ÀÌ¸ŞÀÏ ÀÎÁõ Å×½ºÆ® end");
+    System.out.println("ì´ë©”ì¼ ì¸ì¦ í…ŒìŠ¤íŠ¸ end");
 	}
 	
 }

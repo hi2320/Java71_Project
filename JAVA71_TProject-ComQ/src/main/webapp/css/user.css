@@ -1,0 +1,66 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+#login-button {
+	margin-left: 100px;
+	margin-top: 100px;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+#btn-login {
+  position: relative;
+}
+
+#input-email-label {
+  display: block;
+}
+
+#input-email {
+	width: 281px;
+}
+#duplication-check {
+	margin-bottom: 0.2em;
+}
+
+#input-email, #duplication-check {
+	display: inline-block;
+}
+
+#input-email-output, #pwd-check-output, .help-block {
+	line-height: 2em;
+	font-size: 0.8em;
+	color: #737373;
+}
+
+#join-Modal .modal-body {
+	background-color: #F2F2F2;
+}
+#join-Modal .modal-header {
+	background-color: #C0C0C0;
+}
+
+#propic-preview, #propic-div {
+	border: 1px solid black;
+	width: 368px;
+	height: 368px;
+}
+
+#join-Modal .modal-content {
+	width: 400px;
+	margin: 0 auto;
+}
+
+#propic-upload {
+	width: 368px;
+}
+
+#btn-join {
+	width: 79px;
+	height: 34px;
+	margin: 0 auto;
+}

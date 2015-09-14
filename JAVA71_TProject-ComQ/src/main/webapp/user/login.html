@@ -3,28 +3,106 @@
 	<head>
 		<meta charset='utf-8'>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>1111</title>
-	</head>
-	<body>
-<form class="form-inline">
-  <div class="form-group">
-    <label for="exampleInputName2">Name</label>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-  </div><br>
-  <div class="form-group">
-    <label for="exampleInputEmail2">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-  </div><br>
-   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호를 입력해주세요.">
-  </div><br>
-   <div class="form-group">
-    <label for="exampleInputFile">파일 업로드</label>
-    <input type="file" id="exampleInputFile">
-  </div><br>
-  <center><button type="submit" class="btn btn-default">회원가입</button></center>
-</form>
-	</body>
-	</html>
+		<title>COMQ: login</title>
+
+<!-- font -->
+
+<link rel="stylesheet" media="screen" href="http://openfontlibrary.org/face/alex-brush" rel="stylesheet" type="text/css"/> <!-- 'AlexBrushRegular' -->
+	
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../../css/user.css">
+</head>
+<body>
+
+<button id="login-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-Modal">
+  LOGIN
+</button>
+<button id="join-button" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#join-Modal">
+  가입
+</button>
+
+
+<!-- login-Modal -->
+<div class="modal fade" id="login-Modal" tabindex="-1" role="dialog" aria-labelledby="login-ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="login-ModalLabel">로그인</h4>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="user-mail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="user-mail" name="email" placeholder="Email@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-pwd" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="user-pwd" name="pwd" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">LOGIN</button>
+            </div>
+          </div>
+        </form>
+        
+      </div>      
+    </div>
+  </div>
+</div>
+
+<!-- join-Modal -->
+<div class="modal fade" id="join-Modal" tabindex="-1" role="dialog" aria-labelledby="join-ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="join-ModalLabel">회원 가입</h4>
+      </div>
+      <div class="modal-body">
+        
+        <form id="join-form" enctype="multipart/form-data" action="/app/user/joinUser" method="POST" >
+		  <div class="form-group">
+		    <label for="input-email" id="input-email-label">이메일 주소 (필수)</label>
+		    <input type="email" class="form-control" id="input-email" placeholder="이메일을 입력하세요." name="email">
+		    <button type="button" id="duplication-check" class="btn btn-default">중복 체크</button>
+		    <p id="input-email-output">중복체크를 해주세요.</p>
+		  </div>
+		  <div class="form-group">
+		    <label for="input-pwd">비밀번호 (필수)</label>
+		    <input type="password" class="form-control" id="input-pwd" placeholder="비밀번호를 입력하세요." name="pwd">
+		    <input type="password" class="form-control" id="input-pwd-check" placeholder="비밀번호를 다시 입력하세요.">
+		    <p id="pwd-check-output"></p>
+		  </div>
+		  <div class="form-group">
+		    <label for="porpic-upload">프로필 사진 (선택)</label>
+		    <div id="propic-div">
+		  	<img id="propic-preview" src="../../img/icon/default-propic.png">
+		  	</div>
+		    <input type="file" id="propic-upload" onchange="readURL(this)" class="btn btn-default" name="propic">
+		    <p class="help-block">이미지 파일만 업로드 가능 합니다.</p>
+		  </div>
+		  <div id="btn-join">
+		  <button type="submit" class="btn btn-default">회원가입</button>
+		  </div>
+		</form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../js/user/user.js"></script>
+</body>
+</html>
 		
