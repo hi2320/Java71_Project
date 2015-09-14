@@ -8,7 +8,7 @@ public class User {
 	private String proPic;
 	private String userKind;
 		
-	private boolean isActive;
+	private boolean Active;
 	
 	public int getUserId() {
 		return userId;
@@ -42,17 +42,18 @@ public class User {
 		this.userKind = string;
 	}
 	public boolean isActive() {
-		return isActive;
+		return Active;
 	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean active) {
+		Active = active;
 	}
-	
+
 	@Override
   public String toString() {
 	  return "User [userId=" + userId + ", email=" + email + ", pwd=" + pwd
-	      + ", proPic=" + proPic + ", userKind=" + userKind + ", isActive="
-	      + isActive + "]";
+	      + ", proPic=" + proPic + ", userKind=" + userKind + ", Active="
+	      + Active + "]";
   }
+
 	
 }

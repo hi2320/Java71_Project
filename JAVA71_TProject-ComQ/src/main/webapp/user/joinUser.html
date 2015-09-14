@@ -17,7 +17,7 @@ height: 300px;
 <form id="join-form" class="form-inline" method="POST" action="/app/user/joinUser" enctype="multipart/form-data">
   <div id ="user-email" class="form-group">
     <label for="exampleInputEmail2">Email
-    <input type="email" class="form-control" id="input-email" name="usermail" placeholder="email@example.com" required>
+    <input type="email" class="form-control" id="input-email" name="email" placeholder="email@example.com" required>
     <button type="button" id="duplication-check">중복체크</button></label>
     
   </div><br>
@@ -55,15 +55,11 @@ $(document).ready(function(){
 			data: { "id" : $("#input-email").val() },
 			success: function(data) {
 				if(data == "false") {
-					alert("이미 존재하는  e-mail 입니다.");	
+				  alert("이미 존재하는  e-mail 입니다.");	
 				  joinCheck_email = false;
-				  if(joinCheck_email == false) 
-				      alert('joinCheck_email :: false');
 				} else { 
-					alert("사용 가능 합니다.");			
+				  alert("사용 가능 합니다.");			
 				  joinCheck_email = true;
-				  if(joinCheck_email == true) 
-				      alert('joinCheck_email :: ture');
 				}
 			}
 	  });
@@ -76,26 +72,19 @@ $(document).ready(function(){
 	  if (input_pwd == check_pwd) {
 	    $('#pwd-check-output').text('비밀번호가 일치합니다.');
 	    joinCheck_pwd = true;
-	    if(joinCheck_pwd == true) 
-	        alert('joinCheck_pwd :: ture');
 	  } else {
 	    $('#pwd-check-output').text('비밀번호가 일치하지 않습니다.');
-	    joinCheck_email = false;
-	    if(joinCheck_email == false) 
-	    	alert('joinCheck_pwd :: false');
+	    joinCheck_pwd = false;
 	  }
 	}); 
 	
 	$('#join-form').submit(function(e) {
-	 alert('회원가입');	
-	 alert('joinCheck_email'+joinCheck_email);
-	 alert('joinCheck_pwd'+joinCheck_pwd);
 	 if(joinCheck_email == false) {
-		 alert('email 확인');
+		 alert('email 중복 체크를 확인해 주세요.');
 		 e.preventDefault();
 	 }
 	 if(joinCheck_pwd == false) {
-	   alert('pwd 확인');
+	   alert('비밀번호를 확인해 주세요.');
 	   e.preventDefault();
 	 }
 	});
