@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	
+	
 	$('#login-form').submit(function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -12,6 +14,7 @@ $(document).ready(function() {
 					$('#login-Modal').modal('hide');
 					$('#login-btn').css('display', 'none');
 					$('#logout-btn').css('display', 'inline');
+					
 				} else {
 					alert('이메일 혹은 패스워드를 확인해주세요.');
 				}

@@ -48,6 +48,24 @@ $(document).ready(function(){
 	var joinCheck_email = false;
 	var joinCheck_pwd = false;
 
+	$.ajax({
+		url: "/app/user/sessionCheck",
+		type: "POST",
+		data: {},
+		dataType: "JSON",
+		success: function(data) {
+			alert(JSON.stringify(data));
+			alert('ok');
+			if(data != null){
+				alert(data);
+			} else {
+				alert('로그인 되지 않았습니다.');
+			}	
+		}
+	});
+	
+	
+	
  $('#duplication-check').on('click', function() {
 		$.ajax({
 			url: "/app/user/checkId",

@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,23 @@ public class UserController {
 	
 	public UserController() {
 		System.out.println(this.getClass());
+	}
+	
+	@RequestMapping(value="/sessionCheck", method=RequestMethod.POST)
+	public @ResponseBody String sessionCheck(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		session = request.getSession(true);
+		User user = (User)session.getAttribute("loginUser");
+		
+		ObjectMapper objMapper = new ObjectMapper();
+		String jsonVal = "";
+		
+		if (user != null) {
+			jsonVal = objMapper.writeValueAsString(user);
+			System.out.println(jsonVal);
+		}
+		
+		return jsonVal;
 	}
 	
 	@RequestMapping
@@ -76,7 +94,7 @@ public class UserController {
 			session.removeAttribute("loginUser");
 			result ="true";
 		} 
-
+		
 		return result;
 	}
 	
