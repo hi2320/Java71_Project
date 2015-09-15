@@ -1,180 +1,292 @@
+
+<!DOCTYPE html>
 <html>
 
-	<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../css/reset.css">
-    <title>ComQ 질문 관리 페이지.</title>
-    <link rel="stylesheet"  href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="../../css/question_manage.css">
-    
-		<style>
-			
-		</style>
-	</head>
+<head>
+<meta charset="utf-8">
+<link
+	href="http://img2.kakao.co.kr/assets/layout-033506aab1fd6d21d1e0e8be7ac850f5.css"
+	media="all" rel="stylesheet">
+<link
+	href="http://img2.kakao.co.kr/assets/languages/ko-1d22614f60b988215bb3ac3a3ed33f3f.css"
+	media="screen" rel="stylesheet">
+<script
+	src="http://img2.kakao.co.kr/assets/application-d98a0c947828bd4b09cdf31b5169c0e2.js"></script>
+<link
+	href="http://img2.kakao.co.kr/assets/applications-d4174f83af4dbf2e6c5396fd3e9a924f.css"
+	media="screen" rel="stylesheet">
+<!--[if lte IE 8]>
+            <script src="http://img2.kakao.co.kr/assets/ie.compatibility-747eb806af5c5b915a7ffa5628ef3cc6.js"></script>
+        <![endif]-->
+<link
+	href="http://img2.kakao.co.kr/assets/sub-d7835380ca2f09dfb1a86477a5d65bc1.css"
+	media="all" rel="stylesheet">
 
-	<body>
-		<div class="main_wrap">
-			<div class="header_wrap">
-				<div id="header">
-					<div class="mainlogo4">
-						ComQ
-						<span class="pagename">질문 관리페이지</span>
-					</div>
-					<div class="log-form">
-						<div class="log-input">
-							<p>
-								<input class="form-control" type="text" placeholder=" I D ">
-							</p>
-							<p>
-								<input class="form-control" type="text" placeholder=" P A S S W O R D ">
-							</p>
-						</div>
-						<span class="glyphicon glyphicon-user user-icon-size "
-							aria-hidden="true"></span>
-					</div>
-				</div>
+<script
+	src="http://img2.kakao.co.kr/assets/helps-fe2fbdf54a2a154f19d5a786d9e5bef1.js"></script>
+<style>
+.help-visual1 {
+	width: 958px;
+	height: 126px;
+}
 
-			</div>
-		<form name="questionForm" method="post" action="../curator/curatorAdmin">
-	  
-			<div class="aside">
-				<select class="form-control curating_code" onchange="curatorPageChange(this[this.selectedIndex].value)">
-					<option value="1" label="사무용PC">사무용PC</option>
-					<option value="2" label="멀티미디어 감상용 PC">멀티미디어 감상용 PC</option>
-					<option value="3" label="게이밍 PC">게이밍 PC</option>
-					<option value="4" label="멀티미디어 편집 PC">멀티미디어 편집 PC</option>
-					<option value="5" label="프로그래밍 PC">프로그래밍 PC</option>
-				</select>
-				<input type="hidden" name="purpose" >
-				<button type="button" class="btn btn-info addbtn" onclick="questionAdd()">+
-				</button>
-			</div>
+.questionadd {
+	position: absolute;
+	padding-top: 13px;
+	text-align: center;
+	background-color: red;
+	width: 130px;
+	height: 37px;
+	left: 800px;
+	bottom: 22px;
+	background-color: #4A4C4E;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+}
 
-			<div class="question_admin_area">
-				<div class="question_answer_area">
-					<div class="question">
-						<div id="accordion">
+.questiondelete4 {
+	cursor: pointer;
+	position: absolute;
+	border-radius: 5px;
+	padding-bottom: 4px;
+	padding-right: 1px;
+	text-align: center;
+	border: 1px solid #4A4C4E;
+	left: 927px;
+	width: 23px;
+	top: 15px;
+	height: 10px;
+	color: #4A4C4E;
+	bottom: 22px;
+	font-weight: bold;
+}
 
-							<div class="question_box">
-								<select class="form-control product_value">
-									<option>모니터</option>
-									<option>마우스</option>
-									<option>키보드</option>
-									<option>CPU</option>
-									<option>메인보드</option>
-								</select>
+.questiondelete3 {
+	cursor: pointer;
+	position: absolute;
+	border-radius: 5px;
+	padding-bottom: 4px;
+	padding-right: 1px;
+	text-align: center;
+	border: 1px solid #4A4C4E;
+	left: 927px;
+	width: 23px;
+	top: 15px;
+	height: 10px;
+	color: #4A4C4E;
+	bottom: 22px;
+	font-weight: bold;
+}
 
-								<select class="form-control answer_value">
-									<option>답변유형</option>
-									<option>checkbox</option>
-									<option>radio</option>
-								</select>
-								<input type="text" class="form-control question_texts" placeholder="질문 문장을 입력하시오.">
+.questiondelete2 {
+	cursor: pointer;
+	position: absolute;
+	border-radius: 5px;
+	padding-bottom: 4px;
+	padding-right: 1px;
+	text-align: center;
+	border: 1px solid #4A4C4E;
+	left: 927px;
+	width: 23px;
+	top: 15px;
+	height: 10px;
+	color: #4A4C4E;
+	bottom: 22px;
+	font-weight: bold;
+}
 
-                                <button type="button" class="btn btn-info deletebtn" onclick="questionDelete(this)">-</button>
-							</div>
+.questiondelete1 {
+	cursor: pointer;
+	position: absolute;
+	border-radius: 5px;
+	padding-bottom: 4px;
+	padding-right: 1px;
+	text-align: center;
+	border: 1px solid #4A4C4E;
+	left: 927px;
+	width: 23px;
+	top: 15px;
+	height: 10px;
+	color: #4A4C4E;
+	bottom: 22px;
+	font-weight: bold;
+}
 
-							<div class="answer_box">
-								<div class="answer">
-									<input type="text" class="answer_text form-control" placeholder="답변 문장을 입력하시오.">
-                                    <input type="text" class="answer_hidden form-control" placeholder="hidden_keyword">
-                                    <button type="button" class="btn btn-info answerdeletebtn" onclick="answerDelete(this)">- </button>
-                                    <button type="button" class="btn btn-info answeraddbtn" onclick="answerAdd(this)">+ </button>
+.logo{
+background-color: #C8C8C8;
+}
+
+.logo_image{
+position: absolute;
+top : 80px;
+}
+
+.help-footer1{
+position: absolute;
+}
+
+</style>
+</head>
+
+<body class="helps">
+	<div class="container" id="container">
+		<section id="middle">
+			<section id="body">
+				<section class="help" id="content">
+					<article  class="help-visual1 logo">
+						<img  src="../COMQ.png" class="logo_image">
+					</article>
+					<section class="category">
+						<section class="form-select first">
+							<div class="default type1 on">
+								<div class="selected-text">
+									<div>
+										<input readonly="readonly" type="text" value="게임용PC">
+									</div>
+									<button class="icon off"></button>
+								</div>
+								<div class="list" style="height: 0px;">
+									<div class="box" style="top: -457px;">
+										<div class="box2">
+											<div class="box3">
+												<div class="content">
+													<ul>
+														<li><a href="/helps?locale=ko&amp;service=8">게임용PC</a>
+														</li>
+														<li><a href="/helps?locale=ko&amp;service=45">사무용PC</a>
+														</li>
+														<li><a href="/helps?locale=ko&amp;service=9">디자이너용PC</a>
+														</li>
+														<li><a href="/helps?locale=ko&amp;service=42">개발자용PC</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-			</form>
-			<div class="footer">
-				<button type="button" class="btn btn-info db_send_btn" onclick="sendQuestionManage()">저장</button>
-			</div>
-			<script type="text/javascript">
-				var questionBox = $('.question_box').clone();
-                var answerBox = $('.answer_box').clone();
-                var accordion = $('#accordion');
-					function questionDelete(id) {
-                        event.stopPropagation();
-                        var questionBoxs = $('.question_box');
-                        console.log(questionBoxs.length);
-						if(questionBoxs.length == 1) {
-							alert('마지막 질문란입니다');
-						} else {
-                            $(id).parent().next().remove();
-                            if($(id).parent().not().last()) {
-                                $('.question_box').last().trigger('click');
-                            }
-                            $(id).parent().remove();
-						}
-					}
-					function questionAdd() {
-                        var questionBoxClone = questionBox.clone();
-						accordion.append(questionBoxClone);
-                        accordion.append(answerBox.clone());
-                        accordion.accordion('refresh');
-                        questionBoxClone.trigger('click');
-					}
-					function answerDelete(id) {
-						var isLast = $(id).parent().next().hasClass('answer')
-								|| $(id).parent().prev().hasClass('answer');
-						if (isLast) {
-							if ($(id).next().hasClass('answeraddbtn')) {
-								$(id).parent().prev().append($(id).next());
-							}
-							$(id).parent().remove();
-						} else {
-							alert('마지막 답변란입니다');
-						}
-					}
-					function answerAdd(id) {
-						var thisForm = $(id).parent();
-						var formClone = thisForm.clone();
-						formClone.find('input').val('');
-						formClone.appendTo(thisForm.parent());
-						$(id).remove();
-					}
-					$(function() {
-						$("#accordion").accordion();
-					});
+						</section>
+					</section>
+					<section class="faq">
+						<form action="~~~~.do" class="questionform1">
+							<details class="off" id="table1073181372">
+								<summary>
+									<div class="box">
+										<span class="dot"></span> <span class="questiondelete2">ㅡ</span>
+										<span class="text"> <a href="" class="faq-title">1.
+												자신의 게임 스타일은 ?</a>
+										</span>
+									</div>
+								</summary>
+								<div class="content" id="1073181370">
+									1개 이상 체크 해주세요. <br> <br> <input type="checkbox">화려하고
+									스펙타클한 그래픽 위주로! <br> <br> <input type="checkbox">그래픽은
+									화려하지않아도 재미만 있다면! <br> <br> <input type="checkbox">그래픽은
+									화려하지않아도 재미만 있다면! <br>
+								</div>
+							</details>
+						</form>
+						<form action="~~~~.do" class="questionform2">
+							<details class="off" id="table1073181370">
+								<summary>
+									<div class="box">
+										<span class="dot"></span> <span class="questiondelete2">ㅡ</span>
+										<span class="text"> <a class="faq-title" href=""
+											value="1">2. 자신이 즐겨하는 게임 장르는? </a>
+										</span>
+									</div>
+								</summary>
+								<div class="content" id="1073181370">
+									1개 이상 체크 해주세요. <br> <br> <input type="checkbox">RPG
+									<br> <br> <input type="checkbox" value="TCG">TCG
+									<br> <br> <input type="checkbox">ACTION <br>
+									<br> <input type="checkbox">WWBGAME <br> <br>
+									<input type="checkbox">SPORTS <br> <br> <input
+										type="checkbox">전략&amp;시뮬 <br>
+								</div>
+							</details>
+						</form>
+						<form action="~~~~.do" class="questionform3">
+							<details class="off" id="table1073181371">
+								<summary>
+									<div class="box">
+										<span class="dot"></span> <span class="questiondelete3">ㅡ</span>
+										<span class="text"> <a class="faq-title" href="">3.
+												자신이 즐겨하는 게임 장르는 ?</a>
+										</span>
+									</div>
+								</summary>
+								<div class="content" id="1073181370">
+									1개 이상 체크 해주세요. <br> <br> <input type="checkbox">RPG
+									<br> <br> <input type="checkbox">TCG <br>
+									<br> <input type="checkbox">ACTION <br> <br>
+									<input type="checkbox">WWBGAME <br> <br> <input
+										type="checkbox">SPORTS <br> <br> <input
+										type="checkbox">전략&amp;시뮬 <br>
+								</div>
+							</details>
+						</form>
+						<form action="~~~~" class="questionform4">
+							<details class="off" id="table1073181371">
+								<summary>
+									<div class="box">
+										<span class="dot"></span> <span class="questiondelete4">ㅡ</span>
+										<span class="text"> <a class="faq-title" href="">4.
+												주로 어느정도의 사양의 게임을 즐기시나요?</a>
+										</span>
+									</div>
+								</summary>
+								<div class="content" id="1073181370">
+									1개만 체크 해주세요. <br> <br> <input type="radio" name="1"
+										value="highqual">고사양 게임 <br> <br> <input
+										type="radio" name="1" value="middlequal">중간사양 게임 <br>
+									<br> <input type="radio" name="1" value="lowqual">저사양
+									게임 <br>
+								</div>
+							</details>
+						</form>
+					</section>
+					<section class="paging"></section>
+					<footer class="help-footer">
+						<p>질문을 추가하시려면 질문 추가 버튼을 눌러주세요.</p>
+						<div class="questionadd" href="">질문 추가</div>
+					</footer>
 					
-					function curatorPageChange(index) {
-						/* $('form').attr('action', '../curator/curating?curId='+index);
-						$('form').submit(); */
-					}
-					
-					function sendQuestionManage() {
-				        var questions = $('.question_box');
+				</section>
+			</section>
+		</section>
+	</div>
+	<!-- Tiara 기본 코드 -->
+	<script>
+		var _tiq = 'undefined' !== typeof _tiq ? _tiq : [];
+		_tiq.push([ '__setConfig', {
+			enableSPA : true,
+			enableClick : true
+		} ]);
+		_tiq.push([ '__trackPageview' ]);
+		(function(d) {
+			var se = d.createElement('script');
+			se.type = 'text/javascript';
+			se.async = true;
+			se.src = 'https://m2.daumcdn.net/tiara/js/td.min.js';
+			var s = d.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(se, s);
+		})(document);
+		$(".questiondelete1").click(function() {
+			$(".questionform1").remove();
+		});
+		$(".questiondelete2").click(function() {
+			$(".questionform2").remove();
+		});
+		$(".questiondelete3").click(function() {
+			$(".questionform3").remove();
+		});
+		$(".questiondelete4").click(function() {
+			$(".questionform4").remove();
+		});
+	</script>
+</body>
 
-				        $('.curating_code').attr('name', 'curId');
-				        $('[name=purpose]').val($('.curating_code option:selected').text());
-				        for(var i = 0; i < questions.length; i++) {
-				           var question = questions[i];
-				           
-				           $(question).find('[class*=question_texts]').attr('name', 'questionList['+i+'].qSente');
-				           $(question).find('[class*=product_value]').attr('name', 'questionList['+i+'].qProd');
-				           $(question).find('[class*=answer_value]').attr('name', 'questionList['+i+'].qType');
-				            var answers = $(question).next().find('.answer');
-				            for(var j = 0; j < answers.length; j++) {
-				                var answer = answers[j];
-				                $(answer).find('[class*=answer_text]').attr('name', 'questionList['+i+'].answerList['+j+'].aSente');
-				                $(answer).find('[class*=answer_hidden]').attr('name', 'questionList['+i+'].answerList['+j+'].aSpec');
-				            }
-				        }
-				        $('form').submit();
-				    }
-			</script>
-	</body>
 </html>

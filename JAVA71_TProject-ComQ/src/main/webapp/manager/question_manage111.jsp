@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ 
  <!DOCTYPE html>
  <html>
 
 	<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../css/reset.css">
-    <title>ComQ 질문 관리 페이지 Manage.</title>
+    <title>ComQ 질문 관리 페이지.</title>
     <link rel="stylesheet"  href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -31,7 +31,7 @@
 			<div class="header_wrap">
 				<div id="header">
 					<div class="mainlogo4">
-						<a href="/index_.html">ComQ</a>
+						ComQ
 						<span class="pagename">질문 관리페이지</span>
 					</div>
 					<div class="log-form">
@@ -49,7 +49,7 @@
 				</div>
 
 			</div>
-		<form name="questionForm" method="post" action="../curator/updateQuestionPage">
+		<form name="questionForm" method="post" action="../curator/curatorAdmin">
 	  
 			<div class="aside">
 				<select class="form-control curating_code" onchange="curatorPageChange(this[this.selectedIndex].value)">
@@ -197,7 +197,7 @@
 				});
 				
 				function curatorPageChange(index) {
-					$('form').attr('action', '../curator/changeQuestionPage?curId='+index);
+					$('form').attr('action', '../curator/curating?curId='+index);
 					$('form').submit();
 				}
 				
