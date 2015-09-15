@@ -34,6 +34,10 @@ public class CuratorController {
 		this.curatorService = curatorService;
 	}
 	
+	public CuratorController() {
+		System.out.println(this.getClass());
+	}
+	
 	@RequestMapping
 	public ModelAndView questionPageView(@RequestParam("curId") int curId,
 			HttpSession session) throws Exception {
