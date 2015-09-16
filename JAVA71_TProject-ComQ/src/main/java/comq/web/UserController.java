@@ -132,7 +132,7 @@ public class UserController {
       System.out.println("newPath:: " + newPath);
   	  propic.transferTo(newPath);
   	  
-  	  user.setProPic(realUploadPath + "/" + newFilename);
+  	  user.setProPic(newFilename);
 		} else {
 			user.setProPic(null);
 		}
