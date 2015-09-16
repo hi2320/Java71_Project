@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	
+	$('#login-a').on('click', function() {
+		$('#login-Modal input').val('');
+	});
 	
 	$('#login-form').submit(function(e) {
 		e.preventDefault();
@@ -12,9 +15,9 @@ $(document).ready(function() {
 				if(data == "true") {
 					alert('로그인 성공!');
 					$('#login-Modal').modal('hide');
-					$('#login-btn').css('display', 'none');
-					$('#logout-btn').css('display', 'inline');
-					
+					$('#login-a').css('display', 'none');
+					$('#logout-a').css('display', 'inline');
+					location.reload();
 				} else {
 					alert('이메일 혹은 패스워드를 확인해주세요.');
 				}
@@ -23,17 +26,15 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#logout-btn').on('click', function() {
-		alert('logout 실행');
+	$('#logout-a').on('click', function() {
 		$.ajax({
 			url:"/app/user/logout",
 			type: "POST",
 			success: function(data) {
-				alert(data);
 				if(data == "true") {
 					alert('로그아웃 성공!');
-					$('#login-btn').css('display', 'inline');
-					$('#logout-btn').css('display', 'none');
+					$('#login-a').css('display', 'inline');
+					$('#logout-a').css('display', 'none');
 				} else {
 					alert('로그아웃 실패!');
 				}

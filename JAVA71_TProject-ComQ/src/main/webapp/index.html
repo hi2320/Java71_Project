@@ -38,8 +38,31 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style>
+.modal-open {
+	padding-right: 0px;
+}
+</style>
 
+<!-- jquery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/wow.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/creative.js"></script>
+<script src="js/user/join.js"></script>
+<script src="js/user/login.js"></script>
+
+<script src="js/common/session.js"></script>
 </head>
+
 
 <body id="page-top">
 
@@ -64,10 +87,11 @@
 					<li><a class="page-scroll" href="#services">Services</a></li>
 					<li><a class="page-scroll" href="#portfolio">Curating</a></li>
 					<li><a class="page-scroll" href="#contact">Contact Us</a></li>
-					<li><a class="page-scroll" href="#" data-toggle="modal"
-						data-target="#login-Modal">Login</a></li>
-					<!-- login-Modal -->
+					<li id="login-a"><a id="login-ab" class="page-scroll" href="#"
+						data-toggle="modal" data-target="#login-Modal">Login</a></li>
+					<li id="logout-a"><a id="email-output" class="page-scroll" href="#">LogOuT</a></li>
 
+					<!-- login-Modal -->
 					<div class="modal fade" id="login-Modal" tabindex="-1"
 						role="dialog" aria-labelledby="login-ModalLabel"
 						aria-hidden="true">
@@ -82,8 +106,7 @@
 								</div>
 								<div class="modal-body">
 
-									<form class="form-horizontal" action="/app/user/loginCheck"
-										method="POST" id="login-form">
+									<form class="form-horizontal" id="login-form">
 										<div class="form-group">
 											<label for="user-mail" class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-10">
@@ -113,50 +136,59 @@
 							</div>
 						</div>
 					</div>
-					
-					
-<!-- join-Modal -->
-<div class="modal fade" id="join-Modal" tabindex="-1" role="dialog" aria-labelledby="join-ModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="join-ModalLabel">회원 가입</h4>
-      </div>
-      <div class="modal-body">
-        
-        <form id="join-form" enctype="multipart/form-data" action="/app/user/joinUser" method="POST" >
-      <div class="form-group">
-        <label for="input-email" id="input-email-label">이메일 주소 (필수)</label>
-        <input type="email" class="form-control" id="input-email" placeholder="이메일을 입력하세요." name="email">
-        <button type="button" id="duplication-check" class="btn btn-default">중복 체크</button>
-        <p id="input-email-output">중복체크를 해주세요.</p>
-      </div>
-      <div class="form-group">
-        <label for="input-pwd">비밀번호 (필수)</label>
-        <input type="password" class="form-control" id="input-pwd" placeholder="비밀번호를 입력하세요." name="pwd">
-        <input type="password" class="form-control" id="input-pwd-check" placeholder="비밀번호를 다시 입력하세요.">
-        <p id="pwd-check-output"></p>
-      </div>
-      <div class="form-group">
-        <label for="porpic-upload">프로필 사진 (선택)</label>
-        <div id="propic-div">
-        <img id="propic-preview" src="../../img/icon/default-propic.png">
-        </div>
-        <input type="file" id="propic-upload" onchange="readURL(this)" class="btn btn-default" name="propic">
-        <p class="help-block">이미지 파일만 업로드 가능 합니다.</p>
-      </div>
-      <div id="btn-join">
-      <button type="submit" class="btn btn-default">회원가입</button>
-      </div>
-    </form>
-        
-      </div>
-    </div>
-  </div>
-</div>
 
-					
+
+					<!-- join-Modal -->
+					<div class="modal fade" id="join-Modal" tabindex="-1" role="dialog"
+						aria-labelledby="join-ModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="join-ModalLabel">회원 가입</h4>
+								</div>
+								<div class="modal-body">
+
+									<form id="join-form" enctype="multipart/form-data"
+										action="/app/user/joinUser" method="POST">
+										<div class="form-group">
+											<label for="input-email" id="input-email-label">이메일주소 (필수)</label>
+											<p id="input-email-output" class="check-output"></p>
+											<input type="email" class="form-control" id="input-email"
+												placeholder="이메일을 입력하세요." name="email">
+
+										</div>
+										<div class="form-group">
+											<label for="input-pwd">비밀번호 (필수)</label>
+											<p id="pwd-check-output" class="check-output"></p> 
+											<input type="password" class="form-control" id="input-pwd" placeholder="비밀번호를 입력하세요." name="pwd">
+											<input type="password" class="form-control" id="input-pwd-check" placeholder="비밀번호를 다시 입력하세요.">
+										</div>
+										<div class="form-group">
+											<label for="porpic-upload">프로필 사진 (선택)</label>
+											<p id="propic-upload-output" class="check-output"></p>
+											<div id="propic-div">
+												<img id="propic-preview"
+													src="../../img/icon/default-propic.png">
+											</div>
+											<input type="file" id="propic-upload"
+												onchange="readURL(this)" class="btn btn-default"
+												name="propic">
+										</div>
+										<div id="btn-join">
+											<button type="submit" class="btn btn-default">회원가입</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+
 
 				</ul>
 			</div>
@@ -352,19 +384,8 @@
 		</div>
 	</section>
 
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
 
-	<!-- Plugin JavaScript -->
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.fittext.js"></script>
-	<script src="js/wow.min.js"></script>
-
-	<!-- Custom Theme JavaScript -->
-	<script src="js/creative.js"></script>
 
 </body>
 

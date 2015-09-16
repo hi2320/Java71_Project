@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,17 +36,22 @@ public class UserController {
 		System.out.println(this.getClass());
 	}
 	
+	// login User Check
 	@RequestMapping(value="/sessionCheck", method=RequestMethod.POST)
 	public @ResponseBody String sessionCheck(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		
+		JSONObject json = new JSONObject();
+		
 		ObjectMapper objMapper = new ObjectMapper();
 		String jsonVal = "";
 		
 		if (user != null) {
-			jsonVal = objMapper.writeValueAsString(user);
+			json.put("email", user.getEmail());
+			jsonVal = json.toString();
+			System.out.println(json);
 			System.out.println(jsonVal);
 		}
 		

@@ -1,9 +1,21 @@
 $(document).ready(function(){
 	var joinCheck_email = false;
 	var joinCheck_pwd = false;
+	
+	$('#join-btn').on('click', function() {
+		$('.check-output').text('');
+		joinCheck_email = false;
+		joinCheck_pwd = false;
+		$('#join-Modal input').val('');
+		
+	});
+	
+	$('#input-email').attr('autocomplete', 'off');
+	
+	
 
-	$('#duplication-check').on('click', function() {
-	 if ( isEmail( $('#input-email').val() )) {
+	$('#input-email').keyup( function() {
+		if ( isEmail( $('#input-email').val() )) {
 		 $.ajax({
 			url: "/app/user/emailDuplicationcheck",
 			type: "POST",
@@ -20,10 +32,16 @@ $(document).ready(function(){
 				  }
 				}
 		});
+	 } else if ($('#input-email').val().length == 0) {
+		 $('#input-email-output').text("이메일을 입력해주세요.");	
+		 $('#input-email-output').css("color", "red");
 	 } else {
-		 alert("이메일 형식에 맞게 기입하세요.");
+		 $('#input-email-output').text("이메일 형식에 맞게 기입해주세요.");	
+		 $('#input-email-output').css("color", "red"); 
 	 }
+		
 	});
+	
 	 
 	$('input[type=password]').keyup(function() {
 	  var input_pwd = $('#input-pwd').val();
@@ -59,9 +77,11 @@ $(document).ready(function(){
 });
 
 function readURL(input) {
+  $('#propic-upload-output').text('');
   if(input.files && input.files[0])  {
     if ( !(/image/i).test(input.files[0].type) ){
-      alert("이미지 파일을 선택해 주세요!");
+    	$('#propic-upload-output').text('이미지 파일을 선택해 주세요!');
+    	$('#propic-upload-output').css('color', 'red');
       return false;
     }
     var reader = new FileReader();
@@ -76,3 +96,5 @@ function isEmail(string) {
 	var regExp = /\w+@\w+\.\w+/;	
 	return regExp.test(string);
 }
+
+
