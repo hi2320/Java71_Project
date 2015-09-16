@@ -6,7 +6,7 @@ public class User {
 	private String email;
 	private String pwd;
 	private String proPic;
-	private String userKind;
+	private String userAccess;
 		
 	private boolean Active;
 	
@@ -35,11 +35,11 @@ public class User {
 	public void setProPic(String proPic) {
 		this.proPic = proPic;
 	}
-	public String getUserKind() {
-		return userKind;
+	public String getUserAccess() {
+		return userAccess;
 	}
-	public void setUserKind(String string) {
-		this.userKind = string;
+	public void setUserAccess(String userAccess) {
+		this.userAccess = userAccess;
 	}
 	public boolean isActive() {
 		return Active;
@@ -47,13 +47,11 @@ public class User {
 	public void setActive(boolean active) {
 		Active = active;
 	}
-
 	@Override
   public String toString() {
 	  return "User [userId=" + userId + ", email=" + email + ", pwd=" + pwd
-	      + ", proPic=" + proPic + ", userKind=" + userKind + ", Active="
+	      + ", proPic=" + proPic + ", userAccess=" + userAccess + ", Active="
 	      + Active + "]";
   }
-
 	
 }

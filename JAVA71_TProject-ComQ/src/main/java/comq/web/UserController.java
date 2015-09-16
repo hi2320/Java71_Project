@@ -113,7 +113,7 @@ public class UserController {
 		
 		user.setEmail(request.getParameter("email"));
 		user.setPwd(request.getParameter("pwd"));
-		user.setUserKind("comq");
+		user.setUserAccess("user");
 		
 		if (propic.getSize() != 0) {
 			String originFilename = propic.getOriginalFilename();

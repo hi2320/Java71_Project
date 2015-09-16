@@ -7,16 +7,16 @@
 <mapper namespace="UserMapper">
 
  	<resultMap id="UserSelectMap" type="user">
- 		<result property="userId" 	column="user_id" 	jdbcType="INTEGER"/>
- 		<result property="email" 	column="email" 		jdbcType="VARCHAR"/>
- 		<result property="pwd" 		column="password" 	jdbcType="VARCHAR"/>
- 		<result property="proPic" 	column="propic" 	jdbcType="VARCHAR"/>
- 		<result property="userKind" column="user_kind" 	jdbcType="VARCHAR"/>
+ 		<result property="userId" 	  column="user_id" 	    jdbcType="INTEGER"/>
+ 		<result property="email" 	    column="email" 		    jdbcType="VARCHAR"/>
+ 		<result property="pwd" 		    column="password" 	  jdbcType="VARCHAR"/>
+ 		<result property="proPic" 	  column="propic" 	    jdbcType="VARCHAR"/>
+ 		<result property="userAccess" column="user_access" 	jdbcType="VARCHAR"/>
  	</resultMap>
  	
 	<!-- SQL : get Domain -->
 	<select id="getUser" parameterType="string" resultMap="UserSelectMap">
-		SELECT user_id, email, password, propic, user_kind
+		SELECT user_id, email, password, propic, user_access
 		FROM USERS
 		WHERE email = #{email}
 	</select>
@@ -30,27 +30,30 @@
 	<!-- SQL : INSERT -->
 	<insert id="insertUser" parameterType="user">
 	 	INSERT 
-		INTO USERS(user_id, email, password, propic, user_kind) 
+		INTO USERS(user_id, email, password, propic, user_access) 
 		VALUES (USERID_SEQ.NEXTVAL, 
 				#{email}, 
 				#{pwd}, 
 				<if test="proPic != null">#{proPic},</if>
 				<if test="proPic == null">null,</if>
-				#{userKind})			
+				#{userAccess})			
 	 </insert>
 	 
 	 <!-- SQL : UPDATE -->
-	<update id="updateCurator" parameterType="curator">
+<!-- 	<update id="updateCurator" parameterType="curator">
 		UPDATE CURATORS
 		SET cur_id = #{curId},
 		SET purpose = #{purpose}
 		WHERE cur_id = #{curId}
 	</update>
-		
+--> 
+ 
+ 
 	<!-- SQL : DELETE -->
+<!--  
 	<delete id="deleteAnswer" parameterType="integer">
 		DELETE ANSWERS
 		WHERE ans_id BETWEEN #{value} AND #{value}+999
 	</delete>
-	
+-->	
 </mapper>
