@@ -1,17 +1,48 @@
-$(document).ready(function(){
+function readURL(input) {
+  $('#propic-upload-output').text('');
+  if(input.files && input.files[0])  {
+    if ( !(/image/i).test(input.files[0].type) ){
+    	$('#propic-upload-output').text('이미지 파일을 선택해 주세요!');
+    	$('#propic-upload-output').css('color', 'red');
+    	$('#propic-upload').val('');
+    	$('#propic-preview').attr('src', '/propic/default-propic.png');
+      return false;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('#propic-preview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function isEmail(string) {
+	var regExp = /\w+@\w+\.\w+/;	
+	return regExp.test(string);
+}
+
+$(document).ready(function() {
 	var joinCheck_email = false;
 	var joinCheck_pwd = false;
 	
-	$('#join-btn').on('click', function() {
+	// join-from - reset function
+	function resetJoinForm() {
 		$('.check-output').text('');
 		joinCheck_email = false;
 		joinCheck_pwd = false;
 		$('#join-Modal input').val('');
-		
+		$('#propic-preview').attr('src', '/propic/default-propic.png');
+	}
+	
+	// join-btn >> login-modal<close>
+	$('#join-btn').on('click', function() {
+		$('#login-Modal').one('hidden.bs.modal', function() {
+			$('#join-Modal').modal('show');
+		});
+		$('#login-Modal').modal('hide');
 	});
 	
 	$('#input-email').attr('autocomplete', 'off');
-	
 	
 
 	$('#input-email').keyup( function() {
@@ -65,36 +96,38 @@ $(document).ready(function(){
 	}); 
 	
 	$('#join-form').submit(function(e) {
-	 if(joinCheck_email == false) {
-		 alert('email 중복 체크를 확인해 주세요.');
-		 e.preventDefault();
-	 }
-	 if(joinCheck_pwd == false) {
-	   alert('비밀번호를 확인해 주세요.');
-	   e.preventDefault();
-	 }
+	  e.preventDefault();
+	 
+	  if(joinCheck_email == false) {
+		  alert('email 중복 체크를 확인해 주세요.');
+	  } else if(joinCheck_pwd == false) {
+		  alert('비밀번호를 확인해 주세요.');
+      } else {
+
+    	 var form = $('#join-form')[0];
+    	 var formData = new FormData(form);
+    	 
+		 //join_request
+		 $.ajax({
+			 url: "/app/user/joinUser",
+			 type: "POST",
+			 data: formData,
+			 processData: false,
+             contentType: false,
+		     success: function(res){
+		    	 alert('회원 가입 성공!');
+		    	 resetJoinForm();
+		    	 $('#join-Moadl').modal('hide');
+		     },
+		     error: function() {
+		    	 alert('회원 가입에 실패했습니다. 다시 시도해 주십시요.');
+		     }
+		 });
+      }
+	  
 	});
 });
 
-function readURL(input) {
-  $('#propic-upload-output').text('');
-  if(input.files && input.files[0])  {
-    if ( !(/image/i).test(input.files[0].type) ){
-    	$('#propic-upload-output').text('이미지 파일을 선택해 주세요!');
-    	$('#propic-upload-output').css('color', 'red');
-      return false;
-    }
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      $('#propic-preview').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(input.files[0]);
-  }
-}
 
-function isEmail(string) {
-	var regExp = /\w+@\w+\.\w+/;	
-	return regExp.test(string);
-}
 
 

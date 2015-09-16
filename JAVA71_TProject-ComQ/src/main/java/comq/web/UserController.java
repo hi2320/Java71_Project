@@ -58,14 +58,6 @@ public class UserController {
 		return jsonVal;
 	}
 	
-	@RequestMapping
-	public ModelAndView joinUserView() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/user/login.html");
-		
-		return mv;
-	}
-	
 	// User login
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public @ResponseBody String login(@RequestParam("email") String email, @RequestParam("pwd") String pwd, HttpSession session) throws Exception {
@@ -106,7 +98,7 @@ public class UserController {
 	
 	// user join
 	@Autowired ServletContext sc;
-	@RequestMapping
+	@RequestMapping(value="joinUser", method=RequestMethod.POST)
 	public ModelAndView joinUser(HttpServletRequest request, @RequestParam MultipartFile propic) throws Exception {
 		
 		User user = new User();
@@ -134,7 +126,7 @@ public class UserController {
   	  
   	  user.setProPic(newFilename);
 		} else {
-			user.setProPic("default_propic.jpg");
+			user.setProPic("default_propic.png");
 		}
 				
 		System.out.println(user);
@@ -145,7 +137,7 @@ public class UserController {
 		}
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/joinUser.html");
+		mv.setViewName("/");
 		
 		return mv;
 		
