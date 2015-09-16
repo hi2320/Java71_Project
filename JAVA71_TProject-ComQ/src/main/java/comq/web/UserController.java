@@ -134,7 +134,7 @@ public class UserController {
   	  
   	  user.setProPic(newFilename);
 		} else {
-			user.setProPic(null);
+			user.setProPic("default_propic.jpg");
 		}
 				
 		System.out.println(user);
