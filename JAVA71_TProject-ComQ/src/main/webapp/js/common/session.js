@@ -6,13 +6,13 @@ $('document').ready(function() {
 		success: function(data) {
 			var user_info = JSON.parse(JSON.stringify(data));
 			$('#login-a').css('display', 'none');
-			$('#logout-a').css('display', 'inline');
-			$('#email-output').text(
+			$('#usermenu_dropdown').css('display', 'inline');
+			$('#user_email').text(
 					user_info.email.substring(0, user_info.email.indexOf("@")));
 		 },
 		error: function() {
 			$('#login-a').css('display', 'inline');
-			$('#logout-a').css('display', 'none');
+			$('#usermenu_dropdown').css('display', 'none');
 		 }
 	});
 });
