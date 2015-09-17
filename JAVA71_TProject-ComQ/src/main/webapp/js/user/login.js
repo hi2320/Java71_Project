@@ -13,7 +13,7 @@ $(document).ready(function() {
 					"pwd" : $("#user-pwd").val() },
 			success: function(data) {
 				if(data == "true") {
-					alert('로그인 성공!');
+					alert('환영 합니다!');
 					$('#login-Modal').modal('hide');
 					$('#login-a').css('display', 'none');
 					$('#logout-a').css('display', 'inline');
@@ -32,7 +32,7 @@ $(document).ready(function() {
 			type: "POST",
 			success: function(data) {
 				if(data == "true") {
-					alert('로그아웃 성공!');
+					alert('로그아웃 되었습니다.');
 					$('#login-a').css('display', 'inline');
 					$('#logout-a').css('display', 'none');
 				} else {
