@@ -1,0 +1,13 @@
+#user_info {
+	background-color: black;
+	top: 200px;
+	width: 100%;
+}
+
+header {
+	min-height: 500px;
+}
+
+header-content {
+	padding: 0;	
+}

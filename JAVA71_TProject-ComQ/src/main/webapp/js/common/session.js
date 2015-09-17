@@ -6,6 +6,7 @@ $('document').ready(function() {
 		success: function(data) {
 			var user_info = JSON.parse(JSON.stringify(data));
 			$('#login-a').css('display', 'none');
+			$('#logout-a').css('display', 'inline');
 			$('#usermenu_dropdown').css('display', 'inline');
 			$('#user_email').text(
 					user_info.email.substring(0, user_info.email.indexOf("@")));
