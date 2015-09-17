@@ -34,6 +34,10 @@ $(document).ready(function() {
 		$('#propic-preview').attr('src', '/propic/default-propic.png');
 	}
 	
+	$('#join-Modal').on('hide.bs.modal', function(){
+		resetJoinForm();
+	})
+	
 	// join-btn >> login-modal<close>
 	$('#join-btn').on('click', function() {
 		$('#login-Modal').one('hidden.bs.modal', function() {
@@ -116,11 +120,11 @@ $(document).ready(function() {
              contentType: false,
 		     success: function(res){
 		    	 alert('회원 가입 성공!');
-		    	 resetJoinForm();
-		    	 $('#join-Moadl').modal('hide');
+		    	 $('#join-Modal').modal('hide');
 		     },
 		     error: function() {
 		    	 alert('회원 가입에 실패했습니다. 다시 시도해 주십시요.');
+		    	 $('#join-Modal').modal('hide');
 		     }
 		 });
       }
