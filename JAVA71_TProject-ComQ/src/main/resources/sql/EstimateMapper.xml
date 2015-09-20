@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EstimateMapper">
+
+ 	<resultMap id="EstimateSelectMap" type="estimate">
+ 		<result property="estId" 	column="est_id" 	jdbcType="INTEGER"/>
+ 		<result property="userId" 	column="user_id" 	jdbcType="INTEGER"/>
+ 		<result property="curId" 	column="cur_id" 	jdbcType="INTEGER"/>
+ 		<result property="estName" 	column="estname" 	jdbcType="VARCHAR"/>
+ 		<result property="estDate" 	column="estdate" 	jdbcType="DATE"/>
+ 	</resultMap>
+ 	
+	<resultMap id="ProdListSelectMap" type="prodlist">
+		<result property="prolId"	column="prol_id" 	jdbcType="INTEGER"/>
+		<result property="estId"	column="est_id" 	jdbcType="INTEGER"/>
+		<result property="prolKind" 	column="prol_kind" 	jdbcType="VARCHAR"/>
+		<result property="prodId" 	column="prod_id" 		jdbcType="INTEGER"/>
+		<result property="anlAns"	column="anl_ans" 		jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- SQL : get Domain -->
+	<select id="getEstimateList" parameterType="map" resultMap="EstimateSelectMap">
+		SELECT *
+		FROM (	SELECT inner_table.* , rnum AS row_seq
+				FROM(SELECT est_id, user_id, cur_id, estname, estdate, ROWNUM as rnum
+			    	 FROM estimates
+		             WHERE user_id = #{userId}	     
+		             ORDER BY est_id
+		             ) inner_table
+			 )
+		WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="getProdList" parameterType="integer" resultMap="ProdListSelectMap">
+	    SELECT prol_id, est_id, prol_kind, prod_id, anl_ans
+	    FROM prodlists
+	    WHERE est_id = #{value}
+	</select>
+	
+	<select id="getLastEstimate" resultMap="EstimateSelectMap">
+	    SELECT est_id, user_id, cur_id, estname, estdate
+	    FROM (SELECT est_id, user_id, cur_id, estname, estdate, rownum
+	    	FROM estimates
+	    	ORDER BY rownum DESC)
+	    WHERE rownum = 1
+	</select>
+	
+	<select id="getMoreEstimate" parameterType="map" resultMap="EstimateSelectMap">
+	    
+		
+		SELECT est_id, user_id, cur_id, estname, estdate
+		FROM estimates
+		WHERE user_id = #{value}
+		ORDER BY est_id
+	</select>
+	
+	<!--  SQL : get DB_Table Count -->
+	<select id="getEstimateCount" parameterType="integer" resultType="integer">
+		SELECT COUNT(*)
+		FROM estimates
+		WHERE user_id = #{value}
+	</select>
+	
+	<!-- SQL : INSERT -->
+	<insert id="insertEstimate" parameterType="estimate">
+	 	INSERT
+		INTO estimates(est_id, user_id, cur_id, estname, estdate) 
+		VALUES (ESTID_SEQ.NEXTVAL, #{userId}, #{curId}, #{estName}, SYSDATE)			
+	 </insert>
+	 
+	<insert id="insertProdList" parameterType="prodlist">
+	    INSERT INTO prodlists(prol_id, est_id, prol_kind, prod_id, anl_ans)
+	    VALUES(PROLID_SEQ.NEXTVAL, #{estId}, #{prolKind}, #{prodId}, #{anlAns})
+	</insert>
+	 
+	 <!-- SQL : UPDATE -->
+	<update id="updateEstimate" parameterType="estimate">
+		UPDATE estimates
+		SET estname = #{estName}
+		WHERE est_id = #{estId}
+	</update>
+	
+	<update id="updateProdList" parameterType="prodlist">
+	    UPDATE prodlists
+	    SET prod_id = #{prodId}
+	    WHERE prol_id = #{prolId}
+	</update>
+
+	<!-- SQL : DELETE -->
+	<delete id="deleteEstimate" parameterType="integer">
+		DELETE estimates
+		WHERE est_id = #{value}
+	</delete>
+	
+	<delete id="deleteProd" parameterType="integer">
+	    DELETE prodlists
+	    WHERE prol_id = #{value}
+	</delete>
+	
+</mapper>

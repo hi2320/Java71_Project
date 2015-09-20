@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko" >
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Computer Curating System : myPage</title>
+  
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   
+
+<!-- Custom Fonts -->
+<link rel='stylesheet' type='text/css'
+  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'>
+<link rel='stylesheet' type='text/css'
+  href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'>
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/css/creative.css" type="text/css">
+
+<link rel="stylesheet" href="/css/user.css" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+    .arrow-up {
+		width: 0; 
+		height: 0; 
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		
+		border-bottom: 15px solid black;
+	    clear: both;
+	    margin: -.5em auto 0em;
+	}
+    
+    .myEstimate {
+    	text-align : center;
+    	overflow: hidden;
+    }
+    	.estimateList {
+    		padding: 0 2em;
+    	}
+    	.estimateA {
+    		color: white;
+    		cursor: pointer;
+    	}
+    	.estimateA:hover {
+    		text-decoration: none;
+    		color: white;
+    	}
+    	.estimate {
+    	    padding: 1.2em;
+    	    
+    	}
+    	.estimate img {
+    		width: 100%;
+    		height: auto;
+    	}
+    	
+		
+	</style>
+<style>
+.prod_img img {
+	width: 160px;
+	height: auto;
+}
+
+.getEstimateResult {
+	margin-top: -1.2em;
+	margin-bottom: 1.2em;
+}
+
+@media ( min-width :1024px) {
+	.estimateProd {
+		width: 80%;
+		margin: 0 auto;
+	}
+	.prod_box {
+		display: table;
+		padding: 0.2em 0.5em;
+		margin: 0 auto;
+		border: 1px solid;
+	}
+	.prod_img {
+		display: table-cell;
+		vertical-align: middle;
+		margin-top: 2em;
+		margin-left: .1em;
+	}
+	.prod_img img {
+		width: 160px;
+		height: auto;
+	}
+	.prod_name {
+		font-size: 1.8em;
+		font-weight: 900;
+		text-indent: 1.5em;
+	}
+	.prod_summary {
+		padding: 0 1.5em;
+		font-size: 1.3em;
+	}
+	.prod_price {
+		font-size: 1.5em;
+		text-indent: 1.2em;
+		font-weight: 600;
+	}
+}
+
+@media ( min-width :768px) and (max-width:1024px) {
+	.estimateProd {
+		width: 95%;
+		margin: 0 auto;
+	}
+	.prod_box {
+		display: table;
+		padding: 0.2em 0.5em;
+		border: 1px solid;
+		margin: 0 auto;
+	}
+	.prod_img {
+		display: table-cell;
+		vertical-align: middle;
+		margin-top: 2.2em;
+		margin-left: 1.2em;
+	}
+	.prod_name {
+		font-size: 1.8em;
+		font-weight: 900;
+		text-indent: 1.5em;
+	}
+	.prod_summary {
+		padding: 0 1.5em;
+		font-size: 1.3em;
+	}
+	.prod_price {
+		font-size: 1.5em;
+		text-indent: 1.2em;
+		font-weight: 600;
+	}
+}
+
+#viewLoading {
+	text-align: center;
+	padding-top: 370px;
+	background-color: #fffff0;
+	filter: alpha(opacity = 60);
+	opacity: .6;
+	z-index: 1000;
+}
+
+p#summaryInfo {
+	font-size: 0;
+}
+
+p.maker {
+	font-size: 1.5em;
+	font-weight: 600;
+}
+
+p.prod_name {
+	font-size: 1.5em;
+	font-weight: 600;
+	text-indent: 1.5em;
+}
+
+.li_info2 {
+	margin-top: 1.2em;
+}
+
+.col-sm-3.price {
+	font-size: 1.3em;
+	font-weight: 600;
+}
+hr.li_hr {
+    max-width: 100%;
+    border-color: cornflowerblue;
+    clear: both;
+}
+.modal-backdrop.fade.in {
+    position: fixed;
+    height: 2000px;
+}
+</style>
+
+
+</head>
+<body>
+	<div id="viewLoading">
+		<img src="../img/ajax-loader.gif">
+	</div>
+	
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span> <span
+            class="icon-bar"></span> <span class="icon-bar"></span> <span
+            class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">Start ComQ</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse"
+        id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="page-scroll" href="#about">About</a></li>
+          <li><a class="page-scroll" href="#services">Services</a></li>
+          <li><a class="page-scroll" href="#portfolio">Curating</a></li>
+          <li><a class="page-scroll" href="#contact">Contact Us</a></li>
+          <li id="login-a"><a id="login-ab" class="page-scroll" href="#"
+            data-toggle="modal" data-target="#login-Modal">Login</a></li>
+          <li id="logout-a"><a id="email-output" class="page-scroll" href="#">LogOuT</a></li>
+
+          <!-- login-Modal -->
+          <div class="modal fade" id="login-Modal" tabindex="-1"
+            role="dialog" aria-labelledby="login-ModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="login-ModalLabel">로그인</h4>
+                </div>
+                <div class="modal-body">
+
+                  <form class="form-horizontal" id="login-form">
+                    <div class="form-group">
+                      <label for="user-mail" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="user-email"
+                          name="email" placeholder="이메일을 입력하세요.">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="user-pwd" class="col-sm-2 control-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="user-pwd"
+                          name="pwd" placeholder="비밀번호 입력하세요.">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" id="btn-login">LOGIN</button>
+                        <button id="join-btn" type="button"
+                          class="btn btn-primary btn-lg" data-toggle="modal"
+                          data-target="#join-Modal">SIGN IN</button>
+
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- join-Modal -->
+          <div class="modal fade" id="join-Modal" tabindex="-1" role="dialog"
+            aria-labelledby="join-ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="join-ModalLabel">회원 가입</h4>
+                </div>
+                <div class="modal-body">
+
+                  <form id="join-form" enctype="multipart/form-data"
+                    action="/app/user/joinUser" method="POST">
+                    <div class="form-group">
+                      <label for="input-email" id="input-email-label">이메일주소 (필수)</label>
+                      <p id="input-email-output" class="check-output"></p>
+                      <input type="email" class="form-control" id="input-email"
+                        placeholder="이메일을 입력하세요." name="email">
+
+                    </div>
+                    <div class="form-group">
+                      <label for="input-pwd">비밀번호 (필수)</label>
+                      <p id="pwd-check-output" class="check-output"></p> 
+                      <input type="password" class="form-control" id="input-pwd" placeholder="비밀번호를 입력하세요." name="pwd">
+                      <input type="password" class="form-control" id="input-pwd-check" placeholder="비밀번호를 다시 입력하세요.">
+                    </div>
+                    <div class="form-group">
+                      <label for="porpic-upload">프로필 사진 (선택)</label>
+                      <p id="propic-upload-output" class="check-output"></p>
+                      <div id="propic-div">
+                        <img id="propic-preview"
+                          src="/img/icon/default-propic.png">
+                      </div>
+                      <input type="file" id="propic-upload"
+                        onchange="readURL(this)" class="btn btn-default"
+                        name="propic">
+                    </div>
+                    <div id="btn-join">
+                      <button type="submit" class="btn btn-default">회원가입</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <header>
+    <div class="header-content">
+      <div class="header-content-inner">
+        <h1>Your Favorite Source of Free Bootstrap Themes</h1>
+        <hr>
+        <p>Start Bootstrap can help you build better websites using the
+          Bootstrap CSS framework! Just download your template and start
+          going, no strings attached!</p>
+        <a href="#about" class="btn btn-primary btn-xl page-scroll">Find
+          Out More</a>
+      </div>
+    </div>
+  </header>
+
+<!-- Estimate 데이터 가져오기 -->
+	<section class="bg-primary" id="about">
+		<div class="myEstimate">
+			<input type="hidden" name="startNo" value="1">
+			<input type="hidden" name="endNo" value="6"> 
+			<a href="javascript:getEstimateList();"
+				class="btn btn-default btn-xl">My Estimate</a>
+		</div>
+		
+		<div class="row estimateList"></div>
+	</section>
+	
+	<!-- 큐레이팅 체인지 -->
+    <div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<h4 class="modal-title">리스트 변경 페이지</h4>
+				</div>
+				<div class="modal-body 123">
+					<p>변경할 제품을 선택해주세요</p>
+					<hr class="li_hr">
+					<input type="hidden" name="startNum" value="11">
+					<p class="prodList "></p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" class="moreProd" onclick="getMoreProd();">More</button>
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Estimate Data get의 Ajax -->
+  <script>
+  	function getEstimateList() {
+  		console.log("getEstimateList function");
+   		$.ajax({
+  			url : "/app/curator/userEstimateList",
+  			data: {
+  				startNo : $('[name=startNo]').val(),
+   				endNo : $('[name=endNo]').val()
+  			},
+  			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+  			timeout: 10000,
+  			type: "POST",
+  			dataType: "JSON",
+  			beforeSend: function() {
+  				$("#viewLoading").css({
+					"position" : "fixed",
+					"left" : 0,
+					"top" : 0,
+					"width" : $(window).width(),
+					"height" :screen.height
+				}).fadeIn(200);
+  			  },
+  			success : function(data) {
+  				/* $('.estimateList').append(); */
+  				$.each(data, function(index, item) {
+						var space = /\+/g;
+	  	  				var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
+	  	  				var divEstimate = $('<div id="pageScroll'+index+'" class="col-sm-4 estimate"></div>'),
+							aTag = $('<a href="#pageScroll'+index+'" class="estimateA"></a>'),
+  							imgTag = $('<img src="/img/portfolio/1.jpg" alt="사무용PC">'),
+  							divTextPart = $('<div class="col-sm-8 col-lg-offset-2 text-center"></div>'),
+  							estimateName = $('<h2 class="section-heading"></h2>'),
+  							estiamteDate = $('<p></p>').text(newData.estDate);
+  						
+  						/* $(estimateDate).text(newData.estDate); */
+  						/* $(estimateName).text(newData.estName); */
+  						var imgsrc,
+  							imgalt;
+  						
+  						switch (parseInt(newData.curId)) {
+	  						case 1: imgsrc = "/img/portfolio/1.jpg"; imgalt = "사무용PC"; break;
+	  						case 2: imgsrc = "/img/portfolio/2.jpg"; imgalt = "게임용PC"; break;
+	  						case 3: imgsrc = "/img/portfolio/3.jpg"; imgalt = "디자인PC"; break;
+	  						case 4: imgsrc = "/img/portfolio/4.jpg"; imgalt = "일체형PC"; break;
+	  						case 5: imgsrc = "/img/portfolio/5.jpg"; imgalt = "조립PC"; break;
+	  						case 6: imgsrc = "/img/portfolio/6.jpg"; imgalt = "PC부품"; break;
+  						}
+  						aTag = $(aTag).attr('onclick', 'javascript:getThisEstimateProdList(this, '+ newData.estId +');');
+  						imgTag = $(imgTag).attr('src', imgsrc).attr('alt',imgalt);
+  						estimateName = $(estimateName).text(newData.estName);
+  						divTextPart = $(divTextPart).append($(aTag).clone().append(estimateName)).append(estiamteDate);
+  						divEstimate = $(divEstimate).append($(aTag).clone().append(imgTag)).append(divTextPart);
+  						$('.estimateList').append(divEstimate);
+				});
+  			},
+  			complete : function() {
+  				/* 완료되면 로딩이미지 제거 */
+  				$('[name=startNo]').val(parseInt($('[name=startNo]').val())+6);
+  				$('[name=endNo]').val(parseInt($('[name=endNo]').val())+6);
+  				$('.myEstimate').slideUp("fast");
+  				$('#viewLoading').fadeOut(300);
+  				 infinityScroll(); 
+  				
+  			},
+  			error : function() {
+  				
+  			}
+  		})
+  	}; 
+  	
+  	/* unlimited scroll */
+   	function infinityScroll() {
+		console.log("infinityScroll function");
+			$(window).on( "scroll", function() {
+				if (($(window).scrollTop()) >= ($(document).height() - $(window).height())) {
+					setTimeout(function() {
+						console.log("infinityScroll setTimeout function");
+						$.ajax({
+				  			url : "/app/curator/userEstimateList",
+				  			data: {
+				  				startNo : $('[name=startNo]').val(),
+				   				endNo : $('[name=endNo]').val()
+				  			},
+				  			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				  			timeout: 10000,
+				  			type: "POST",
+				  			dataType: "JSON",
+				  			beforeSend: function(xhr, settings) {
+				  				$("#viewLoading").css({
+									"position" : "fixed",
+									"left" : 0,
+									"top" : 0,
+									"width" : $(window).width(),
+									"height" :screen.height
+								}).fadeIn(200);
+				  			  },
+				  			success : function(data) {
+				  					console.log("무한 성공ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+								if(data.length == 0) {
+									console.log("data 없으면 무한스크롤 종료");
+									$(window).unbind(infinityScroll());
+								}
+				  				$.each(data, function(index, item) {
+				  						var countNo = parseInt($('[name=startNo]').val())+index-1;
+										var space = /\+/g;
+					  	  				var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
+				  						var divEstimate = $('<div id="pageScroll'+countNo+'" class="col-sm-4 estimate"></div>'),
+				  							aTag = $('<a href="#pageScroll'+countNo+'" class="estimateA"></a>'),
+				  							imgTag = $('<img src="/img/portfolio/1.jpg" alt="사무용PC">'),
+				  							divTextPart = $('<div class="col-sm-8 col-lg-offset-2 text-center"></div>'),
+				  							estimateName = $('<h2 class="section-heading"></h2>'),
+				  							estiamteDate = $('<p></p>').text(newData.estDate); 
+				  						
+				  						var imgsrc,
+				  							imgalt;
+				  						
+				  						switch (parseInt(newData.curId)) {
+					  						case 1: imgsrc = "/img/portfolio/1.jpg"; imgalt = "사무용PC"; break;
+					  						case 2: imgsrc = "/img/portfolio/2.jpg"; imgalt = "게임용PC"; break;
+					  						case 3: imgsrc = "/img/portfolio/3.jpg"; imgalt = "디자인PC"; break;
+					  						case 4: imgsrc = "/img/portfolio/4.jpg"; imgalt = "일체형PC"; break;
+					  						case 5: imgsrc = "/img/portfolio/5.jpg"; imgalt = "조립PC"; break;
+					  						case 6: imgsrc = "/img/portfolio/6.jpg"; imgalt = "PC부품"; break;
+				  						}
+				  						aTag = $(aTag).attr('onclick', 'getThisEstimateProdList(this, '+ newData.estId +');');
+				  						imgTag = $(imgTag).attr('src', imgsrc).attr('alt',imgalt);
+				  						estimateName = $(estimateName).text(newData.estName);
+				  						divTextPart = $(divTextPart).append($(aTag).clone().append(estimateName)).append(estiamteDate);
+				  						divEstimate = $(divEstimate).append($(aTag).clone().append(imgTag)).append(divTextPart);
+				  						$('.estimateList').append(divEstimate);
+								});
+				  			},
+				  			complete : function() {
+				  				$('[name=startNo]').val(parseInt($('[name=startNo]').val())+6);
+				  				$('[name=endNo]').val(parseInt($('[name=endNo]').val())+6);
+				  				$("#viewLoading").fadeOut(200);
+				  			},
+				  			error : function() {
+				  				
+				  			}
+				  		})
+					}, 800);
+				}
+			});
+  	};
+  	
+  	var estId;
+  	/* get Estimate prodlist */
+  	function getThisEstimateProdList(est, est_id) {  		
+	  	console.log('est_id 가져오는 중');
+	  	estId = est_id;
+	  	if($('#prod'+est_id+'').length == 0) {
+			console.log("getThisEstimateProdList if is true");
+			var estimateDiv,
+				estimateDivIndex;
+			var estimateDivs = $('.estimate');
+			var arrowUp = $('<div class="arrow-up"></div>');
+			if($(est).parent().hasClass('estimate')) {
+				estimateDiv = $(est).parent();
+			} else {
+				estimateDiv = $(est).parent().parent();
+			}
+			
+			estimateDivIndex = $(estimateDiv).index() + 1 - ($(estimateDiv).prevAll('.getEstimateResult').length);
+			
+			$('.getEstimateResult').remove();
+			$('.arrow-up').remove();
+			
+			  	$.ajax({
+			  		url : '/app/curator/getEstimate?estId='+est_id,
+			  		type: 'get',
+			  		dataType : 'json',
+			  		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		  			timeout: 10000,
+		  			beforeSend : function() {
+		  				$("#viewLoading").css({
+							"position" : "fixed",
+							"left" : 0,
+							"top" : 0,
+							"width" : $(window).width(),
+							"height" :screen.height
+						}).fadeIn(500);
+			  		},
+			  		success : function(data) {
+			  			$.each(data, function(index, item){
+							var space = /\+/g;
+							var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
+							var estimate_result = $('<div id="prod'+ est_id +'" class="getEstimateResult col-sm-12" style="display:none;"></div>'),
+								estimate_prod = $('<div class="estProd"></div>'),
+								prod_box = $('<div class="row prod_box"></div>'),
+								img_div = $('<div class="row col-sm-2 prod_img"></div>'),
+								prod_info_div = $('<div class="row col-sm-9 col-sm-offset-1 prod_info"></div>');
+							
+							var prod_img = $('<img class="col-sm-2" src="'+ newData.imageUrl +'"alt="'+ newData.imageUrl +'">'),
+								prod_name = $('<h3 class="col-sm-12 prod_name">'+ newData.maker +' '+ newData.prodName +'</h3>'),
+								prod_summary = $('<p class="col-sm-12 prod_summary">'+ newData.summary +'</p>'),
+								prod_price = $('<p class="col-sm-8 prod_price">'+ newData.price +'원</p>'),
+								change_button = $('<a class="col-sm-2 prod_change_btn btn btn-default btn-sm" data-toggle="modal" data-target="#myModal" onclick="getProdList(this, '+newData.prolId+');">바꾸기</a>');
+							var keyword = $('<input type="hidden" name="url" value="'+newData.prodKind+' '+ newData.prodKeyword +'">');
+
+
+							prod_info_div = $(prod_info_div).append(prod_name).append(prod_summary).append(prod_price).append(change_button).append(keyword);
+							img_div = $(img_div).append(prod_img);
+							prod_box = $(prod_box).append(img_div).append(prod_info_div);
+							estimate_prod = $(estimate_prod).append(prod_box);
+							estimate_result = $(estimate_result).append(estimate_prod);
+							$(estimateDiv).append(arrowUp);
+							
+
+							console.log("getThisEstimateProdList if is true ajax if syntax");
+							console.log()
+							if (estimateDivIndex % 3 == 0) { /* 3번째 */
+								$(estimateDivs[estimateDivIndex-1]).after($(estimate_result));
+							} else if (estimateDivIndex % 3 == 1) { /* 1번째 */
+								
+								if($(estimateDivs[estimateDivIndex+1]).length == 0) {
+									if($(estimateDivs[estimateDivIndex]).length == 0) {
+										$(estimateDivs[estimateDivIndex-1]).after($(estimate_result));
+									} else {
+										$(estimateDivs[estimateDivIndex]).after($(estimate_result));
+									}
+								} else {
+									$(estimateDivs[estimateDivIndex+1]).after($(estimate_result));
+								}
+							
+							} else { /* 2번째 */
+								if($(estimateDivs[estimateDivIndex]) == 0) {
+									$(estimateDivs[estimateDivIndex-1]).after($(estimate_result));
+								} else {
+									$(estimateDivs[estimateDivIndex]).after($(estimate_result));
+								}
+							}
+			  			})
+			  		},
+			  		error : function() {
+			  			
+			  		},
+			  		complete : function() {
+			  			$('.getEstimateResult').slideDown("slow");
+			  			console.log("확인바람");
+			  			
+			  			$("#viewLoading").fadeOut(500);
+			  		}
+			  	})
+	  	} else {
+			console.log("getThisEstimateProdList if is false");
+	  		$('.getEstimateResult').slideUp("fast", function() {
+				$('.getEstimateResult').remove();
+				$('.arrow-up').remove();
+			});
+	  	}
+  	};
+  	
+  	
+  	/* modal get prod list */
+	  var changeBtnParent;
+	  var keyword;
+		function getProdList(btn) {
+			$("[name=startNum]").val(11);
+			$(".prodList").children().remove();
+			console.log($(".btn").index());
+			keyword = $(btn).next().val();
+			console.log('keyword=' + keyword);
+			$.ajax({
+				url : '/app/curator/curatingChangeProd',
+				data : 'keyword=' + keyword,
+				type : 'post',
+				success : function(data) {
+					$(".prodList").append(data);
+					changeBtnParent = $(btn).parent().parent();
+					console.log($(changeBtnParent));
+				}
+			});
+		}
+		function getMoreProd() {
+			$.ajax({
+				url : '/app/curator/curatingMoreProd',
+				data : 'keyword=' + keyword +'&startNum=' + $("[name=startNum]").val(),
+				type : 'post',
+				success : function(data) {
+					$(".prodList").append(data);
+					$("[name=startNum]").val(parseInt($("[name=startNum]").val()) + 10);
+				}
+			});
+		};
+		function prodChange(change_btn, prolId) {
+		      var prodInfo = $(change_btn).next().text();
+		      var jsonObj = JSON.parse(prodInfo);
+		      console.log(prodInfo);
+		      console.log(prolId);
+		      $(changeBtnParent).find("[class*=prod_name]").text(jsonObj.maker +" "+ jsonObj.prod_name);
+		      $(changeBtnParent).find("img").attr("src", jsonObj.image_url);
+		      $(changeBtnParent).find("[class*=prod_summary]").text(jsonObj.summary);
+		      $(changeBtnParent).find("[class*=prod_price]").text(jsonObj.min_price+"원");
+		      $("#myModal").toggleClass("in").css("display", "none");
+		      $(".modal-open").trigger("click");
+		      
+		       $.ajax({
+	    	    url: "/app/curator/updateEstimateProd",
+	    	    type: "post",
+	    	    data: {
+	    	    	"prolId": prolId,
+	    	    	"estId": estId,
+	    	    	"prodId": jsonObj.prod_id
+	    	    },	    	    
+	  			timeout: 10000,
+	  			beforeSend : function() {
+	  				$("#viewLoading").css({
+						"position" : "fixed",
+						"left" : 0,
+						"top" : 0,
+						"width" : $(window).width(),
+						"height" :screen.height
+					}).fadeIn(500);
+		  		},
+		  		success : function(data) {
+		  			alert("update success");
+		  		},
+		  		complete : function() {
+		  			$("#viewLoading").fadeOut(500);
+		  		},
+		  		error : function() {
+		  			
+		  		}
+			  		
+		      }) 
+		  };
+  </script>
+<!-- jquery -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.fittext.js"></script>
+<script src="/js/wow.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/creative.js"></script>
+<script src="/js/user/join.js"></script>
+<script src="/js/user/login.js"></script>
+
+<script src="/js/common/session.js"></script>
+   <script>
+   $(document).ready(function() {
+		$("#viewLoading").hide();
+		/* console.log("aaaaaaaaaaaa");
+			$("#viewLoading").ajaxStart(function() {
+				console.log("로딩 도나?");
+				$("#viewLoading").css({
+					"position" : "absolute",
+					"left" : 0,
+					"top" : 0,
+					"width" : $(screen).width(),
+					"height" :$(screen).height()
+				}).fadeIn(500);
+			}).ajaxStop(function() {
+				$(this).fadeOut(500);
+			});
+ */
+	   
+	   $(window).resize(function() { // 브라우저 사이즈 감지
+			console.log($(document).width());
+		  })
+ 	});
+   </script>
+</body>
+</html>
