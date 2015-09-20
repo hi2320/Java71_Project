@@ -57,3 +57,35 @@ body {
 	font-size: 0.8em;
 	color: #737373;
 }
+
+#update-propic-upload {
+	width: 100%;
+}
+
+#curating .col-lo-4, .col-sm-6 {
+	padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.curating_purpose {
+  position: relative;
+  height: 250px;
+  width: 100%;
+  background-image: url("/img/portfolio/design.jpg");
+  background-size: cover;
+}
+
+#curating a {
+	color: blue;
+	text-weight: bold;
+	text-align: center;
+}
+
+#curating p {
+  color: white;
+  background-color: rgba(25, 25, 25, 0.5);	
+}
+
+#curating a:hover {
+	text-decoration: none;
+}

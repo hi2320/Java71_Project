@@ -8,5 +8,7 @@ public interface UserDao {
 	
 	public int getUserCheck(String email) throws Exception;
 	public User getUser(String email) throws Exception;
+	public int updateUser(User user) throws Exception;
+	public int deleteUser(int userId) throws Exception;
 	
 }

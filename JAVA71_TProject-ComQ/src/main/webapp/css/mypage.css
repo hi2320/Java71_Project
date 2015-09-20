@@ -1,13 +1,80 @@
-#user_info {
-	background-color: black;
-	top: 200px;
+@import url(https://fonts.googleapis.com/css?family=Lato:700,900);
+
+#user_profile {
+	border: 1px solid black;
+  text-align: left;	
+  min-width: 300px;
+}
+
+@media(min-width:768px) {
+     /* header { min-height: 500px !important; } */
+     #propic { width: 300px; height: 300px; }
+}
+
+P {
+	margin-bottom: 0px !important;
+}
+
+.header-content-inner {
+	background-color: rgba(25, 25, 25, 0.7);
+	
+}
+
+#div_btn {
+	padding-top: 3px;
+}
+
+#propic {
+  width: 100%;
+}
+
+#div_propic {
+	text-align: left;
+}
+
+#div_email {
+	padding-top: 1px;
+  height: 35px;
+}
+
+#div_propic #userMail {
 	width: 100%;
+	overflow: hidden;
+	text-weight: 700px;
+	text-align: center;
 }
 
-header {
-	min-height: 500px;
+#div_propic #userMail p {
+   font-family: 'Lato', 'Open Sans','Helvetica Neue',Arial,sans-serif;
+	 font-weight: 700;
+	 font-size: 1.5em;
 }
 
-header-content {
-	padding: 0;	
+#mypage_nav {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#mypage_nav button[type=button] {
+	font-family: 'Lato', sans-serif;
+	text-weigth: 900px;
+	width: 90%;
+}
+
+#div-update {
+	display: none;
+	padding: 15px 5%;
+}
+
+#update-form {
+  text-align: left !important;	
+}
+
+#update-form .check-output {
+	padding-left: 2em !important;
+	font-size: 1em;
+}
+
+#leave-btn {
+	float: right;
 }

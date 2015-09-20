@@ -33,6 +33,7 @@ $(document).ready(function() {
 			success: function(data) {
 				if(data == "true") {
 					alert('로그아웃 되었습니다.');
+					location.href="/";
 					$('#login-a').css('display', 'inline');
 					$('#logout-a').css('display', 'none');
 				} else {

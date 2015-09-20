@@ -8,5 +8,7 @@ public interface UserService {
 	
 	public boolean getUserCheck(String email) throws Exception;
 	public User getUser(String email) throws Exception;
+	public boolean updateUser(User user) throws Exception;
+	public boolean deleteUser(int userId) throws Exception;
 	
 }

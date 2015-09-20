@@ -3,6 +3,7 @@ package comq.web;
 import java.io.File;
 
 import javax.servlet.ServletContext;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -44,18 +45,125 @@ public class UserController {
 		User user = (User)session.getAttribute("loginUser");
 		
 		JSONObject json = new JSONObject();
+		String email = "";
+				
+		if (user != null) {
+			json.put("email", user.getEmail());
+			email = json.toString();
+			System.out.println("logIN User: " +email);
+		}
 		
-		ObjectMapper objMapper = new ObjectMapper();
-		String jsonVal = "";
+		return email;
+	}
+
+	// Get User
+	@RequestMapping
+	public @ResponseBody String getUser(HttpServletRequest request, HttpSession session) throws Exception {
+		
+		session = request.getSession(true);
+		User user = (User)session.getAttribute("loginUser");
+		System.out.println("getUser : "+user);
+		
+		JSONObject json = new JSONObject();
+		String logUser = "";
 		
 		if (user != null) {
 			json.put("email", user.getEmail());
-			jsonVal = json.toString();
+			json.put("propic", user.getProPic());
+			
 			System.out.println(json);
-			System.out.println(jsonVal);
+			logUser = json.toJSONString();
+			System.out.println(logUser);
 		}
 		
-		return jsonVal;
+		return logUser;
+	}
+	
+
+	// Update User
+	@Autowired ServletContext sc1;
+	@RequestMapping
+	public @ResponseBody String updateUser(HttpServletRequest request, HttpSession session, @RequestParam MultipartFile propic) throws Exception {
+		
+		User user = (User)session.getAttribute("loginUser");
+		
+		System.out.println("updateUser Before: "+user);
+		String updateResult = "fail";
+		
+		if ( !(request.getParameter("email").equals(user.getEmail()) || request.getParameter("email").equals("")) ) {
+			user.setEmail(request.getParameter("email"));
+		}
+		
+		if ( !(request.getParameter("pwd").equals(user.getPwd()) || request.getParameter("pwd").equals("")) ) {
+			user.setPwd(request.getParameter("pwd"));
+		}
+		
+		if (propic.getSize() != 0) {
+			// newPath Create
+			String originFilename = propic.getOriginalFilename();
+			System.out.println("originName ==>> " + originFilename);
+		
+  	  int lastDotPosition = originFilename.lastIndexOf(".");
+  	  String extname = originFilename.substring(lastDotPosition);
+  	  
+  	  String newFilename = System.currentTimeMillis() + extname;
+  	  System.out.println("newFileName :: " + newFilename);
+  	  
+  	  String realUploadPath = sc1.getRealPath("/propic");
+  	  System.out.println("realUploadPath:: " + realUploadPath);
+  	  
+      File newPath = new File(realUploadPath + "/" + newFilename);
+      System.out.println("newPath:: " + newPath);
+  	  propic.transferTo(newPath);
+
+  	  // oldPath Delete
+  	  File oldPath = new File(realUploadPath + "/" + user.getProPic());
+  	  System.out.println("old propic : " +oldPath);
+  	  if(oldPath.exists()) {
+  	  	oldPath.delete();
+  	  	System.out.println("old Propic Delete...");
+  	  }
+  	  
+  	  // newPath Create
+  	  user.setProPic(newFilename);
+		}
+		
+		System.out.println("updateUser Complete: "+user);
+				
+		if (user != null) {
+			if ( userService.updateUser(user) ) {
+				updateResult = "success";
+			}
+		}
+		
+		return updateResult;
+	}
+	
+	// Delete User
+	@Autowired ServletContext sc2;
+	@RequestMapping
+	public @ResponseBody String deleteUser(HttpSession session) throws Exception {
+		
+		User user = (User)session.getAttribute("loginUser");
+		String result = "fail";
+		
+		
+		if(user != null) {
+			// 삭제 파일 저장
+			File deleteFile = new File(sc2.getRealPath("/propic")+"/"+user.getProPic());
+			System.out.println("삭제할 파일 :"+deleteFile);
+			
+			if( userService.deleteUser(user.getUserId()) ) {
+				result = "success";
+				if( deleteFile.exists()) {
+					deleteFile.delete();
+				}
+				session.invalidate();
+			}
+		}
+		
+		System.out.println("Delete User:"+result);
+		return result;
 	}
 	
 	// User login
@@ -154,6 +262,22 @@ public class UserController {
 		} else {
 			result = "true";
 		}
+		return result;
+	}
+	
+	// password checking
+	@RequestMapping
+	public @ResponseBody String pwdCheck(@RequestParam String pwd, HttpSession session) throws Exception {
+		
+		User user = (User)session.getAttribute("loginUser");
+		String result = "fail";
+
+		if ( user != null) {
+			if (user.getPwd().equals(pwd)) {
+				result = "success";
+			}	
+		}
+		
 		return result;
 	}
 	

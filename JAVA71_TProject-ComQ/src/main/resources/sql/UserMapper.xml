@@ -40,20 +40,20 @@
 	 </insert>
 	 
 	 <!-- SQL : UPDATE -->
-<!-- 	<update id="updateCurator" parameterType="curator">
-		UPDATE CURATORS
-		SET cur_id = #{curId},
-		SET purpose = #{purpose}
-		WHERE cur_id = #{curId}
+	<update id="updateUser" parameterType="user">
+		UPDATE USERS
+		SET email = #{email},
+		password = #{pwd},
+		propic = #{proPic}
+		WHERE user_id = #{userId}
 	</update>
---> 
+ 
  
  
 	<!-- SQL : DELETE -->
-<!--  
-	<delete id="deleteAnswer" parameterType="integer">
-		DELETE ANSWERS
-		WHERE ans_id BETWEEN #{value} AND #{value}+999
+	<delete id="deleteUser" parameterType="integer">
+		DELETE USERS
+		WHERE user_id = #{userId}
 	</delete>
--->	
+
 </mapper>

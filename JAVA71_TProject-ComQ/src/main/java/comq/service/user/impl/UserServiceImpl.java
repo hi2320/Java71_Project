@@ -44,4 +44,23 @@ public class UserServiceImpl implements UserService {
 	  return userDao.getUser(email);
   }
 
+	@Override
+  public boolean updateUser(User user) throws Exception {
+		boolean result = false;
+		if (userDao.updateUser(user) != 0 ) {
+			result = true;
+		}
+	  return result;
+  }
+
+	@Override
+  public boolean deleteUser(int userId) throws Exception {
+		boolean result = false;
+		if(userDao.deleteUser(userId) != 0) {
+			result = true;
+		}
+		
+		return result;
+  }
+
 }

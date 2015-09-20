@@ -78,7 +78,7 @@ $(document).ready(function() {
 	});
 	
 	 
-	$('input[type=password]').keyup(function() {
+	$('#join-form input[type=password]').keyup(function() {
 	  var input_pwd = $('#input-pwd').val();
 	  var check_pwd = $('#input-pwd-check').val();
 	  
