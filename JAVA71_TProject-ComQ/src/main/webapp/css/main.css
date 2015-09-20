@@ -1,4 +1,37 @@
-.123{
-	width: 530px;
-	height: 280px;
+#start_curator {
+	color: black;
+}
+
+#contact {
+	color: grey;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+.portfolio-box .portfolio-box-caption {
+  background: rgba(30,30,30, .6) !important;
+}
+
+#purpose_1 {
+  background-image: url("/img/portfolio/purpose_1.png"); 	
+}
+
+#purpose_2 {
+  background-image: url("/img/portfolio/purpose_2.jpg");
+}
+
+#purpose_3 {
+  background-image: url("/img/portfolio/purpose_3.jpg");
+}
+
+#purpose_4 {
+  background-image: url("/img/portfolio/purpose_4.png");
+}
+
+#purpose_5 {
+  background-image: url("/img/portfolio/purpose_5.jpg");
+}
+
+#purpose_6 {
+  background-image: url("/img/portfolio/purpose_6.jpg");
 }

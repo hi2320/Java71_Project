@@ -15,6 +15,10 @@ P {
 	margin-bottom: 0px !important;
 }
 
+header {
+	background-image: url("/img/mypage_header.jpg") !important;
+}
+
 .header-content-inner {
 	background-color: rgba(25, 25, 25, 0.7);
 	
