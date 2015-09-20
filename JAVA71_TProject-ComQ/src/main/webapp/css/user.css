@@ -44,10 +44,6 @@ body {
 	margin: 0 auto;
 }
 
-#logout-a {
-	display: none;
-}
-
 .check-output {
 	display: inline; !importent;
 	margin-bottom: 0px;

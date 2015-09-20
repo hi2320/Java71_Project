@@ -1,44 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ComQ 질문 페이지11.</title>
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+ 
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+   
 
-<link href="http://fonts.googleapis.com/css?family=Montserrat:700,400"
-	rel="stylesheet" type="text/css">
-
-<link rel="stylesheet" href="../../css/question_page.css">
-<link href="../../css/reset.css" type="text/css" rel="stylesheet">
-<!--        <link href="css/curatingList.css" type="text/css" rel="stylesheet">-->
-<!--  <link rel="stylesheet" href="../../css/question_page.css"> -->
-<!-- <script src="../../js/jquery-1.11.3.js"></script> -->
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]--> 
+<link rel="stylesheet" href="/css/user.css" type="text/css">
+	<link rel="stylesheet" href="/css/complete.css" type="text.css">
 </head>
 
 <body>
-	<div class="modal fade" id="myModal" role="dialog">
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Start ComQ</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Curating</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+<div class="container">
+  <h2>Collapse</h2>
+  <p><strong>Note:</strong> The <strong>data-parent</strong> attribute makes sure that all collapsible elements under the specified parent will be closed when one of the collapsible item is shown.</p>
+  <div class="panel-group" id="accordion">
+  <input type="hidden" name="curId" value="${curId }">
+   	<c:forEach var="curators" items="${data }" varStatus="i">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <button type="button" class="btn btn-lg btn-info btn-width ${i.index == 0 ? '':'collapsed' }" data-toggle="collapse" data-parent="#accordion"
+           data-target="#collapse${i.index }">${data[i.index].maker} ${data[i.index].prod_name}</button>
+        </h4>
+      </div>
+      <div id="collapse${i.index }" class="panel-collapse collapse ${i.index == 0 ? 'in':'' }" name="targetData">
+        <div class="panel-body">
+        	<div class="li_wrap">
+				<input type="hidden" class="prod_id" name="prodId" value="${data[i.index].prod_id }">
+                <img class="image_url" src="${data[i.index].image_url }">
+                <div class="li_info1">
+                    <div class="product_name">
+                        <p class="maker">${data[i.index].maker}</p> 
+                        <p class="prod_name">${data[i.index].prod_name}</p>
+                    </div>
+                    <div class="summary">${data[i.index].summary}
+                    </div>
+                </div>
+                    <div class="compl_price price">${data[i.index].min_price}원</div>
+                    <div class="select_button">
+                        <button type="button" class="compl_change btn btn-info btn-lg"
+							data-toggle="modal" data-target="#myModal"
+							onclick="getProdList(this);">Change</button>
+						<input type="hidden" name="url"
+							value="${keyword[i.index] }">
+                    </div>
+                
+            </div>
+		</div>
+      </div>
+    </div>
+    </c:forEach>
+    <button type="button" id="curatingSave">완료</button>
+  </div> 
+</div>
+    
+    <!-- 큐레이팅 체인지 -->
+    <div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -47,159 +119,19 @@
 				</div>
 				<div class="modal-body 123">
 					<p>변경할 제품을 선택해주세요</p>
+					<hr>
+					<input type="hidden" name="startNum" value="11">
 					<p class="prodList "></p>
 				</div>
 				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" id="moreProd">More</button>
 				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="main_wrap">
-		<div class="header_wrap">
-			<div id="header">
-				<div class="mainlogo4">
-					ComQ <span class="pagename">큐레이팅</span>
-				</div>
-				<div class="log-form">
-					<div class="log-input">
-						<p>
-							<input class="form-control" type="text" placeholder=" I D ">
-						</p>
-						<p>
-							<input class="form-control" type="text"
-								placeholder=" P A S S W O R D ">
-						</p>
-					</div>
-					<span class="glyphicon glyphicon-user user-icon-size "
-						aria-hidden="true"></span>
-				</div>
-			</div>
-		</div>
-		<div class="question_complete_area">
-			<div class="curating_wrap">
-
-				<div id="curating_list">
-					<div id="list_wrap">
-
-						<form name="" method="" action="">
-							<c:forEach var="curators" items="${data }" varStatus="i">
-
-								<div class="cate">
-									<div class="slide_cate">
-										<img class="cate_icon"></img> <span class="cate_number">${data[i.index].maker}&nbsp;${data[i.index].prod_name}</span>
-
-									</div>
-									<div class="curating_list" style="display: block">
-
-										<div class="li_wrap">
-											<img class="image_url" src="${data[i.index].image_url }">
-											<div class="li_info1">
-												<div class="product_name">
-													<p class="maker">${data[i.index].maker}</p>
-													<p class="prod_name">${data[i.index].prod_name}</p>
-												</div>
-												<div class="summary">${data[i.index].summary}</div>
-											</div>
-											<div class="li_info2">
-												<div class="price">${data[i.index].min_price}원</div>
-												<div class="select_button">
-													<button type="button" class="btn btn-info btn-lg"
-														id="modalW" data-toggle="modal" data-target="#myModal"
-														onclick="getProdList(this);">Change</button>
-													<input type="hidden" name="url"
-														value="${keyword[i.index] }">
-												</div>
-											</div>
-										</div>
-										<hr class="li_hr">
-									</div>
-								</div>
-							</c:forEach>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.curating_list').hide();
-			$('.cate:first').addClass('show');
-			$('.cate:first').children().next().show();
-		});
-		$('.slide_cate').click(
-				function(event) {
-					event.stopPropagation();
-					if (!($(this).parent().parent()
-							.hasClass('principal_components'))) {
-						$('.principal_components').children().removeClass(
-								'show').children().next().slideUp('fast');
-					}
-					$(this).parent().siblings().removeClass('show').children()
-							.next().slideUp('fast');
-					$(this).parent().toggleClass('show').children().next()
-							.slideToggle('fast');
-				});
-	</script>
-	<script>
-	  var chagneBtnParent;
-		function getProdList(btn) {
-			$(".prodList").children().remove();
-			console.log($(".btn").index());
-			var keyword = $(btn).next().val();
-			console.log(keyword);
-			$.ajax({
-				url : '/app/curator/curatingChangeProd',
-				data : 'keyword=' + keyword,
-				type : 'post',
-				success : function(data) {
-					$(".prodList").append(data);
-					chagneBtnParent = $(btn).parent().parent().parent().parent().parent();
-				}
-			});
-		}
-
-		$('#modalW').on(
-				'click',
-				function() {
-					$(window).on(
-							"scroll",
-							function() {
-								console.log(openModal);
-								console.log($(window).scrollTop());
-								console.log($(window).height()
-										- $(window).height() - 100);
-								if ($(window).scrollTop() >= $(document)
-										.height()
-										- ($(window).height() - 100)) {
-									console.log("bottom");
-									setTimeout(function() {
-										fnUnlimitedScroll();
-									}, 800);
-								}
-							});
-				});
-
-		var fnUnlimitedScroll = function() {
-			$.ajax({
-				url : "/app/curator/getListAppend",
-				data : "keyword=" + keyword + "&startNo="
-						+ $("[name=startNum]").val(),
-				dataType : 'html',
-				type : 'post',
-				success : function(data) {
-					$(".prodList").append(data);
-					$("[name=startNum]").val($("[name=startNum]").val() + 10);
-					clearTimeout(fnUnlimitedScroll());
-				}
-			});
-		};
-	</script>
+	
+	
+<script src="/js/user/complete.js"></script>
 </body>
 </html>
-
-
-

@@ -4,3 +4,10 @@ header{
 	background-position: center;
 }
 
+#logout-li {
+	display: none;
+}
+
+#mypage-move {
+	display: none;
+}

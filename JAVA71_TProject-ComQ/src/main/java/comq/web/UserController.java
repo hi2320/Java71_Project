@@ -45,15 +45,16 @@ public class UserController {
 		User user = (User)session.getAttribute("loginUser");
 		
 		JSONObject json = new JSONObject();
-		String email = "";
+		String userStr = "";
 				
 		if (user != null) {
 			json.put("email", user.getEmail());
-			email = json.toString();
-			System.out.println("logIN User: " +email);
+			json.put("access", user.getUserAccess());
+			userStr = json.toString();
+			System.out.println("logIN User: " +userStr);
 		}
 		
-		return email;
+		return userStr;
 	}
 
 	// Get User

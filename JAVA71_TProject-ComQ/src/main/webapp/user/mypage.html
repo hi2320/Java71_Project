@@ -10,6 +10,7 @@
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
 <link rel='stylesheet' type='text/css'
@@ -37,7 +38,7 @@
 </head>
 <body>
 
-  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -47,7 +48,7 @@
             class="icon-bar"></span> <span class="icon-bar"></span> <span
             class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="/">ComQ</a>
+        <a class="navbar-brand page-scroll" href="#page-top">COMQ</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,26 +57,14 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a class="page-scroll" href="#about">About</a></li>
           <li><a class="page-scroll" href="#services">Services</a></li>
-          <li><a class="page-scroll" href="#portfolio">Curating</a></li>
-          <li><a class="page-scroll" href="#contact">Contact Us</a></li>
-          <li id="login-a"><a id="login-ab" class="page-scroll" href="#"
-            data-toggle="modal" data-target="#login-Modal">Login</a></li>
-          <!-- <li id="logout-a"><a class="page-scroll" href="#">LogOuT</a></li> -->
+          <li id="admin-move"><a href="/manager/question_manage.jsp">ADMIN</a></li>
+          <li id="mypage-move"><a href="/user/mypage.html">MYPAGE</a></li>
+          <li id="login-li"><a href="#" data-toggle="modal" data-target="#login-Modal">LOGIN</a></li>
+          <li id="logout-li"><a href="#" id="logout-a">LOGOUT</a></li>
+        </ul>  
 
-
-          <li class="dropdown" id="usermenu_dropdown"><a href="#" id="user_email"
-            data-toggle="dropdown" class="dropdown-toggle js-activated">
-              <b class="caret"></b>
-          </a>
-            <ul class="dropdown-menu">
-              <li><a href="/user/mypage.html">MyPage</a></li>
-              <li><a href="" id="logout-a">logout</a></li>
-            </ul></li>
-
-          <!-- login-Modal -->
-          <div class="modal fade" id="login-Modal" tabindex="-1"
-            role="dialog" aria-labelledby="login-ModalLabel"
-            aria-hidden="true">
+       <!-- login-Modal -->
+          <div class="modal fade" id="login-Modal" tabindex="-1" role="dialog" aria-labelledby="login-ModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -91,7 +80,8 @@
                     <div class="form-group">
                       <label for="user-mail" class="col-sm-2 control-label">Email</label>
                       <div class="col-sm-10">
-                        <input type="email" class="form-control" id="user-email" name="email" placeholder="이메일을 입력하세요.">
+                        <input type="email" class="form-control" id="user-email"
+                          name="email" placeholder="이메일을 입력하세요.">
                       </div>
                     </div>
                     <div class="form-group">
@@ -104,7 +94,7 @@
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-default" id="btn-login">LOGIN</button>
-                        <button id="join-btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#join-Modal">SIGN IN</button>
+                        <button id="join-btn" type="button" class="btn btn-default">SIGN IN</button>
 
                       </div>
                     </div>
@@ -117,13 +107,11 @@
 
 
           <!-- join-Modal -->
-          <div class="modal fade" id="join-Modal" tabindex="-1" role="dialog"
-            aria-labelledby="join-ModalLabel" aria-hidden="true">
+          <div class="modal fade" id="join-Modal" tabindex="-1" role="dialog" aria-labelledby="join-ModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                   <h4 class="modal-title" id="join-ModalLabel">회원 가입</h4>
@@ -149,8 +137,7 @@
                       <label for="porpic-upload">프로필 사진 (선택)</label>
                       <p id="propic-upload-output" class="check-output"></p>
                       <div id="propic-div">
-                        <img id="propic-preview"
-                          src="/img/icon/default-propic.png">
+                        <img id="propic-preview" src="/propic/default-propic.png">
                       </div>
                       <input type="file" id="propic-upload" onchange="readURL(this)" class="btn btn-default" name="propic">
                     </div>
@@ -163,6 +150,7 @@
               </div>
             </div>
           </div>
+
 
         </ul>
       </div>
@@ -227,8 +215,6 @@
 <!-- Estimate 데이터 가져오기 -->
   <section class="bg-primary" id="about">
      <div class="myEstimate">
-      <input type="hidden" name="startNo" value="1">
-      <input type="hidden" name="endNo" value="6"> 
       <h1>Viewing Your Estimates</h1>
     </div> -->
     

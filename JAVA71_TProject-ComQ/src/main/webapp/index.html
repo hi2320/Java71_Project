@@ -54,7 +54,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="#page-top">ComQ</a>
+				<a class="navbar-brand page-scroll" href="#page-top">COMQ</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,24 +63,13 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a class="page-scroll" href="#about">About</a></li>
 					<li><a class="page-scroll" href="#services">Services</a></li>
-					<li><a class="page-scroll" href="#curating">Curating</a></li>
-					<li><a class="page-scroll" href="#contact">Contact Us</a></li>
-					<li id="login-a"><a class="page-scroll" href="#"
-						data-toggle="modal" data-target="#login-Modal">Login</a></li>
-					<!-- <li id="logout-a"><a class="page-scroll" href="#">LogOuT</a></li> -->
+					<li id="admin-move"><a href="/manager/question_manage.jsp">ADMIN</a></li>
+					<li id="mypage-move"><a href="/user/mypage.html">MYPAGE</a></li>
+					<li id="login-li"><a href="#" data-toggle="modal" data-target="#login-Modal">LOGIN</a></li>
+					<li id="logout-li"><a href="#" id="logout-a">LOGOUT</a></li>
+        </ul>  
 
-
-					<li class="dropdown" id="usermenu_dropdown"><a href="#" id="user_email"
-						data-toggle="dropdown" class="dropdown-toggle js-activated">
-							<b class="caret"></b>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="/user/mypage.html">MyPage</a></li>
-							<li><a href="" id="logout-a">logout</a></li>
-						</ul></li>
-
-
-<!-- login-Modal -->
+       <!-- login-Modal -->
           <div class="modal fade" id="login-Modal" tabindex="-1" role="dialog" aria-labelledby="login-ModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -154,8 +143,7 @@
                       <label for="porpic-upload">프로필 사진 (선택)</label>
                       <p id="propic-upload-output" class="check-output"></p>
                       <div id="propic-div">
-                        <img id="propic-preview"
-                          src="/propic/default-propic.png">
+                        <img id="propic-preview" src="/propic/default-propic.png">
                       </div>
                       <input type="file" id="propic-upload" onchange="readURL(this)" class="btn btn-default" name="propic">
                     </div>
@@ -185,7 +173,7 @@
 			<div class="header-content-inner">
 				<h1>컴퓨터 큐레이팅 시스템</h1>
 				<hr>
-				<p>당신이 원하는 최적의 컴퓨터를 엄선해 보여드립니다.</p>
+				<p>당신이 원하는 최적의 컴퓨터를 엄선 해드립니다.</p>
 				<a href="#about" class="btn btn-primary btn-xl page-scroll">About Curating</a>
 			</div>
 		</div>
@@ -326,10 +314,6 @@
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/jquery.fittext.js"></script>
   <script src="js/wow.min.js"></script>
-
-  <!-- input file -->
-  <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap-filestyle.js"></script>
 
   <!-- Custom Theme JavaScript -->
   <script src="js/creative.js"></script>

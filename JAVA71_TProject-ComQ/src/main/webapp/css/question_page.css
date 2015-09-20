@@ -86,3 +86,80 @@ html ,body{
   margin-top: 0.1%;
 }
         
+ #mainNav{
+    	background-color: black;
+    }
+       .container {
+       	margin-top: 3em;
+       } 
+.li_wrap {
+	position: relative;
+	margin: 8px 0px 2px;
+}
+
+    .li_wrap .image_url {
+        width: 130px;
+        float: left;
+    }
+
+    .li_wrap .li_info1 {
+        width: 76%;
+        float: left;
+        padding: 5px 0px 5px 10px;
+    }
+
+    .li_wrap .li_info2 {
+        width: 30%;
+        float: right;
+        margin-right: 20px;
+        font-weight: 600;
+    }
+
+    .li_wrap .price {
+        text-align: left;
+        font-size: 1.2em;
+        margin-top: 6px;
+        float: left;
+    }
+
+    .li_wrap .select_button {
+        float: right;
+        cursor: pointer;
+    }
+    .li_hr {
+        clear: both;
+        background-color: lightblue;
+        margin-right: 5px;
+        height: 3px;
+    }
+    .btn-width {
+    	min-width: 50%;
+    }
+	  /* Icon when the collapsible content is shown */
+	  .btn:after {
+	    font-family: "Glyphicons Halflings";
+	    content: "\e114";
+	    float: right;
+	    margin-left: 15px;
+	  }
+	  /* Icon when the collapsible content is hidden */
+	  .btn.collapsed:after {
+	    content: "\e080";
+	  }
+	  #summaryInfo {
+	  	font-size: 0px;
+	  }
+	  p.maker {
+	    font-size: 1.5em;
+	    font-weight: 700;
+	    text-indent: 1.5em;
+	}
+	p.prod_name {
+	    font-size: 1.5em;
+	    font-weight: 700;
+	    text-indent: 1.7em;
+	}
+	.summary {
+	    font-size: 1.2em;
+	    padding: 0 1.2em;
+	}       

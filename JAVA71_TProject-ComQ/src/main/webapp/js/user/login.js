@@ -15,8 +15,6 @@ $(document).ready(function() {
 				if(data == "true") {
 					alert('환영 합니다!');
 					$('#login-Modal').modal('hide');
-					$('#login-a').css('display', 'none');
-					$('#logout-a').css('display', 'inline');
 					location.reload();
 				} else {
 					alert('이메일 혹은 패스워드를 확인해주세요.');
@@ -33,9 +31,7 @@ $(document).ready(function() {
 			success: function(data) {
 				if(data == "true") {
 					alert('로그아웃 되었습니다.');
-					location.href="/";
-					$('#login-a').css('display', 'inline');
-					$('#logout-a').css('display', 'none');
+					location.reload();
 				} else {
 					alert('로그아웃 실패!');
 				}

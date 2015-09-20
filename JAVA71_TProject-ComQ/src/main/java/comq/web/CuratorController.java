@@ -323,12 +323,24 @@ public class CuratorController {
 		response.setCharacterEncoding("text/html;charset=UTF-8"); 
 		
 		return JSONArray.toJSONString(jsonProdlist);
-//		http://localhost:8080/app/curator/getEstimate?estId=27
 	}
 	
 	@RequestMapping
 	public @ResponseBody String updateEstimateProd(@ModelAttribute ProdList prod) throws Exception {
-		System.out.println(prod);
+		System.out.println("updateEstimateProd >> " + prod);
+		estimateService.updateProd(prod);
+		return "";
+	}
+	@RequestMapping
+	public @ResponseBody String deleteEstimate(@RequestParam int estId) throws Exception {
+		System.out.println("deleteEstimate >> " + estId);
+		estimateService.deleteEstimate(estId);
+		return "";
+	}
+	@RequestMapping
+	public @ResponseBody String deleteProdList(@RequestParam int prolId) throws Exception {
+		System.out.println("deleteProdList >> " + prolId);
+		estimateService.deleteProd(prolId);
 		return "";
 	}
 }
