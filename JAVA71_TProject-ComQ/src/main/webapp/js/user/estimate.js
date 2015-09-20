@@ -1,4 +1,5 @@
-$('#esti-start-btn').on('click', function() {
+$('#esti-start-btn').on('click', function(e) {
+	$('.estimates-hide').css('display', 'block');
 	getEstimateList();
 });  
 var deleteEst = $('<button type="button" class="btn btn-default btn-sm delete_est_btn" onclick="deleteEstimate(this);"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>');
@@ -194,7 +195,7 @@ function getEstimateList() {
 								estimate_prod = $('<div class="estProd"></div>'),
 								prod_box = $('<div class="row prod_box"></div>'),
 								img_div = $('<div class="row col-sm-2 prod_img"></div>'),
-								prod_info_div = $('<div class="row col-sm-9 col-sm-offset-1 prod_info"></div>');
+								prod_info_div = $('<div class="row col-sm-10 prod_info"></div>');
 							
 							var prod_img = $('<img class="col-sm-2" src="'+ newData.imageUrl +'"alt="'+ newData.imageUrl +'">'),
 								prod_name = $('<h3 class="col-sm-12 prod_name">'+ newData.maker +' '+ newData.prodName +'</h3>'),

@@ -68,7 +68,7 @@ header {
 
 #div-update {
 	display: none;
-	padding: 15px 5%;
+	padding: 10px 5%;
 }
 
 #update-form {
@@ -95,33 +95,33 @@ header {
     margin: -.5em auto 0em;
 }
    
-  .myEstimate {
-  	text-align : center;
-  	overflow: hidden;
-  }
-  	.estimateList {
-  	  margin-right: 0px;
-  		padding: 0 2em;
-  	}
-  	.estimateA {
-  		color: white;
-  		cursor: pointer;
-  	}
-  	.estimateA:hover {
-  		text-decoration: none;
-  		color: white;
-  	}
-  	.estimate {
-  	    padding: 1.2em;
-  	    
-  	}
-  	.estimate img {
-  		width: 100%;
-  		height: auto;
-  	}   
-.prod_img img {
-	width: 160px;
+.myEstimate {
+	text-align : center;
+	overflow: hidden;
+}
+.estimateList {
+  margin-right: 0px;
+	padding: 0 2em;
+}
+.estimateA {
+	color: white;
+	cursor: pointer;
+}
+.estimateA:hover {
+	text-decoration: none;
+	color: white;
+}
+.estimate {
+    padding: 1.2em;
+    
+}
+.estimate img {
+	width: 100%;
 	height: auto;
+}
+   
+.prod_img img {
+	width: 100%;
 }
 
 .getEstimateResult {
@@ -143,8 +143,6 @@ header {
 	.prod_img {
 		display: table-cell;
 		vertical-align: middle;
-		margin-top: 2em;
-		margin-left: .1em;
 	}
 	.prod_img img {
 		width: 160px;
@@ -244,4 +242,37 @@ hr.li_hr {
     position: absolute;
     right: .2em;
     top: .2em;
+}
+
+/* 2015-09-21 05:27 수정 시작 */
+.estimates-hide {
+  display: none;
+}
+
+.prod_box {
+  display: table;
+  padding: 0.2em 0.5em;
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+}
+
+.prod_summary {
+    padding: 0 1.5em;
+    font-size: 1em;
+    color: grey;
+}
+
+.prod_name {
+    font-size: 1.7em;
+    font-weight: 900;
+    text-indent: 1.5em;
+    text-align: center;
+}
+
+.prod_price {
+    font-size: 1.5em;
+    text-indent: 1.2em;
+    font-weight: 600;
+    text-align: center;
 }

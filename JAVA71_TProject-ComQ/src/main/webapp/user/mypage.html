@@ -36,7 +36,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body id="page-top">
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -48,15 +48,14 @@
             class="icon-bar"></span> <span class="icon-bar"></span> <span
             class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top">COMQ</a>
+        <a class="navbar-brand page-scroll" href="/index.html">COMQ</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse"
-        id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="page-scroll" href="#about">About</a></li>
-          <li><a class="page-scroll" href="#services">Services</a></li>
+          <li><a class="page-scroll" href="#page-top">profile</a></li>
+          <li><a class="page-scroll estimates-hide" href="#Estimates">Estimates</a></li>
           <li id="admin-move"><a href="/manager/question_manage.jsp">ADMIN</a></li>
           <li id="mypage-move"><a href="/user/mypage.html">MYPAGE</a></li>
           <li id="login-li"><a href="#" data-toggle="modal" data-target="#login-Modal">LOGIN</a></li>
@@ -170,12 +169,12 @@
       <div id="userMail"><p id="user_data_email"></p></div>
     </div>	        
     <div class="col-sm-9" id="mypage_nav">
-      <button type="button" class="btn btn-default btn-xl" id="update-start-btn">UPDATE your profile</button>
+      <button type="button" class="btn btn-default btn-xl" id="update-start-btn">회원 정보 변경하기</button>
       <hr id="hr-line">
       
       <input type="hidden" name="startNo" value="1">
       <input type="hidden" name="endNo" value="6"> 
-      <button type="button" class="btn btn-default btn-xl" id="esti-start-btn">View Your Estimates</button>
+      <a class="page-scroll" href="#Estimates"><button type="button" class="btn btn-default btn-xl" id="esti-start-btn">큐레이팅 목록 보기</button></a>
       
     </div>
     <div class="col-sm-9" id="div-update">
@@ -213,10 +212,10 @@
   </header>
 
 <!-- Estimate 데이터 가져오기 -->
-  <section class="bg-primary" id="about">
+  <section class="bg-primary estimates-hide" id="Estimates">
      <div class="myEstimate">
-      <h1>Viewing Your Estimates</h1>
-    </div> -->
+      <h2>큐레이팅 목록 확인!</h2>
+     </div>
     
     <div class="row estimateList"></div>
   </section>
