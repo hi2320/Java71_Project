@@ -78,3 +78,163 @@ P {
 #leave-btn {
 	float: right;
 }
+
+
+
+
+    .arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    
+    border-bottom: 15px solid black;
+      clear: both;
+      margin: -.5em auto 0em;
+  }
+    
+    .myEstimate {
+      text-align : center;
+      overflow: hidden;
+    }
+      .estimateList {
+        padding: 0 2em;
+      }
+      .estimateA {
+        color: white;
+        cursor: pointer;
+      }
+      .estimateA:hover {
+        text-decoration: none;
+        color: white;
+      }
+      .estimate {
+          padding: 1.2em;
+          
+      }
+      .estimate img {
+        width: 100%;
+        height: auto;
+      }
+      
+.prod_img img {
+  width: 160px;
+  height: auto;
+}
+
+.getEstimateResult {
+  margin-top: -1.2em;
+  margin-bottom: 1.2em;
+}
+
+@media ( min-width :1024px) {
+  .estimateProd {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .prod_box {
+    display: table;
+    padding: 0.2em 0.5em;
+    margin: 0 auto;
+    border: 1px solid;
+  }
+  .prod_img {
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 2em;
+    margin-left: .1em;
+  }
+  .prod_img img {
+    width: 160px;
+    height: auto;
+  }
+  .prod_name {
+    font-size: 1.8em;
+    font-weight: 900;
+    text-indent: 1.5em;
+  }
+  .prod_summary {
+    padding: 0 1.5em;
+    font-size: 1.3em;
+  }
+  .prod_price {
+    font-size: 1.5em;
+    text-indent: 1.2em;
+    font-weight: 600;
+  }
+}
+
+@media ( min-width :768px) and (max-width:1024px) {
+  .estimateProd {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .prod_box {
+    display: table;
+    padding: 0.2em 0.5em;
+    border: 1px solid;
+    margin: 0 auto;
+  }
+  .prod_img {
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 2.2em;
+    margin-left: 1.2em;
+  }
+  .prod_name {
+    font-size: 1.8em;
+    font-weight: 900;
+    text-indent: 1.5em;
+  }
+  .prod_summary {
+    padding: 0 1.5em;
+    font-size: 1.3em;
+  }
+  .prod_price {
+    font-size: 1.5em;
+    text-indent: 1.2em;
+    font-weight: 600;
+  }
+}
+
+#viewLoading {
+  text-align: center;
+  padding-top: 370px;
+  background-color: #fffff0;
+  filter: alpha(opacity = 60);
+  opacity: .6;
+  z-index: 1000;
+}
+
+p#summaryInfo {
+  font-size: 0;
+}
+
+p.maker {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+p.prod_name {
+  font-size: 1.5em;
+  font-weight: 600;
+  text-indent: 1.5em;
+}
+
+.li_info2 {
+  margin-top: 1.2em;
+}
+
+.col-sm-3.price {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+hr.li_hr {
+    max-width: 100%;
+    border-color: cornflowerblue;
+    clear: both;
+}
+.modal-backdrop.fade.in {
+    position: fixed;
+    height: 2000px;
+}

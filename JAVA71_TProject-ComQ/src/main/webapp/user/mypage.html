@@ -34,37 +34,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<style>
-
-
- .myEstimate {
- 	text-align : center;
- 	overflow: hidden;
- }
- 	.estimateList {
- 		padding: 0 2em;
- 	}
- 	.estimateA {
- 		color: white;
- 	}
- 	.estimateA:hover {
- 		text-decoration: none;
- 		color: white;
- 	}
- 	.estimate {
- 	    padding: 1.2em;
- 	    
- 	}
- 	.estimate img {
- 		width: 100%;
- 		height: auto;
- 	}
- 	
-	@media (min-width:540px) and (max-width:768px) {
-		.col-sm-4 { width: 50%; float:left; }
-	}
-  
-</style>
 </head>
 <body>
 
@@ -216,7 +185,11 @@
     <div class="col-sm-9" id="mypage_nav">
       <button type="button" class="btn btn-default btn-xl" id="update-start-btn">UPDATE your profile</button>
       <hr id="hr-line">
+      
+      <input type="hidden" name="startNo" value="1">
+      <input type="hidden" name="endNo" value="6"> 
       <button type="button" class="btn btn-default btn-xl" id="esti-start-btn">View Your Estimates</button>
+      
     </div>
     <div class="col-sm-9" id="div-update">
     
@@ -253,183 +226,38 @@
   </header>
 
 <!-- Estimate 데이터 가져오기 -->
-	<section class="bg-primary" id="about">
-		<div class="myEstimate">
-			<input type="hidden" name="startNo" value="1">
-			<input type="hidden" name="endNo" value="6"> 
-			<a href="javascript:getEstimateList();"
-				class="btn btn-default btn-xl">My Estimate</a>
-		</div>
+  <section class="bg-primary" id="about">
+     <div class="myEstimate">
+      <input type="hidden" name="startNo" value="1">
+      <input type="hidden" name="endNo" value="6"> 
+      <h1>Viewing Your Estimates</h1>
+    </div> -->
+    
+    <div class="row estimateList"></div>
+  </section>
+  
+  <!-- 큐레이팅 체인지 -->
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">리스트 변경 페이지</h4>
+        </div>
+        <div class="modal-body 123">
+          <p>변경할 제품을 선택해주세요</p>
+          <hr class="li_hr">
+          <input type="hidden" name="startNum" value="11">
+          <p class="prodList "></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" class="moreProd" onclick="getMoreProd();">More</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		<div class="row estimateList">
-		
-		</div>
-	</section>
-
-	<!-- 의 Ajax -->
-  <script>
-  	function getEstimateList() {
-   		$.ajax({
-  			url : "/app/curator/userEstimateList",
-  			data: {
-  				startNo : $('[name=startNo]').val(),
-   				endNo : $('[name=endNo]').val()
-  			},
-  			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-  			timeout: 10000,
-  			type: "POST",
-  			dataType: "JSON",
-  			beforeSend: function(xhr, settings) {
-  			    /* 데이터 가져오기전에 로딩이미지 뿌려줌 */
-  			  },
-  			success : function(data) {
-  				/* $('.estimateList').append(); */
-  				$.each(data, function(index, item) {
-						var space = /\+/g;
-	  	  				var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
-  						var divEstimate = $('<div class="col-sm-4 estimate"></div>'),
-  							aTag = $('<a class="estimateA"></a>'),
-  							imgTag = $('<img src="/img/portfolio/1.jpg" alt="사무용PC">'),
-  							divTextPart = $('<div class="col-sm-8 col-lg-offset-2 text-center"></div>'),
-  							estimateName = $('<h2 class="section-heading"></h2>'),
-  							estiamteDate = $('<p></p>').text(newData.estDate);
-  						
-  						/* $(estimateDate).text(newData.estDate); */
-  						/* $(estimateName).text(newData.estName); */
-  						var imgsrc,
-  							imgalt;
-  						
-  						switch (parseInt(newData.curId)) {
-	  						case 1: imgsrc = "/img/portfolio/1.jpg"; imgalt = "사무용PC"; break;
-	  						case 2: imgsrc = "/img/portfolio/2.jpg"; imgalt = "게임용PC"; break;
-	  						case 3: imgsrc = "/img/portfolio/3.jpg"; imgalt = "디자인PC"; break;
-	  						case 4: imgsrc = "/img/portfolio/4.jpg"; imgalt = "일체형PC"; break;
-	  						case 5: imgsrc = "/img/portfolio/5.jpg"; imgalt = "조립PC"; break;
-	  						case 6: imgsrc = "/img/portfolio/6.jpg"; imgalt = "PC부품"; break;
-  						}
-  						aTag = $(aTag).attr('href', 'javascript:getThisEstimateProdList('+ newData.estId +');');
-  						imgTag = $(imgTag).attr('src', imgsrc).attr('alt',imgalt);
-  						estimateName = $(estimateName).text(newData.estName);
-  						divTextPart = $(divTextPart).append($(aTag).clone().append(estimateName)).append(estiamteDate);
-  						divEstimate = $(divEstimate).append($(aTag).clone().append(imgTag)).append(divTextPart);
-  						$('.estimateList').append(divEstimate);
-				});
-  			},
-  			complete : function() {
-  				/* 완료되면 로딩이미지 제거 */
-  				$('[name=startNo]').val(parseInt($('[name=startNo]').val())+6);
-  				$('[name=endNo]').val(parseInt($('[name=endNo]').val())+6);
-  				$('.myEstimate').slideUp("fast");
-  				
-  				infinityScroll();
-  				
-  			},
-  			error : function() {
-  				
-  			}
-  		})
-  	}; 
-  	
-  	/* unlimited scroll */
-  	function infinityScroll() {
-			$(window).on( "scroll", function() {
-				if (($(window).scrollTop()) >= ($(document).height() - $(window).height())) {
-					setTimeout(function() {
-						$.ajax({
-				  			url : "/app/curator/userEstimateList",
-				  			data: {
-				  				startNo : $('[name=startNo]').val(),
-				   				endNo : $('[name=endNo]').val()
-				  			},
-				  			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				  			timeout: 10000,
-				  			type: "POST",
-				  			dataType: "JSON",
-				  			beforeSend: function(xhr, settings) {
-				  			    /* 데이터 가져오기전에 로딩이미지 뿌려줌 */
-				  			  },
-				  			success : function(data) {
-				  				/* $('.estimateList').append(); */
-				  				$.each(data, function(index, item) {
-										var space = /\+/g;
-					  	  				var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
-				  						var divEstimate = $('<div class="col-sm-4 estimate"></div>'),
-				  							aTag = $('<a class="estimateA"></a>'),
-				  							imgTag = $('<img src="/img/portfolio/1.jpg" alt="사무용PC">'),
-				  							divTextPart = $('<div class="col-sm-8 col-lg-offset-2 text-center"></div>'),
-				  							estimateName = $('<h2 class="section-heading"></h2>'),
-				  							estiamteDate = $('<p></p>').text(newData.estDate);
-				  						
-				  						/* $(estimateDate).text(newData.estDate); */
-				  						/* $(estimateName).text(newData.estName); */
-				  						var imgsrc,
-				  							imgalt;
-				  						
-				  						switch (parseInt(newData.curId)) {
-					  						case 1: imgsrc = "/img/portfolio/1.jpg"; imgalt = "사무용PC"; break;
-					  						case 2: imgsrc = "/img/portfolio/2.jpg"; imgalt = "게임용PC"; break;
-					  						case 3: imgsrc = "/img/portfolio/3.jpg"; imgalt = "디자인PC"; break;
-					  						case 4: imgsrc = "/img/portfolio/4.jpg"; imgalt = "일체형PC"; break;
-					  						case 5: imgsrc = "/img/portfolio/5.jpg"; imgalt = "조립PC"; break;
-					  						case 6: imgsrc = "/img/portfolio/6.jpg"; imgalt = "PC부품"; break;
-				  						}
-				  						aTag = $(aTag).attr('href', 'javascript:getThisEstimateProdList('+ newData.estId +');').attr('name','searchEst');
-				  						imgTag = $(imgTag).attr('src', imgsrc).attr('alt',imgalt);
-				  						estimateName = $(estimateName).text(newData.estName);
-				  						divTextPart = $(divTextPart).append($(aTag).clone().append(estimateName)).append(estiamteDate);
-				  						divEstimate = $(divEstimate).append($(aTag).clone().append(imgTag)).append(divTextPart);
-				  						$('.estimateList').append(divEstimate);
-								});
-				  			},
-				  			complete : function() {
-				  				/* 완료되면 로딩이미지 제거 */
-				  				$('[name=startNo]').val(parseInt($('[name=startNo]').val())+6);
-				  				$('[name=endNo]').val(parseInt($('[name=endNo]').val())+6);
-				  			},
-				  			error : function() {
-				  				
-				  			}
-				  		})
-					}, 800);
-				}
-			});
-  	};
-  	
-  	/* get Estimate prodlist */
-  	function getThisEstimateProdList(est_id){  		
-	  	console.log('est_id 가져오는 중');
-	  	console.log(est_id);
-
-	  	$.ajax({
-	  		url : '/app/curator/getEstimate?estId='+est_id,
-	  		type: 'get',
-	  		dataType : 'json',
-	  		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-  			timeout: 10000,
-  			beforeSend : function() {
-	  			
-	  		},
-	  		success : function(data) {
-	  			$.each(data, function(index, item){
-					var space = /\+/g;
-					var newData = JSON.parse(decodeURIComponent(data[index].replace(space, ' ')));
-		  			console.log('index >> ' + index);
-					console.log(newData);
-	  			})
-					
-	  		},
-	  		error : function() {
-	  			
-	  		},
-	  		complete : function() {
-	  			
-	  		}
-	  	})
-  	}
-  	
-  	
-  	
-  </script>
 <!-- jquery -->
 <script src="/js/jquery.js"></script>
 
@@ -446,6 +274,7 @@
 <script src="/js/user/join.js"></script>
 <script src="/js/user/login.js"></script>
 <script src="/js/user/mypage.js"></script>
+<script src="/js/user/estimate.js"></script>
 
 <script src="/js/common/session.js"></script>
    
