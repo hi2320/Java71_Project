@@ -63,14 +63,7 @@ public class CuratorController {
 		session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		
-		mv.setViewName("/user/question_page.jsp");
-
-		if(user != null) {
-			if(user.getUserAccess().equals("admin")) {
-				System.out.println("/manager/question_manage.jsp moving");
-				mv.setViewName("/manager/question_manage.jsp");
-			}
-		}
+		mv.setViewName("/user/question_page2.jsp");
 		
 		Curator curator = null;
 		curator = curatorService.getCurator(curId);

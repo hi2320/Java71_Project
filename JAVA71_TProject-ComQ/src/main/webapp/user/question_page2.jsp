@@ -1,40 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" >
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Computer Curating System : myPage</title>
 
-<title>COMQ: Curating 시작하기</title>
-
-<link rel="stylesheet" href="/reset.css">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Custom Fonts -->
+<link rel='stylesheet' type='text/css'
+  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'>
+<link rel='stylesheet' type='text/css'
+  href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'>
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
 
-<link href="http://fonts.googleapis.com/css?family=Montserrat:700,400"
-	rel="stylesheet" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/css/animate.min.css" type="text/css">
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/css/creative.css" type="text/css">
 
-<link rel="stylesheet" href="/css/question_page.css">
+<link rel="stylesheet" href="/css/user.css" type="text/css">
+<!-- <link rel="stylesheet" href="/css/mypage.css" type="text.css"> -->
+<link rel="stylesheet" href="/css/questionpage.css" type="text.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-
 <body id="page-top">
+
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,20 +53,17 @@
             class="icon-bar"></span> <span class="icon-bar"></span> <span
             class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top">COMQ</a>
+        <a class="navbar-brand page-scroll" href="/index.html">COMQ</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse"
-        id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="page-scroll" href="#about">About</a></li>
-          <li><a class="page-scroll" href="#services">Services</a></li>
           <li id="admin-move"><a href="/manager/question_manage.jsp">ADMIN</a></li>
           <li id="mypage-move"><a href="/user/mypage.html">MYPAGE</a></li>
           <li id="login-li"><a href="#" data-toggle="modal" data-target="#login-Modal">LOGIN</a></li>
           <li id="logout-li"><a href="#" id="logout-a">LOGOUT</a></li>
-        </ul>  
+        </ul>
 
        <!-- login-Modal -->
           <div class="modal fade" id="login-Modal" tabindex="-1" role="dialog" aria-labelledby="login-ModalLabel" aria-hidden="true">
@@ -156,60 +161,82 @@
     <!-- /.container-fluid -->
   </nav>
 
+  <header>
+    <div class="header-content" style="min-height: 300px;">
+      <div class="header-content-inner">
+    
+      </div> <!-- header-content-inner -->
+    </div> <!-- header-content -->
+  </header>
 
-	<div class="main_wrap">
-		
-		<div class="question_area size">
-			<form name="curatingForm" method="post"
-				action="/app/curator/curating?curId=${list.curId }">
-				<div id="accordion">
-					<c:forEach var="questions" items="${list.questionList }">
-						<div>${questions.qSente}||${questions.qProd }
-							<input type="hidden" name="questionKey"
-								value="${questions.qProd }" />
-						</div>
-						<div>
-							<c:forEach var="answers" items="${questions.answerList }">
-								<div>
-									<input
-										type="${questions.qType eq 'check' ? 'checkbox':'radio'}"
-										id="${answers.ansId }" name="${questions.queId }"> <label
-										for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
-									<input type="hidden" name="" value="${answers.aSpec }" />
-								</div>
-							</c:forEach>
-						</div>
-					</c:forEach>
-				</div>
-			</form>
-		</div>
-	
-		<div class="footer">
-			<button type="button" class="btn btn-info db_send_btn">
-				<a href="javascript:danawaJson()">저장</a>
-			</button>
-		</div>
-	</div>
-</body>
+<!-- Estimate 데이터 가져오기 -->
+  <section class="bg-primary" id="Estimates">
+       <div class="question_area size">
+      <form name="curatingForm" method="post" id="cur-form"
+        action="/app/curator/curating?curId=${list.curId }">
+        <div id="accordion">
+          <c:forEach var="questions" items="${list.questionList }">
+            <div>${questions.qSente}||${questions.qProd }
+              <input type="hidden" name="questionKey"
+                value="${questions.qProd }" />
+            </div>
+            <div>
+              <c:forEach var="answers" items="${questions.answerList }">
+                <div>
+                  <input
+                    type="${questions.qType eq 'check' ? 'checkbox':'radio'}"
+                    id="${answers.ansId }" name="${questions.queId }"> <label
+                    for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
+                  <input type="hidden" name="" value="${answers.aSpec }" />
+                </div>
+              </c:forEach>
+            </div>
+          </c:forEach>
+        </div>
+      </form>
+      <button type="button" class="btn btn-info db_send_btn">
+        <a href="javascript:danawaJson()">저장</a>
+      </button>
+    </div>
+  </section>
+
+<!-- jquery -->
+<script src="/js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.fittext.js"></script>
+<script src="/js/wow.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/creative.js"></script>
+<script src="/js/user/join.js"></script>
+<script src="/js/user/login.js"></script>
+
+<script src="/js/common/session.js"></script>
 <script>
-	$(function() {
-		$("#accordion").accordion();
-	});
+$(function() {
+	  $("#accordion").accordion();
+});
 
-	function danawaJson() {
-		var answerSpec = $(":checked");
-		for (i = 0; i < answerSpec.length; i++) {
-			$(answerSpec[i]).next().next().val(
-					$(answerSpec[i]).parent().parent().prev().find(
-							"[name=questionKey]").val()
-							+ ":" + $(answerSpec[i]).next().next().val());
-			$(answerSpec[i]).next().next().attr("name", "answers");
-			console.log($(answerSpec[i]).next().next().attr("name"));
-		}
-		$("form").submit();
-	}
+function danawaJson() {
+  var answerSpec = $(":checked");
+  for (i = 0; i < answerSpec.length; i++) {
+    $(answerSpec[i]).next().next().val(
+        $(answerSpec[i]).parent().parent().prev().find(
+            "[name=questionKey]").val()
+            + ":" + $(answerSpec[i]).next().next().val());
+    $(answerSpec[i]).next().next().attr("name", "answers");
+    console.log($(answerSpec[i]).next().next().attr("name"));
+  }
+  $("#cur-form").submit();
+
+}
 </script>
+</body>
 </html>
-
-
-
