@@ -17,8 +17,14 @@ header {
 
 .db_send_btn {
 	width: 150px;
-	background-color: rgba(25, 25, 25, .7) !important;	
+	background-color: rgba(51, 122, 183, .7) !important;	
 	color: white;
+}
+
+#save_btn a:hover {
+	width: 150px;
+	background-color: rgba(51, 122, 183, .9) !important;	
+	color: white !important;
 }
 
 #save_btn {

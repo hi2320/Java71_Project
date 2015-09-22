@@ -63,7 +63,7 @@ public class CuratorController {
 		session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		
-		mv.setViewName("/user/question_page2.jsp");
+		mv.setViewName("/user/question_page.jsp");
 		
 		Curator curator = null;
 		curator = curatorService.getCurator(curId);
@@ -91,7 +91,6 @@ public class CuratorController {
 //		질문페이지 수정(del >> ins)
 		curatorService.updateCurator(curators);
 		
-//		mv.setViewName("redirect:/app/curator/questionPageView?curId="+curators.getCurId());
 		mv.setViewName("redirect:/app/curator/changeQuestionPage?curId="+curators.getCurId());
 		return mv;
 	}
@@ -115,7 +114,6 @@ public class CuratorController {
 		  }
 		}
 		
-//		String[] keywords = {"모니터", "1920", "마우스", "게이밍"};
 		List<Map> objs = new ArrayList<Map>();
 		List<String> urlKeywords = new ArrayList<String>();
 		
@@ -224,7 +222,7 @@ public class CuratorController {
 		mv.addObject("data", objs);
 		mv.addObject("keyword", resultKeywords);
 		mv.addObject("curId", curId);
-		mv.setViewName("/user/curating_complete.jsp");
+		mv.setViewName("/user/curating_complete2.jsp");
 		
 		return mv;
 	}

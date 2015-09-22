@@ -49,7 +49,7 @@
 				</div>
 
 			</div>
-		<form name="questionForm" method="post" action="../curator/updateQuestionPage">
+		<form name="questionForm" method="post" action="/app/curator/updateQuestionPage">
 	  
 			<div class="aside">
 				<select class="form-control curating_code" onchange="curatorPageChange(this[this.selectedIndex].value)">
@@ -197,7 +197,7 @@
 				});
 				
 				function curatorPageChange(index) {
-					$('form').attr('action', '../curator/changeQuestionPage?curId='+index);
+					$('form').attr('action', '/app/curator/changeQuestionPage?curId='+index);
 					$('form').submit();
 				}
 				

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Computer Curating System : myPage</title>
+  <title>Computer Curating CompletePage</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -28,11 +28,11 @@
 <link rel="stylesheet" href="/css/main.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/creative.css" type="text/css">
-
 <link rel="stylesheet" href="/css/user.css" type="text/css">
-<!-- <link rel="stylesheet" href="/css/mypage.css" type="text.css"> -->
-<link rel="stylesheet" href="/css/questionpage.css" type="text/css">
+<!-- <link rel="stylesheet" href="/css/questionpage.css" type="text/css"> -->
+<link rel="stylesheet" href="/css/complete.css" type="text/css">
 <link rel="stylesheet" href="/css/arccodian.css" type="text/css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -162,48 +162,57 @@
     <!-- /.container-fluid -->
   </nav>
   
-<!-- 큐레이팅 질문 페이지 시작 -->
+<!-- 큐레이팅 완료 페이지 시작 -->
   <header>
     <div class="header-content" style="min-height: 300px;">
       <div class="header-content-inner">
-    	<h1>큐레이팅 시작하기!</h1>
-    	<p>질문에 대한 답변을 해주세요. 당신이 원하는 최적의 컴퓨터를 엄선해드립니다.</p>
-    	<a href="#start-curating" class="btn btn-primary btn-xl page-scroll" id="cur_move">START CURATING</a>
+    	<h1>큐레이팅 완료!</h1>
+    	<p>당신에게 최적화된 컴퓨터 입니다. 다른 부품을 원하시면 CHANGE 기능을 통해 변경해주세요.</p>
+    	<a href="#cp_move" class="btn btn-primary btn-xl page-scroll">REView Curating</a>
       </div> <!-- header-content-inner -->
     </div> <!-- header-content -->
   </header>
 
-  <section class="bg-primary" id="start-curating">
-    <div class="question_area size">
-      <form name="curatingForm" method="post" id="cur-form"
-        action="/app/curator/curating?curId=${list.curId }">
-        <div id="accordian">
-	        <ul>
-	        	<c:forEach var="questions" items="${list.questionList }">
-	        	<li class="questionList">
-	        		<h3>${questions.qSente}||${questions.qProd }
-	        			<input type="hidden" name="questionKey" value="${questions.qProd }"/>
-	        		</h3>
-              		
-              		<ul class="checking">
-              			<c:forEach var="answers" items="${questions.answerList }">
-              			<li class="answerList">
-              				<input class="checkTarget" type="${questions.qType eq 'check' ? 'checkbox':'radio'}" id="${answers.ansId }" name="${questions.queId }"> 
-                    		<label for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
-                  			<input type="hidden" name="" value="${answers.aSpec }"/>
-              			</li>
-              			</c:forEach>
-              		</ul>
-              		
-	        	</li>
-	        	</c:forEach>
-	        </ul>
-        </div>
-      </form>
-     </div>
-      <div id="save_btn">
-      	<a href="javascript:danawaJson()" class="btn btn-default db_send_btn">저장 </a>
+  <section class="bg-primary" id="cp_move">
+    <div class="panel-group" id="accordion">
+  <input type="hidden" name="curId" value="${curId }">
+   	<c:forEach var="curators" items="${data }" varStatus="i">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <button type="button" class="btn btn-lg btn-info btn-width ${i.index == 0 ? '':'collapsed' }" data-toggle="collapse" data-parent="#accordion"
+           data-target="#collapse${i.index }">${data[i.index].maker} ${data[i.index].prod_name}</button>
+        </h4>
       </div>
+      <div id="collapse${i.index }" class="panel-collapse collapse ${i.index == 0 ? 'in':'' }" name="targetData">
+        <div class="panel-body">
+        	<div class="li_wrap">
+				<input type="hidden" class="prod_id" name="prodId" value="${data[i.index].prod_id }">
+                <img class="image_url" src="${data[i.index].image_url }">
+                <div class="li_info1">
+                    <div class="product_name">
+                        <p class="maker">${data[i.index].maker}</p> 
+                        <p class="prod_name">${data[i.index].prod_name}</p>
+                    </div>
+                    <div class="summary">${data[i.index].summary}
+                    </div>
+                </div>
+                    <div class="compl_price price">${data[i.index].min_price}원</div>
+                    <div class="select_button">
+                        <button type="button" class="compl_change btn btn-info btn-lg"
+							data-toggle="modal" data-target="#myModal"
+							onclick="getProdList(this);">Change</button>
+						<input type="hidden" name="url"
+							value="${keyword[i.index] }">
+                    </div>
+                
+            </div>
+		</div>
+      </div>
+    </div>
+    </c:forEach>
+    <button type="button" id="curatingSave">완료</button>
+  </div> 
   </section>
 
 <!-- jquery -->
@@ -224,46 +233,7 @@
 
 <script src="/js/common/session.js"></script>
 <script src="/js/common/arccodian.js"></script>
-<script>
-/* radio button event start */
-$(document).find("input:checked[type='radio']").addClass('bounce');   
-$("input[type='radio']").click(function() {
-    $(this).prop('checked', false);
-    $(this).toggleClass('bounce');
+<script src="/js/user/complete.js"></script>
 
-    if( $(this).hasClass('bounce') ) {
-        $(this).prop('checked', true);
-        $(document).find("input:not(:checked)[type='radio']").removeClass('bounce');
-        
-        $(this).parent().parent().prev().css({"background-color":"forestgreen", "opacity":"0.5", "color": "white", "font-weight":"700"});
-    } else {
-    	$(this).parent().parent().prev().removeAttr("style");
-    }
-}); /* radio event end */
-
-/* checkbox event start */
-$("input[type='checkbox']").click(function() {
-	console.log($(this).parent().parent().find(":checked").length);
-	if($(this).parent().parent().find(":checked").length == 0) {
-    	$(this).parent().parent().prev().removeAttr("style");
-    } else {
-        $(this).parent().parent().prev().css({"background-color":"forestgreen", "opacity":"0.5", "color": "white", "font-weight":"700"});
-    }
-});/* checkbox event end */
-
-function danawaJson() {
-  var answerSpec = $(":checked");
-  for (i = 0; i < answerSpec.length; i++) {
-    $(answerSpec[i]).next().next().val(
-        $(answerSpec[i]).parent().parent().prev().find(
-            "[name=questionKey]").val()
-            + ":" + $(answerSpec[i]).next().next().val());
-    $(answerSpec[i]).next().next().attr("name", "answers");
-    console.log($(answerSpec[i]).next().next().attr("name"));
-  }
-  
-  $("#cur-form").submit();
-}
-</script>
 </body>
 </html>
