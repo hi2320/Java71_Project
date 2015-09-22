@@ -1,7 +1,7 @@
-/* header {
+header {
 	background-image: url() !important;
+	min-height: 400px;
 }
- */
 
 #accordion {
 	width: 90%;
@@ -14,12 +14,11 @@
 }
 
 .li_wrap .image_url {
-    width: 130px;
+    width: 100%;
     float: left;
 }
 
 .li_wrap .li_info1 {
-    width: 76%;
     float: left;
     padding: 5px 0px 5px 10px;
 }
@@ -32,35 +31,18 @@
 }
 
 .li_wrap .price {
-    text-align: left;
+    text-align: center;
     font-size: 1.2em;
     margin-top: 6px;
-    float: left;
 }
 
-.li_wrap .select_button {
-    cursor: pointer;
-}
 .li_hr {
     clear: both;
     background-color: lightblue;
     margin-right: 5px;
     height: 3px;
 }
-.btn-width {
-	min-width: 100%;
-}
-/* Icon when the collapsible content is shown */
-#cp_move .btn:after {
-  font-family: "Glyphicons Halflings";
-  content: "\e114";
-  margin-left: 15px;
-  float: right;
-}
-/* Icon when the collapsible content is hidden */
-#cp_move .btn.collapsed:after {
-  content: "\e080";
-}
+
 #summaryInfo {
 	font-size: 0px;
 }
@@ -74,6 +56,7 @@ p.prod_name {
     font-weight: 700;
     text-indent: 1.7em;
 }
+
 .summary {
     font-size: 1.2em;
     padding: 0 1.2em;
@@ -82,22 +65,100 @@ p.prod_name {
    clear: right;
    font-weight: 800;
    font-size: 1.4em;
-   margin-left: 20%;
 }
 .compl_change{
-   text-align: right;
-   margin-left: 45%;
+   float: right;  
 }
 
 .panel-heading {
 	padding: 0px;
+	background-color: rgba(0, 0, 0, .0) !important;
 }
 
 .panel-body {
-	color: black;
+	color: rgba(0, 0, 0, .7);
 }
 
 .panel-title{
-	background-color: black;
+	background-color: rgba(0, 0, 0, .0);
 }
 
+.btn-width {
+  min-width: 100%;
+}
+
+.btn-primary {
+	background-color: #337ab7 !important;
+}
+
+#curatingSave {
+	margin-top: 20px;
+	width: 100px;
+}
+
+#cur_save_btn {
+	text-align: center;
+}
+
+#cp_move #accordion .btn:after {
+  font-family: "Glyphicons Halflings";
+  content: "\e114";
+  margin-left: 15px;
+  float: right;
+}
+
+#cp_move #accordion .btn.collapsed:after {
+  content: "\e080";
+}
+
+#cp_move #accordion .btn {
+  border-radius: 0px !important;
+  background-color: rgba(0, 0, 0, 0.5);  
+}
+
+#cp_move {
+	height: 70%;
+}
+
+#cp_move .row {
+	padding-right: 0px;
+	padding-left: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.bg-primary {
+    background-color: rgba(0, 0, 0, .0);
+}
+
+.product_name {
+	text-align: left !important;
+	padding-left: 3em;
+}
+
+.prod_name{
+	display: inline-block;
+}
+.maker {
+	display: inline-block;
+}
+
+#bg_img {
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background-image: url(/img/curatingcomplete.jpg);
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: none;
+	background-size: cover;
+}
+
+#myModal .image_url {
+	width: 200px;
+}
+
+#myModal hr {
+	max-width: 100% !important;
+}

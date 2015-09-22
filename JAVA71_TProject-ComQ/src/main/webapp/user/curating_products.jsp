@@ -16,7 +16,7 @@
         <div class="col-sm-10 col-sm-offset-2 li_info2">
             <div class="col-sm-3 price">${data[i.index].min_price}원</div>
             <div class="row col-sm-2 col-sm-offset-6 select_button">
-             	<button type="button" class="changeBtn btn btn-lg btn-info" data-dismiss="modal" onclick="javascript:prodChange(this);">Select This</button>
+             	<button type="button" class="changeBtn btn btn-lg btn-info" data-dismiss="modal" onclick="javascript:prodChange(this);">변경</button>
      			<p id="summaryInfo">${data[i.index]}</p>
             </div>
         </div>

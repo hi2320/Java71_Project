@@ -70,7 +70,6 @@
 							}
 						});/* endCompleteEstimate */
 					}
-					
 				},
 				error: function() {
 					alert("저장하기 실패했습니다.");
@@ -79,7 +78,7 @@
 			});/* end createEstimate */
 			
 		});
-
+		
 var prodInfo;
 function prodChange(btn) {
       prodInfo = $(btn).next().text();

@@ -154,8 +154,6 @@
             </div>
           </div>
 
-
-        </ul>
       </div>
       <!-- /.navbar-collapse -->
     </div>
@@ -164,7 +162,7 @@
   
 <!-- 큐레이팅 질문 페이지 시작 -->
   <header>
-    <div class="header-content" style="min-height: 300px;">
+    <div class="header-content">
       <div class="header-content-inner">
     	<h1>큐레이팅 시작하기!</h1>
     	<p>질문에 대한 답변을 해주세요. 당신이 원하는 최적의 컴퓨터를 엄선해드립니다.</p>
@@ -202,7 +200,7 @@
       </form>
      </div>
       <div id="save_btn">
-      	<a href="javascript:danawaJson()" class="btn btn-default db_send_btn">저장 </a>
+      	<a href="javascript:danawaJson()" class="btn btn-default db_send_btn">완료</a>
       </div>
   </section>
 

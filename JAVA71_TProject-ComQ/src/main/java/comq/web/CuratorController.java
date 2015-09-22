@@ -222,7 +222,7 @@ public class CuratorController {
 		mv.addObject("data", objs);
 		mv.addObject("keyword", resultKeywords);
 		mv.addObject("curId", curId);
-		mv.setViewName("/user/curating_complete2.jsp");
+		mv.setViewName("/user/curating_complete.jsp");
 		
 		return mv;
 	}
