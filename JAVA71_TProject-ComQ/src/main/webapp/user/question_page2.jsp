@@ -31,8 +31,8 @@
 
 <link rel="stylesheet" href="/css/user.css" type="text/css">
 <!-- <link rel="stylesheet" href="/css/mypage.css" type="text.css"> -->
-<link rel="stylesheet" href="/css/questionpage.css" type="text.css">
-
+<link rel="stylesheet" href="/css/questionpage.css" type="text/css">
+<link rel="stylesheet" href="/css/arccodian.css" type="text/css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -42,6 +42,7 @@
     
 </head>
 <body id="page-top">
+<div id="bg_img"></div>
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -175,24 +176,26 @@
     <div class="question_area size">
       <form name="curatingForm" method="post" id="cur-form"
         action="/app/curator/curating?curId=${list.curId }">
-        <div id="accordion">
-          <c:forEach var="questions" items="${list.questionList }">
-            <div>${questions.qSente}||${questions.qProd }
-              <input type="hidden" name="questionKey"
-                value="${questions.qProd }" />
-            </div>
-            <div>
-              <c:forEach var="answers" items="${questions.answerList }">
-                <div>
-                  <input
-                    type="${questions.qType eq 'check' ? 'checkbox':'radio'}"
-                    id="${answers.ansId }" name="${questions.queId }"> <label
-                    for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
-                  <input type="hidden" name="" value="${answers.aSpec }" />
-                </div>
-              </c:forEach>
-            </div>
-          </c:forEach>
+        <div id="accordian">
+	        <ul>
+	        	<c:forEach var="questions" items="${list.questionList }">
+	        	<li>
+	        		<h3>${questions.qSente}||${questions.qProd }
+	        		<input type="hidden" name="questionKey" value="${questions.qProd }"/></h3>
+              		
+              		<ul>
+              			<c:forEach var="answers" items="${questions.answerList }">
+              			<li>
+              				<input type="${questions.qType eq 'check' ? 'checkbox':'radio'}" id="${answers.ansId }" name="${questions.queId }"> 
+                    		<label for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
+                  			<input type="hidden" name="" value="${answers.aSpec }"/>
+              			</li>
+              			</c:forEach>
+              		</ul>
+              		
+	        	</li>
+	        	</c:forEach>
+	        </ul>
         </div>
       </form>
      </div>
@@ -203,10 +206,8 @@
 
 <!-- jquery -->
 <script src="/js/jquery.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- Bootstrap Core JavaScript -->
 
+<!-- Bootstrap Core JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
@@ -220,11 +221,8 @@
 <script src="/js/user/login.js"></script>
 
 <script src="/js/common/session.js"></script>
+<script src="/js/common/arccodian.js"></script>
 <script>
-$(function() {
-	  $("#accordion").accordion();
-});
-
 function danawaJson() {
   var answerSpec = $(":checked");
   for (i = 0; i < answerSpec.length; i++) {
@@ -236,7 +234,6 @@ function danawaJson() {
     console.log($(answerSpec[i]).next().next().attr("name"));
   }
   $("#cur-form").submit();
-
 }
 </script>
 </body>

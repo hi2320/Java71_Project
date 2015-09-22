@@ -1,0 +1,63 @@
+#accordian {
+ 	background: rgba(25, 25, 25, .7);
+	width: 90%;
+	margin: 0 auto;
+	color: white;
+	box-shadow: 
+		0 5px 15px 1px rgba(0, 0, 0, 0.6), 
+		0 0 200px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* 메뉴 스타일 */
+#accordian h3 {
+	font-size: 12px;
+	line-height: 34px;
+	padding: 0 10px;
+	margin: 0.3em .5em;
+	cursor: pointer;
+ 	background-color: rgba(0, 0, 0, .7);
+	
+}
+#accordian h3:hover {
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+/* 아이콘폰트 스타일 */
+#accordian h3 span {
+	font-size: 16px;
+	margin-right: 10px;
+}
+
+#accordian li {
+	list-style-type: none;
+	padding: 0.2em 1em;
+}
+#accordian ul {
+	padding-left: 0;
+}
+/* 서브메뉴 스타일 */
+#accordian ul ul li a {
+	color: grey !important;
+	text-decoration: none;
+	font-size: 11px;
+	line-height: 27px;
+	display: block;
+	padding: 0 15px;
+	-webkit-transition: all 0.15s;
+	-moz-transition: all 0.15s;
+	-o-transition: all 0.15s;
+	-ms-transition: all 0.15s;
+	transition: all 0.15s;
+}
+#accordian ul ul li a:hover {
+	background: #003545;
+	border-left: 5px solid #09c;
+}
+
+/* active 클래스 외에 것은 보이지 않게 하기 */
+#accordian ul ul {
+	display: none;
+}
+#accordian li.active ul {
+	display: block;
+}
