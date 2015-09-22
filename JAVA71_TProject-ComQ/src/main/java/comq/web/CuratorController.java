@@ -101,11 +101,14 @@ public class CuratorController {
 	    @RequestParam String[] questionKey,
 	    @RequestParam String[] answers) throws Exception {
 		//search in danawa 
+		String danawaProdSearchString = "http://api.danawa.com/api/search/product/info?"
+				+ "key=9a8680fa6492d9f7c7ae1a509ce946e4&mediatype=json&charset=utf8&limit_no=1";
+		
 		ModelAndView mv = new ModelAndView();
 		List<String> keywords = new ArrayList<String>();
 		
 		
-		for(int i = 0; i < questionKey.length; i++) {
+		for(int i = 0; i < questionKey.length; i++) { // 질문 키워드
 		  System.out.println(questionKey[i]);
 		  if(!keywords.contains(questionKey[i])) {
 		    keywords.add(questionKey[i]);
@@ -116,7 +119,7 @@ public class CuratorController {
 		List<Map> objs = new ArrayList<Map>();
 		List<String> urlKeywords = new ArrayList<String>();
 		
-		for(int i = 0; i < keywords.size(); i++) {
+		for(int i = 0; i < keywords.size(); i++) { // 답변 키워드에서 질문 키워드와 같은 ( 제품종류) 연결
 			StringBuilder keywordPart = new StringBuilder(keywords.get(i));
 			for(int j = 0; j < answers.length; j++) {
 			 if(keywords.get(i).equals(answers[j].substring(0, answers[j].indexOf(":")))) {
@@ -129,24 +132,93 @@ public class CuratorController {
 		}
 //		JSONObject obj = (JSONObject)JSONValue.parse(br);
 		List<String> resultKeywords = new ArrayList<String>();
+		Map<String, String> map = null;
+		JSONObject jsonData = null;
 		for(int i = 0; i < urlKeywords.size(); i++) {
 			if(urlKeywords.get(i).indexOf(' ') != -1) {
 			
 				String prodKind = urlKeywords.get(i).substring(0, urlKeywords.get(i).indexOf(' '));
 				String spec = urlKeywords.get(i).substring(urlKeywords.get(i).indexOf(' '));
 				System.out.println(prodKind + " :: " + spec);
-				resultKeywords.add(urlKeywords.get(i));
 				
-				StringBuilder danawaApi = new StringBuilder("http://api.danawa.com/api/search/product/info?key=9a8680fa6492d9f7c7ae1a509ce946e4&mediatype=json&charset=utf8&limit_no=1&keyword=")
-				.append(URLEncoder.encode(urlKeywords.get(i), "UTF-8"));
-				URL url = new URL(danawaApi.toString());
-				BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+				String vgaOnlyDanawa = null;// vga 관련 스트링
+				if(prodKind.equals("VGA")) {
+					vgaOnlyDanawa = "http://api.danawa.com/api/search/product/info?key=9a8680fa6492d9f7c7ae1a509ce946e4&mediatype=json&charset=utf8";
+					vgaOnlyDanawa += "&limit_no=10";
+					System.out.println("limit 해제 > " + vgaOnlyDanawa);
+					resultKeywords.add(urlKeywords.get(i));
+					
+					StringBuilder danawaApi = new StringBuilder(vgaOnlyDanawa).append("&keyword=");
+					StringBuilder newdanawaApi = new StringBuilder(danawaApi).append(URLEncoder.encode(urlKeywords.get(i), "UTF-8"));
+					
+					URL url = new URL(newdanawaApi.toString());
+					BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+					
+					jsonData = (JSONObject)JSONValue.parse(br);
+					JSONArray jsonArray = (JSONArray)jsonData.get("productList");
+					System.out.println("jsonArray >> " + jsonArray);
+					for (int j = 0; j < jsonArray.size(); j++) {
+						JSONObject prodList = (JSONObject) (jsonArray.get(j));
+						System.out.println("prodList > " + prodList);
+						String summary = (String) prodList.get("summary");
+						System.out.println("summary > " + summary);
+
+						if (summary.contains("정격파워")) { // 옵션 정보 찾을때까지 돌리기
+														// 10개중 하나는 있겠지..
+							String[] summarys = summary.split("\\|");
+							objs.add(prodList);// VGA 중 정격파워 옵션 정보 있는 것 가져오기
+
+							for (int k = 0; k < summarys.length; k++) {
+								System.out.println("summarys >> " + summarys[k]);
+								if (summarys[k].contains("정격파워")) {
+									String ratedPowerNumericValue = (summarys[k].substring(4,summarys[k].indexOf("W") + 1)).trim();
+									System.out.println("정격 파워 >> "+ ratedPowerNumericValue);
+									resultKeywords.add(("파워 ATX " + ratedPowerNumericValue));
+									String searchPower = URLEncoder.encode("파워 ATX " + ratedPowerNumericValue,"UTF-8");
+									String powerSearch = danawaProdSearchString+ "&keyword=" + searchPower;
+
+									URL powerUrl = new URL(powerSearch);
+									BufferedReader powerBr = new BufferedReader(
+											new InputStreamReader(powerUrl.openStream(),"UTF-8"));
+									JSONObject powerJson = (JSONObject) JSONValue.parse(powerBr);
+									map = (Map) powerJson.get("productList");
+									objs.add(map);
+									break;
+								}
+							}
+							break;
+
+						}
+						
+					}/* end VGA */
+				} else {
+					resultKeywords.add(urlKeywords.get(i));
+					
+					StringBuilder danawaApi = new StringBuilder(danawaProdSearchString).append("&keyword=");
+					
+					StringBuilder newdanawaApi = new StringBuilder(danawaApi).append(URLEncoder.encode(urlKeywords.get(i), "UTF-8"));
+					URL url = new URL(newdanawaApi.toString());
+					BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+					
+					jsonData = (JSONObject)JSONValue.parse(br);
+					map = (Map)jsonData.get("productList");
+					
+					objs.add(map);
+				}
 				
-				JSONObject jsonData = (JSONObject)JSONValue.parse(br);
-				Map<String, String> map = (Map)jsonData.get("productList");
 				
-				objs.add(map);
-				
+				if(prodKind.equals("CPU")) {
+//					메인보드 가져오기  :: 메인보드 일반-ATX cpu의 키워드
+					resultKeywords.add("메인보드 일반-ATX "+spec);
+					String mainboard = URLEncoder.encode("메인보드 일반-ATX"+spec, "UTF-8");
+					String mainboardSearch = danawaProdSearchString+"&keyword=" + mainboard;
+					URL murl = new URL(mainboardSearch);
+					BufferedReader mbr = new BufferedReader(new InputStreamReader(murl.openStream(), "UTF-8"));
+					JSONObject mjsonData = (JSONObject)JSONValue.parse(mbr);
+					map = (Map)mjsonData.get("productList");
+					
+					objs.add(map);
+				}/* end CPU */
 			} 
 		}
 		mv.addObject("data", objs);

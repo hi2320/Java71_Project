@@ -161,7 +161,8 @@
     </div>
     <!-- /.container-fluid -->
   </nav>
-
+  
+<!-- 큐레이팅 질문 페이지 시작 -->
   <header>
     <div class="header-content" style="min-height: 300px;">
       <div class="header-content-inner">
@@ -179,14 +180,15 @@
         <div id="accordian">
 	        <ul>
 	        	<c:forEach var="questions" items="${list.questionList }">
-	        	<li>
+	        	<li class="questionList">
 	        		<h3>${questions.qSente}||${questions.qProd }
-	        		<input type="hidden" name="questionKey" value="${questions.qProd }"/></h3>
+	        			<input type="hidden" name="questionKey" value="${questions.qProd }"/>
+	        		</h3>
               		
-              		<ul>
+              		<ul class="checking">
               			<c:forEach var="answers" items="${questions.answerList }">
-              			<li>
-              				<input type="${questions.qType eq 'check' ? 'checkbox':'radio'}" id="${answers.ansId }" name="${questions.queId }"> 
+              			<li class="answerList">
+              				<input class="checkTarget" type="${questions.qType eq 'check' ? 'checkbox':'radio'}" id="${answers.ansId }" name="${questions.queId }"> 
                     		<label for="${answers.ansId }">${answers.aSente}||${answers.aSpec }</label>
                   			<input type="hidden" name="" value="${answers.aSpec }"/>
               			</li>
@@ -223,6 +225,32 @@
 <script src="/js/common/session.js"></script>
 <script src="/js/common/arccodian.js"></script>
 <script>
+/* radio button event start */
+$(document).find("input:checked[type='radio']").addClass('bounce');   
+$("input[type='radio']").click(function() {
+    $(this).prop('checked', false);
+    $(this).toggleClass('bounce');
+
+    if( $(this).hasClass('bounce') ) {
+        $(this).prop('checked', true);
+        $(document).find("input:not(:checked)[type='radio']").removeClass('bounce');
+        
+        $(this).parent().parent().prev().css({"background-color":"forestgreen", "opacity":"0.5", "color": "white", "font-weight":"700"});
+    } else {
+    	$(this).parent().parent().prev().removeAttr("style");
+    }
+}); /* radio event end */
+
+/* checkbox event start */
+$("input[type='checkbox']").click(function() {
+	console.log($(this).parent().parent().find(":checked").length);
+	if($(this).parent().parent().find(":checked").length == 0) {
+    	$(this).parent().parent().prev().removeAttr("style");
+    } else {
+        $(this).parent().parent().prev().css({"background-color":"forestgreen", "opacity":"0.5", "color": "white", "font-weight":"700"});
+    }
+});/* checkbox event end */
+
 function danawaJson() {
   var answerSpec = $(":checked");
   for (i = 0; i < answerSpec.length; i++) {
@@ -233,6 +261,7 @@ function danawaJson() {
     $(answerSpec[i]).next().next().attr("name", "answers");
     console.log($(answerSpec[i]).next().next().attr("name"));
   }
+  
   $("#cur-form").submit();
 }
 </script>
