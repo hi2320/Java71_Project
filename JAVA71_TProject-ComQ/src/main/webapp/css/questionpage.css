@@ -1,4 +1,26 @@
 header {
-	min-height: 500px;
+	min-height: 400px;
 }
 
+.header-content {
+	padding: 100px 15px !important;
+}
+
+#cur_move {
+	background-color: #337ab7 !important;
+}
+
+.db_send_btn {
+	width: 150px;	
+}
+
+#save_btn {
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+
+#accordion {
+	margin: 0 auto;
+	width: 80%;
+}

@@ -39,7 +39,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    
 </head>
 <body id="page-top">
 
@@ -164,14 +164,15 @@
   <header>
     <div class="header-content" style="min-height: 300px;">
       <div class="header-content-inner">
-    
+    	<h1>큐레이팅 시작하기!</h1>
+    	<p>질문에 대한 답변을 해주세요. 당신이 원하는 최적의 컴퓨터를 엄선해드립니다.</p>
+    	<a href="#start-curating" class="btn btn-primary btn-xl page-scroll" id="cur_move">START CURATING</a>
       </div> <!-- header-content-inner -->
     </div> <!-- header-content -->
   </header>
 
-<!-- Estimate 데이터 가져오기 -->
-  <section class="bg-primary" id="Estimates">
-       <div class="question_area size">
+  <section class="bg-primary" id="start-curating">
+    <div class="question_area size">
       <form name="curatingForm" method="post" id="cur-form"
         action="/app/curator/curating?curId=${list.curId }">
         <div id="accordion">
@@ -194,10 +195,10 @@
           </c:forEach>
         </div>
       </form>
-      <button type="button" class="btn btn-info db_send_btn">
-        <a href="javascript:danawaJson()">저장</a>
-      </button>
-    </div>
+     </div>
+      <div id="save_btn">
+      	<a href="javascript:danawaJson()" class="btn btn-default db_send_btn">저장 </a>
+      </div>
   </section>
 
 <!-- jquery -->
