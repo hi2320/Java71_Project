@@ -244,13 +244,14 @@ hr.li_hr {
     top: .2em;
 }
 
-/* 2015-09-21 05:27 ¼öÁ¤ ½ÃÀÛ */
+/* 2015-09-21 05:27 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .estimates-hide {
   display: none;
 }
 
 .prod_box {
   display: table;
+  width: 100%;
   padding: 0.2em 0.5em;
   margin: 0 auto;
   background-color: white;

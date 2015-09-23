@@ -45,7 +45,7 @@
 	    SELECT est_id, user_id, cur_id, estname, estdate
 	    FROM (SELECT est_id, user_id, cur_id, estname, estdate, rownum
 	    	FROM estimates
-	    	ORDER BY rownum DESC)
+	    	ORDER BY est_id DESC, rownum DESC)
 	    WHERE rownum = 1
 	</select>
 	

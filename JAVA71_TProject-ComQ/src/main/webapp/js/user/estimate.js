@@ -246,6 +246,7 @@ function getEstimateList() {
 			  		complete : function() {
 			  			$('.getEstimateResult').slideDown("slow");
 			  			console.log("확인바람");
+			  			$('html,body').animate({scrollTop:$('#prod'+ estId).offset().top - 230}, 500);
 			  			
 			  			$("#viewLoading").fadeOut(500);
 			  		}

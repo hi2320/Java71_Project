@@ -196,7 +196,7 @@
     <div class="panel-group" id="accordion">
   <input type="hidden" name="curId" value="${curId }">
    	<c:forEach var="curators" items="${data }" varStatus="i">
-    <div class="panel panel-default">
+    <div class="curatingProdBox panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
           <button type="button" class="btn btn-lg btn-info btn-width ${i.index == 0 ? '':'collapsed' }" data-toggle="collapse" data-parent="#accordion"

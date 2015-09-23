@@ -162,3 +162,8 @@ p.prod_name {
 #myModal hr {
 	max-width: 100% !important;
 }
+.modal-backdrop.fade.in {
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}

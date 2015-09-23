@@ -251,16 +251,20 @@ $("input[type='checkbox']").click(function() {
 
 function danawaJson() {
   var answerSpec = $(":checked");
-  for (i = 0; i < answerSpec.length; i++) {
-    $(answerSpec[i]).next().next().val(
-        $(answerSpec[i]).parent().parent().prev().find(
-            "[name=questionKey]").val()
-            + ":" + $(answerSpec[i]).next().next().val());
-    $(answerSpec[i]).next().next().attr("name", "answers");
-    console.log($(answerSpec[i]).next().next().attr("name"));
-  }
-  
-  $("#cur-form").submit();
+	if(answerSpec.length != 0) {
+	  for (i = 0; i < answerSpec.length; i++) {
+	    $(answerSpec[i]).next().next().val(
+	        $(answerSpec[i]).parent().parent().prev().find(
+	            "[name=questionKey]").val()
+	            + ":" + $(answerSpec[i]).next().next().val());
+	    $(answerSpec[i]).next().next().attr("name", "answers");
+	    console.log($(answerSpec[i]).next().next().attr("name"));
+	  }
+	  
+	  $("#cur-form").submit();
+	} else {
+		alert("질문에 대해 하나 이상의 답변을 해주세요");
+	}
 }
 </script>
 </body>
